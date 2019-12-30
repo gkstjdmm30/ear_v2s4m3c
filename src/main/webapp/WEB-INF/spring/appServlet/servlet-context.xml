@@ -25,6 +25,7 @@
   <context:component-scan base-package="dev.mvc.ear" />
   <context:component-scan base-package="dev.mvc.product_categrp" /> <!-- 왕눈이 -->
   <context:component-scan base-package="dev.mvc.product" /> <!-- 왕눈이 -->
+  <context:component-scan base-package="dev.mvc.notice" /> <!-- 왕눈이 -->
   
 </beans:beans>
 
