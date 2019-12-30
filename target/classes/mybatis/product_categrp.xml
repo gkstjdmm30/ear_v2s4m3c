@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<!-- dev.mvc.categrp.CategrpDAOInter 패키지에 등록된 interface 명시,
+      패키지명과 인터페이스명은 실제로 존재해야함,
+      Spring이 내부적으로 자동으로 interface를 구현해줌. -->
+<mapper namespace="dev.mvc.product_categrp.Product_categrpDAOInter"> 
+  <!-- 
+  insert: INSERT SQL 실행
+  id: Spring에서 호출시 사용
+  parameterType: 전달받는 데이터 객체
+  return: 등록한 레코드 갯수 리턴
+  SQL선언시 ';'은 삭제
+  #{}: ? 동일
+  #{name}: public String getName(){...
+   -->
+   <insert id="create" parameterType="Product_categrpVO">
+     INSERT INTO product_categrp(productcateno, name, seqno, cnt)
+     VALUES((SELECT NVL(MAX(productcateno), 0) + 1 as productcateno FROM product_categrp),
+                #{name}, #{seqno}, #{cnt})
+   </insert>
+   
+   <select id="list" resultType="Product_categrpVO">
+     SELECT productcateno, name, seqno, cnt
+     FROM product_categrp
+     ORDER BY productcateno ASC
+   </select> 
+   
+   <select id="read" resultType="Product_categrpVO" parameterType="int">
+     SELECT productcateno, name, seqno, cnt 
+     FROM product_categrp
+     WHERE productcateno = #{productcateno}
+   </select> 
+   
+   <update id="update" parameterType="Product_categrpVO">
+     UPDATE product_categrp
+     SET name=#{name}, seqno=#{seqno}
+     WHERE productcateno = #{productcateno}
+   </update>
+   
+   <delete id="delete" parameterType="int">
+     DELETE FROM product_categrp
+     WHERE productcateno = #{productcateno}
+   </delete>
+   
+   
+ 
+  
+</mapper>
+
+
+
+
+

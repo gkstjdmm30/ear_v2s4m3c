@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="dev.mvc.product.ProductDAOInter"> 
+
+   <insert id="create" parameterType="ProductVO">
+     INSERT INTO product(productno, productcateno, name, content, recom, cnt, replycnt, rdate, word)
+     VALUES((SELECT NVL(MAX(productno), 0) + 1 as productno FROM product),
+             #{productcateno}, #{name}, #{content},
+             #{recom}, #{cnt}, #{replycnt}, sysdate, #{word});
+   </insert>
+   
+    <select id="list_all" resultType="ProductVO">
+     SELECT productno, productcateno, name, content, 
+                recom, cnt, replycnt, rdate, word
+     FROM product
+     ORDER BY productno DESC
+   </select> 
+
+   <select id="list_by_productcateno" resultType="ProductVO" parameterType="int">
+     SELECT productno, productcateno, name, content, 
+                recom, cnt, replycnt, rdate, word
+     FROM product
+     WHERE productcateno=#{productcateno}
+     ORDER BY productno DESC
+   </select> 
+
+   <select id="total_count" resultType="int">
+     SELECT COUNT(*) as count
+     FROM product
+   </select> 
+   
+   <select id="read" resultType="ProductVO" parameterType="int">
+     SELECT productno, productcateno, name, content, 
+                recom, cnt, replycnt, rdate, word
+     FROM product
+     WHERE productno=#{productno}
+   </select>
+   
+   <update id='update' parameterType="ProductVO">
+     UPDATE product
+     SET name=#{name}, content=#{content}, word=#{word}
+     WHERE productno = #{productno}
+   </update>
+   
+   <delete id="delete" parameterType="int">
+     DELETE FROM product
+     WHERE productno=#{productno}
+   </delete> 
+
+   <!-- FK 컬럼 값이 사용된 레코드 갯수 산출: id="count_by_categrpno" -->  
+   <select id="count_by_productcateno" resultType="int">
+     SELECT COUNT(*) as cnt
+     FROM product
+     WHERE productcateno=#{productcateno}
+   </select> 
+   <!-- FK 컬럼 값이 사용된 레코드 삭제: id="delete_by_categrpno" -->  
+   <delete id="delete_by_productcateno" parameterType="int">
+     DELETE FROM product
+     WHERE productcateno=#{productcateno}
+   </delete>
+   
+   
+ 
+  
+</mapper>
+
+
+
+
+
