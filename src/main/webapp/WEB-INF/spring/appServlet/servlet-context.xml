@@ -21,11 +21,11 @@
     <beans:property name="prefix" value="/" />
     <beans:property name="suffix" value=".jsp" />
   </beans:bean>
-  
-  <context:component-scan base-package="dev.mvc.ear" />
+  <context:component-scan base-package="dev.mvc" />
+<!--   <context:component-scan base-package="dev.mvc.ear" />
   <context:component-scan base-package="dev.mvc.notice" />
-  <context:component-scan base-package="dev.mvc.product_categrp" /> <!-- 왕눈이 -->
-  <context:component-scan base-package="dev.mvc.product" /> <!-- 왕눈이 -->
+  <context:component-scan base-package="dev.mvc.product_categrp" /> 왕눈이
+  <context:component-scan base-package="dev.mvc.product" /> 왕눈이 -->
 
 </beans:beans>
 
