@@ -518,7 +518,7 @@
   }
   
   .menubar li a{
-    background: rgb(109,109,109);
+    /* background: rgb(109,109,109); */
     color:#cccccc;
     display:block;
     font-weight:normal;
