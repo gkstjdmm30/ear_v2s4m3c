@@ -12,13 +12,10 @@ public interface Product_categrpProcInter {
   public int create(Product_categrpVO product_categrpVO);
   
   /**
-   * 목록
-   * <xmp>
-   * <select id="list" resultType="ProductVO">
-   * </xmp> 
+   * seqno 오름차순 출력 목록
    * @return
    */
-  public List<Product_categrpVO> list();
+  public List<Product_categrpVO> list_seqno_asc();
   
   /**
    * 조회
@@ -42,6 +39,20 @@ public interface Product_categrpProcInter {
   public int delete(int productcateno);
   
   /**
+   * 우선순위 상향 up 10 ▷ 1
+   * @param categrpno
+   * @return
+   */
+  public int update_seqno_up(int productcateno);
+  
+  /**
+   * 우선순위 하향 down 1 ▷ 10
+   * @param categrpno
+   * @return
+   */
+  public int update_seqno_down(int productcateno);
+  
+  /**
    * 그룹에 속한 상품 수 증가
    * @param productcateno
    * @return
@@ -55,6 +66,16 @@ public interface Product_categrpProcInter {
    * @return
    */
   public int decreaseCnt(int productcateno);
+  
+  /**
+   * cnt 컬럼 0으로 초기화
+   * <xmp>
+   * <update id="cnt_zero" parameterType="int"> 
+   * </xmp>
+   * @param productcateno
+   * @return
+   */
+  public int cnt_zero(int productcateno);
   
   
   
