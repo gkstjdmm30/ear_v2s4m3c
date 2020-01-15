@@ -29,23 +29,16 @@
 <body>
 
 <FORM name='frm' method='POST' action='./update.do'>
-  <input type='hidden' name='categrpno' value='${noticeVO.categrpno }'>
+  <input type='hidden' name='categrpno' value='${notice_categrpVO.categrpno }'>
   <fieldset class='fieldset_basic'>
     <ul>
       <li class='li_none'>
         <label class='label_basic'>카테고리 그룹 이름</label>
-        <input type='text' name='name' value='${noticeVO.name }' required="required" autofocus="autofocus">
+        <input type='text' name='name' value='${notice_categrpVO.name }' required="required" autofocus="autofocus">
       </li>
       <li class='li_none'>
         <label class='label_basic'>출력 순서</label>
-        <input type='number' name='seqno' value='${noticeVO.seqno }' required="required" placeholder="${seqno }" min="1" max="1000" step="1" style='width: 20%;'>
-      </li>
-      <li class='li_none'>
-        <label class='label_basic'>출력 형식</label>
-        <select name='visible'>
-         <option value='Y' ${noticeVO.visible == 'Y' ? "selected='selected'":"" }>Y</option>
-          <option value='N' ${noticeVO.visible == 'N' ? "selected='selected'":"" }>N</option>
-        </select>
+        <input type='number' name='seqno' value='${notice_categrpVO.seqno }' required="required" placeholder="${seqno }" min="1" max="1000" step="1" style='width: 20%;'>
       </li>
       <li class='li_right'>
         <button type="submit" class="btn btn-info">수정 진행</button>

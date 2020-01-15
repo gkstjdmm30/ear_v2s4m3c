@@ -1,6 +1,6 @@
-package dev.mvc.notice;
+package dev.mvc.notice_categrp;
 
-public class NoticeVO {
+public class Notice_categrpVO {
 	
 	/** 카테고리 그룹번호 */
 	private int categrpno;
@@ -8,8 +8,6 @@ public class NoticeVO {
 	private String name;
 	/** 출력 순서 */
 	private int seqno;
-	/** 출력 모드 */
-	private String visible;
 	/** 그룹 생성일 */
 	private String rdate;
 	/** 공지사항 등록갯수 */
@@ -32,12 +30,6 @@ public class NoticeVO {
 	}
 	public void setSeqno(int seqno) {
 		this.seqno = seqno;
-	}
-	public String getVisible() {
-		return visible;
-	}
-	public void setVisible(String visible) {
-		this.visible = visible;
 	}
 	public String getRdate() {
 		return rdate;

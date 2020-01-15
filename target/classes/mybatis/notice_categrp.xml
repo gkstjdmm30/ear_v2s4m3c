@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<!-- dev.mvc.notice_categrp.Notice_categrpDAOInter 패키지에 등록된 interface 명시,
+      패키지명과 인터페이스명은 실제로 존재해야함,
+      Spring이 내부적으로 자동으로 interface를 구현해줌. -->
+<mapper namespace="dev.mvc.notice_categrp.Notice_categrpDAOInter"> 
+  <!-- 
+  insert: INSERT SQL 실행
+  id: Spring에서 호출시 사용
+  parameterType: 전달받는 데이터 객체
+  return: 등록한 레코드 갯수 리턴
+  SQL선언시 ';'은 삭제
+  #{}: ? 동일
+  #{name}: public String getName(){...
+   -->
+   
+   <!-- 리스트 -->
+   <select id="list_seqno_asc" resultType="Notice_categrpVO">
+     SELECT categrpno, name, seqno, rdate, cnt
+     FROM notice_categrp
+     ORDER BY seqno ASC
+   </select> 
+   
+   <!-- 추가 -->
+   <insert id="create" parameterType="Notice_categrpVO">
+     INSERT INTO notice_categrp(categrpno, name, seqno, rdate, cnt)
+     VALUES((SELECT NVL(MAX(categrpno), 0) + 1 as categrpno FROM notice_categrp),
+                  #{name}, #{seqno}, sysdate, 0)
+   </insert>
+   
+   <!-- 삭제, id=delete, 입력: PK, 리턴: 삭제된 갯수 int -->
+   <delete id="delete" parameterType="int">
+     DELETE FROM notice_categrp
+     WHERE categrpno = #{categrpno}
+   </delete>
+   
+   <!-- 조회, id: read, 입력: categrpno, 리턴:NoticeVO -->
+   <select id="read" resultType="Notice_categrpVO" parameterType="int">
+     SELECT categrpno, name, seqno, rdate, cnt
+     FROM notice_categrp
+     WHERE categrpno = #{categrpno}
+   </select> 
+   
+   <!-- 수정, id: update, 입력: CategrpVO, 리턴: 수정된 갯수 int -->
+   <update id="update" parameterType="Notice_categrpVO">
+     UPDATE notice_categrp
+     SET name=#{name}, seqno=#{seqno}
+     WHERE categrpno = #{categrpno}
+   </update>
+   
+    <!-- seqno 우선순위 상향 up 10 -> 1 -->
+   <update id="update_seqno_up" parameterType="int">
+     UPDATE notice_categrp
+     SET seqno = seqno - 1
+     WHERE categrpno=#{categrpno}
+     AND seqno != 1
+   </update>
+   
+   <!-- seqno 우선순위 하향 down 1 -> 10 --> 
+   <update id="update_seqno_down" parameterType="int">
+     UPDATE notice_categrp
+     SET seqno = seqno + 1
+     WHERE categrpno=#{categrpno}
+   </update>
+   
+    <update id="increaseCnt" parameterType="int">
+     UPDATE notice_categrp 
+     SET cnt = cnt + 1 
+     WHERE categrpno=#{categrpno}
+   </update>
+  
+   <update id="decreaseCnt" parameterType="int">
+     UPDATE notice_categrp 
+     SET cnt = cnt - 1 
+     WHERE categrpno=#{categrpno}
+   </update>
+   
+</mapper>
+
+

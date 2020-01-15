@@ -30,11 +30,11 @@
 </FORM> --%>
 
 <FORM name='frm' method='POST' action='./delete.do'>
-  <input type='hidden' name='categrpno' value='${noticeVO.categrpno }'>
+  <input type='hidden' name='categrpno' value='${notice_categrpVO.categrpno }'>
   <fieldset class='fieldset_basic'>
     <ul>
       <li class='li_none' style="font-weight: bold;">
-        삭제될 카테고리 그룹 이름: ${noticeVO.name }
+        삭제될 카테고리 그룹 이름: ${notice_categrpVO.name }
       </li>
       
       <li class='li_none'>
