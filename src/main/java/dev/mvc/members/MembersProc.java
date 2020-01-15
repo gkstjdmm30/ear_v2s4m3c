@@ -25,8 +25,8 @@ public class MembersProc implements MembersProcInter {
   }
 
   @Override
-  public int mem_checkId(String mem_id) {
-    int count = membersDAO.mem_checkId(mem_id);
+  public int mem_checkId(String id) {
+    int count = membersDAO.mem_checkId(id);
     return count;
   }
 

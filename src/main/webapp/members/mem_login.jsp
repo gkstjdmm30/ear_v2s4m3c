@@ -29,7 +29,7 @@
     <div class="form-group">
       <label class="col-md-2 control-label" style='font-size: 0.8em;'>아이디</label>    
       <div class="col-md-10">
-        <input type='text' class="form-control input-lg" name='mem_id' id='mem_id' 
+        <input type='text' class="form-control input-lg" name='id' id='id' 
                    value='${ck_id }' required="required" 
                    style='width: 30%;' placeholder="아이디" autofocus="autofocus">
         <Label>   
@@ -43,7 +43,7 @@
     <div class="form-group">
       <label class="col-md-2 control-label" style='font-size: 0.8em;'>패스워드</label>    
       <div class="col-md-10">
-        <input type='password' class="form-control input-lg" name='mem_passwd' id='mem_passwd' value='${ck_passwd }' required="required" style='width: 30%;' placeholder="패스워드">
+        <input type='password' class="form-control input-lg" name='passwd' id='passwd' value='${ck_passwd }' required="required" style='width: 30%;' placeholder="패스워드">
         <Label>
           <input type='checkbox' name='passwd_save' value='Y' 
                     ${ck_passwd_save == 'Y' ? "checked='checked'" : "" }> 저장
