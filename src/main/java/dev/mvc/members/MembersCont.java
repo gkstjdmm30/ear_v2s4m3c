@@ -39,7 +39,7 @@ public class MembersCont {
     if(count ==0) {
       mav.setViewName("redirecct:/members/mem_create_msg.jsp?count=" + count);      
     } else {
-      mav.setViewName("redirect:/members/list.do");
+      mav.setViewName("redirect:/members/mem_list.do");
     }
     return mav;
   }
