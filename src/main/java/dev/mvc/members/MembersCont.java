@@ -21,7 +21,7 @@ public class MembersCont {
   @Qualifier("dev.mvc.members.MembersProc") // 이름 지정
   private MembersProcInter membersProc;
   public MembersCont() {
-    System.out.println("MemeberCont created");
+    System.out.println("MemebersCont created");
   }
   
   @RequestMapping(value="/members/mem_create.do", method = RequestMethod.GET)
