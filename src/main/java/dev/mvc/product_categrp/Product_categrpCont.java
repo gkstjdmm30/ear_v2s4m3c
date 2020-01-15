@@ -9,18 +9,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.product.ProductProcInter;
+
 @Controller
 public class Product_categrpCont {
   @Autowired
   @Qualifier("dev.mvc.product_categrp.Product_categrpProc")
   private Product_categrpProcInter product_categrpProc;
   
+  @Autowired
+  @Qualifier("dev.mvc.product.ProductProc")
+  private ProductProcInter productProc;
+  
   public Product_categrpCont() {
     System.out.println("--> Product_categrpCont created.");
   }
   
   // 등록폼
-  //http://localhost:9090/team4/product_categrp/create.do
+  //http://localhost:9090/ear/product_categrp/create.do
  @RequestMapping(value = "/product_categrp/create.do", method = RequestMethod.GET)
  public ModelAndView create() {
    ModelAndView mav = new ModelAndView();
@@ -46,12 +52,12 @@ public class Product_categrpCont {
  }
   
  // 목록
-  //  http://localhost:9090/ear/product_categrp/list.do
+  //  http://localhost:9090/team4/product_categrp/list.do
   @RequestMapping(value="/product_categrp/list.do", method=RequestMethod.GET)
   public ModelAndView list() {
     ModelAndView mav = new ModelAndView();
     
-    List<Product_categrpVO> list = product_categrpProc.list();
+    List<Product_categrpVO> list = product_categrpProc.list_seqno_asc();
     
     mav.addObject("list", list);
     mav.setViewName("/product_categrp/list"); // /webapp/product_categrp/list.jsp
@@ -68,8 +74,6 @@ public class Product_categrpCont {
    
    mav.addObject("product_categrpVO", product_categrpVO);
    mav.setViewName("/product_categrp/update"); // /webapp/product_categrp/update.jsp
-
-   // mav.setViewName("redirect:/categrp/create_msg.jsp?count=" + count);
        
    return mav;
  }
@@ -113,26 +117,56 @@ public class Product_categrpCont {
    return mav;
  }
  
+ /**
+  * 우선순위 상향
+  * @param productcateno
+  * @return
+  */
+ @RequestMapping(value="/product_categrp/update_seqno_up.do", 
+                            method=RequestMethod.GET)
+ public ModelAndView update_seqno_up(int productcateno) {
+   ModelAndView mav = new ModelAndView();
+   
+   int count = product_categrpProc.update_seqno_up(productcateno);
+   String url = "redirect:/product_categrp/list.do";
+   mav.setViewName(url);
+                              
+   return mav;
+ }
+ 
+ /**
+  * 우선순위 하향
+  * @param productcateno
+  * @return
+  */
+ @RequestMapping(value="/product_categrp/update_seqno_down.do", 
+                            method=RequestMethod.GET)
+ public ModelAndView update_seqno_down(int productcateno) {
+   ModelAndView mav = new ModelAndView();
+   
+   int count = product_categrpProc.update_seqno_down(productcateno);
+   String url = "redirect:/product_categrp/list.do";
+   mav.setViewName(url);
+                              
+   return mav;
+ }
+
+ 
   // 왼쪽 메뉴
   @RequestMapping(value = "/product_categrp/list_index_left.do", method = RequestMethod.GET)
   public ModelAndView list_index_left() {
     ModelAndView mav = new ModelAndView();
 
-    List<Product_categrpVO> list = product_categrpProc.list();
+    List<Product_categrpVO> list = product_categrpProc.list_seqno_asc();
     mav.addObject("list", list);
 
-    //int total_count = product_contentsProc.total_count();
-    //mav.addObject("total_count", total_count);
+    int total_count = productProc.total_count();
+    mav.addObject("total_count", total_count);
 
-    mav.setViewName("/product_categrp/list_index_left"); // /webapp/categrp/list_index_left.jsp
+    mav.setViewName("/product_categrp/list_index_left"); // /webapp/product_categrp/list_index_left.jsp
 
     return mav;
   }
-  
-  
-  
-
-  
   
 }
 

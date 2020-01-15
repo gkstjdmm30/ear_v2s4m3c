@@ -20,8 +20,8 @@ public class Product_categrpProc implements Product_categrpProcInter {
   }
   
   @Override
-  public List<Product_categrpVO> list() {
-    List<Product_categrpVO> list = product_categrpDAO.list();
+  public List<Product_categrpVO> list_seqno_asc() {   
+    List<Product_categrpVO> list = product_categrpDAO.list_seqno_asc();
     return list;
   }
 
@@ -42,6 +42,18 @@ public class Product_categrpProc implements Product_categrpProcInter {
     int count = product_categrpDAO.delete(productcateno);
     return count;
   }
+  
+  @Override
+  public int update_seqno_up(int productcateno) {
+    int count = product_categrpDAO.update_seqno_up(productcateno);
+    return count;
+  }
+
+  @Override
+  public int update_seqno_down(int productcateno) {
+    int count = product_categrpDAO.update_seqno_down(productcateno);
+    return count;
+  }
 
   @Override
   public int increaseCnt(int productcateno) {
@@ -52,6 +64,12 @@ public class Product_categrpProc implements Product_categrpProcInter {
   @Override
   public int decreaseCnt(int productcateno) {
     int count = product_categrpDAO.decreaseCnt(productcateno);
+    return count;
+  }
+
+  @Override
+  public int cnt_zero(int productcateno) {
+    int count = product_categrpDAO.cnt_zero(productcateno); 
     return count;
   }
 
