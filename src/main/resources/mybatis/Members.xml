@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="dev.mvc.members.MembersDAOInter"> 
 
-<insert id="mem_create" parameterType="MemberVO">
+<insert id="mem_create" parameterType="MembersVO">
      INSERT INTO members(mem_no, mem_id, mem_name, mem_passwd, mem_tel, mem_email, mem_zipcode, mem_address1, mem_address2, mem_rdate)
       VALUES((SELECT NVL(MAX(mem_no), 0) + 1 as mem_no FROM members),
        #{mem_id}, #{mem_name}, #{mem_passwd}, #{mem_tel}, #{mem_email}, #{mem_zipcode}, #{mem_address1}, #{mem_address2}, #{mem_rdate})
