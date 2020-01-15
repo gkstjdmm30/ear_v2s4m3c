@@ -6,6 +6,6 @@ public interface MembersDAOInter {
   public int mem_create(MembersVO membersVO);
   public List<MembersVO> list_mem_no_asc();
   
-  public int mem_checkId(String mem_id);
+  public int mem_checkId(String id);
 
 }

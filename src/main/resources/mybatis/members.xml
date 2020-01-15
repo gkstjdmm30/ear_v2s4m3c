@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.mvc.members.MembersDAOInter"> 
+
+<insert id="mem_create" parameterType="MembersVO">
+     INSERT INTO members(membersno, id, name, passwd, tel, email, zipcode, address1, address2, rdate)
+      VALUES((SELECT NVL(MAX(membersno), 0) + 1 as mem_no FROM members),
+       #{id}, #{name}, #{passwd}, #{tel}, #{email}, #{zipcode}, #{address1}, #{address2}, sysdate)
+   </insert>
+   
+   <select id="list_mem_no_asc" resultType="MembersVO">
+     SELECT membersno, id, name, passwd, tel, email, zipcode, address1, address2, rdate
+     FROM members
+     ORDER BY mem_no ASC
+   </select>
+   
+   <select id="mem_checkId" resultType="int" parameterType="String">
+      SELECT COUNT(id) as cnt
+      FROM members
+      WHERE id=#{id}
+  </select> 
+  
+  
+
+</mapper>

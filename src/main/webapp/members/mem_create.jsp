@@ -23,7 +23,7 @@ $(function() {
 
 function checkId() {
   var frm = $('#frm');
-  var params = 'mem_id=' + $('#mem_id', frm).val();  // #: id 
+  var params = 'id=' + $('#id', frm).val();  // #: id 
   // alert('checkId() 호출됨: ' + params);
   
   $.ajax({
@@ -105,7 +105,7 @@ function send() {
     <div class="form-group">
       <label class="col-md-2 control-label">아이디</label>    
       <div class="col-md-10">
-        <input type='text' class="form-control input-lg" name='mem_id' id='mem_id' value='user' required="required" style='width: 30%;' placeholder="아이디" autofocus="autofocus">
+        <input type='text' class="form-control input-lg" name='id' id='id' value='user' required="required" style='width: 30%;' placeholder="아이디" autofocus="autofocus">
         <button type='button' onclick="checkId()" class="btn btn-info btn-md">중복확인</button>
         <SPAN id='id_span'></SPAN> <!-- ID 중복 관련 메시지 -->        
       </div>
@@ -114,21 +114,21 @@ function send() {
     <div class="form-group">
       <label class="col-md-2 control-label">패스워드</label>    
       <div class="col-md-10">
-        <input type='password' class="form-control input-lg" name='mem_passwd' id='mem_passwd' value='1234' required="required" style='width: 30%;' placeholder="패스워드">
+        <input type='password' class="form-control input-lg" name='passwd' id='passwd' value='1234' required="required" style='width: 30%;' placeholder="패스워드">
       </div>
     </div>   
  
     <div class="form-group">
       <label class="col-md-2 control-label">패스워드 확인</label>    
       <div class="col-md-10">
-        <input type='password' class="form-control input-lg" name='mem_passwd2' id='mem_passwd2' value='1234' required="required" style='width: 30%;' placeholder="패스워드">
+        <input type='password' class="form-control input-lg" name='passwd2' id='passwd2' value='1234' required="required" style='width: 30%;' placeholder="패스워드">
       </div>
     </div>   
     
     <div class="form-group">
       <label class="col-md-2 control-label">성명</label>    
       <div class="col-md-10">
-        <input type='text' class="form-control input-lg" name='mem_name' id='mem_name' 
+        <input type='text' class="form-control input-lg" name='name' id='name' 
                    value='개발자' required="required" style='width: 30%;' placeholder="성명">
       </div>
     </div>   
@@ -136,7 +136,7 @@ function send() {
     <div class="form-group">
       <label class="col-md-2 control-label">전화번호</label>    
       <div class="col-md-10">
-        <input type='text' class="form-control input-lg" name='mem_tel' id='mem_tel' 
+        <input type='text' class="form-control input-lg" name='tel' id='tel' 
                    value='010-0000-0000' required="required" style='width: 30%;' placeholder="전화번호"> 예) 010-0000-0000
       </div>
     </div>
@@ -144,7 +144,7 @@ function send() {
     <div class="form-group">
       <label class="col-md-2 control-label">이메일</label>    
       <div class="col-md-10">
-        <input type='text' class="form-control input-lg" name='mem_email' id='mem_email' 
+        <input type='text' class="form-control input-lg" name='email' id='email' 
                    value='010-0000-0000' required="required" style='width: 30%;' placeholder="전화번호">
       </div>
     </div>   
@@ -161,7 +161,7 @@ function send() {
     <div class="form-group">
       <label class="col-md-2 control-label">주소</label>    
       <div class="col-md-10">
-        <input type='text' class="form-control input-lg" name='mem_address1' id='mem_address1' 
+        <input type='text' class="form-control input-lg" name='address1' id='address1' 
                    value='' required="required" style='width: 80%;' placeholder="주소">
       </div>
     </div>   
@@ -169,7 +169,7 @@ function send() {
     <div class="form-group">
       <label class="col-md-2 control-label">상세 주소</label>    
       <div class="col-md-10">
-        <input type='text' class="form-control input-lg" name='mem_address2' id='mem_address2' 
+        <input type='text' class="form-control input-lg" name='address2' id='address2' 
                    value='' required="required" style='width: 80%;' placeholder="상세 주소">
       </div>
     </div>   

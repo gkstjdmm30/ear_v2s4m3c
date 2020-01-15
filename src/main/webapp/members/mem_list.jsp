@@ -20,9 +20,9 @@
 $(function(){
   
 });
-function update_form(mem_no) {
+function update_form(membersno) {
   
-  var url = './update.do?mem_no=' + mem_no;
+  var url = './update.do?membersno=' + membersno;
   var win = window.open(url, '회원 정보 수정', 'width=800px, height=400px');
   
   var x = (screen.width - 800) / 2;
@@ -31,10 +31,9 @@ function update_form(mem_no) {
   win.moveTo(x, y); // 지정된 좌표로 이동    
 } 
 
-function delete_form(categrpno) {
-  // alert('admin2no: ' + admin2no);
+function delete_form(membersno) {
   
-  var url = './delete.do?mem_no=' + mem_no;
+  var url = './delete.do?membersno=' + membersno;
   var win = window.open(url, '회원 정보 삭제', 'width=800px, height=500px');
   
   var x = (screen.width - 800) / 2;
@@ -80,17 +79,17 @@ function delete_form(categrpno) {
     <c:set var="mem_no" value="${membersVO.mem_no }" />
     
     <TR>
-      <TD style='text-align: center;'>${membersVO.mem_no }</TD>
-      <TD style='text-align: center;'>${membersVO.mem_id }</TD>
-      <TD style='text-align: left: ;'>${membersVO.mem_name }</TD>
-      <TD style='text-align: center;'>${membersVO.mem_passwd }</TD>
-      <TD style='text-align: center;'>${membersVO.mem_tel }</TD>
-      <TD style='text-align: center;'>${membersVO.mem_email }</TD>
-      <TD style='text-align: center;'>(${membersVO.mem_zipcode}) ${membersVO.mem_address1 } ${membersVO.mem_address2 }</TD>
+      <TD style='text-align: center;'>${membersVO.membersno }</TD>
+      <TD style='text-align: center;'>${membersVO.id }</TD>
+      <TD style='text-align: left: ;'>${membersVO.name }</TD>
+      <TD style='text-align: center;'>${membersVO.passwd }</TD>
+      <TD style='text-align: center;'>${membersVO.tel }</TD>
+      <TD style='text-align: center;'>${membersVO.email }</TD>
+      <TD style='text-align: center;'>(${membersVO.zipcode}) ${membersVO.address1 } ${membersVO.address2 }</TD>
       <TD style='text-align: center;'>${membersVO.rdate.substring(0, 10) }</TD>
       <TD style='text-align: center;'>
-        <A href="javascript: update_form(${mem_no });"><IMG src='./images/update.png' title='수정'></A>
-        <A href="javascript: delete_form(${mem_no });"><IMG src='./images/delete.png' title='삭제'></A>
+        <A href="javascript: update_form(${membersno });"><IMG src='./images/update.png' title='수정'></A>
+        <A href="javascript: delete_form(${membersno });"><IMG src='./images/delete.png' title='삭제'></A>
       </TD>
     </TR>
   </c:forEach> 

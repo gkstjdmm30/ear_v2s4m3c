@@ -95,14 +95,13 @@ public class MembersCont {
   @RequestMapping(value = "/member/mem_checkId.do",
                             method = RequestMethod.GET,
                             produces = "text/plain;charset=UTF-8")
-  public String checkId(String mem_id) {
-    // System.out.println("--> id: " + id);
-    int count = membersProc.mem_checkId(mem_id);
+  public String checkId(String id) {
+    int count = membersProc.mem_checkId(id);
     
     JSONObject obj = new JSONObject();
     obj.put("count",count);
  
-    return obj.toString(); // {"count":1}
+    return obj.toString();
 
   }
 }
