@@ -2,7 +2,7 @@
 
       <div class="col-lg-2">
 
-        <h3 class="my-4">집가자</h3>
+        <h3 class="my-4">미정</h3>
         <div class="list-group">
           <a href="#" class="list-group-item">공지사항</a>
           <a href="#" class="list-group-item">자료실</a>

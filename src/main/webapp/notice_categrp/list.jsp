@@ -50,7 +50,7 @@ function delete_form(categrpno) {
 <jsp:include page="/menu/top.jsp" />
 
   <div class="row">
-  <jsp:include page="./list_index_left.jsp" />
+  <jsp:include page="../menu/notice_categrp_left.jsp" />
   
     <div class="col-lg-10">
     
