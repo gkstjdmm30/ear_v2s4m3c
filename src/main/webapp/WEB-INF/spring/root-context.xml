@@ -29,7 +29,8 @@
     <property name="typeAliasesPackage"  value="dev.mvc.ear,
                                                                dev.mvc.notice,
                                                                dev.mvc.product_categrp,
-                                                               dev.mvc.product" />
+                                                               dev.mvc.product,
+                                                               dev.mvc.members" />
     <!-- /src/main/resources/mybatis 폴더 -->                   
     <property name="mapperLocations" value="classpath:mybatis/*.xml" />
   </bean>
