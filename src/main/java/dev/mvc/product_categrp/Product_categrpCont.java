@@ -46,7 +46,7 @@ public class Product_categrpCont {
  }
   
  // ¸ñ·Ï
-  //  http://127.16.12.11:9090/team4/product_categrp/list.do
+  //  http://localhost:9090/ear/product_categrp/list.do
   @RequestMapping(value="/product_categrp/list.do", method=RequestMethod.GET)
   public ModelAndView list() {
     ModelAndView mav = new ModelAndView();
