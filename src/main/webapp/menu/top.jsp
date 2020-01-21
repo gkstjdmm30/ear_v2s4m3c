@@ -45,7 +45,7 @@
             
           <spen class='menubar'>
             <li class="nav-item">
-              <a class="nav-link" href="#">로그인</a>
+              <a class="nav-link" href="${root}/members/mem_login.do">로그인</a>
             </li>
           </ul>
           </spen>
