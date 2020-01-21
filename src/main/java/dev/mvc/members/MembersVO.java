@@ -14,6 +14,7 @@ public class MembersVO {
   private String address1;
   private String address2;
   private Date rdate;
+  private int ps;
   public int getMembersno() {
     return membersno;
   }
@@ -74,4 +75,11 @@ public class MembersVO {
   public void setRdate(Date rdate) {
     this.rdate = rdate;
   }
+  public int getPs() {
+    return ps;
+  }
+  public void setPs(int ps) {
+    this.ps = ps;
+  }
+  
 }

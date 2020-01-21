@@ -1,9 +1,13 @@
 package dev.mvc.members;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +15,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -86,8 +92,60 @@ public class MembersCont {
     mav.addObject("ck_passwd", ck_passwd);
     mav.addObject("ck_passwd_save", ck_passwd_save);
     
-    mav.setViewName("/member/mem_login");
+    mav.setViewName("/members/mem_login");
        
+    return mav;
+  }
+  
+  @RequestMapping(value = "/members/mem_login.do", method = RequestMethod.POST)
+  public ModelAndView mem_login_proc(HttpServletRequest request,
+                                                  HttpServletResponse response,
+                                                  HttpSession session,
+                                                  String id, String passwd,
+                                                  @RequestParam(value="id_save", defaultValue="") String id_save,
+                                                  @RequestParam(value="passwd_save", defaultValue="") String passwd_save) {
+    ModelAndView mav = new ModelAndView();
+    Map<Object, Object> map = new HashMap<Object, Object>();
+    map.put("id", id);
+    map.put("passwd", passwd);
+    
+    int count = membersProc.mem_login(map);
+    if (count == 1) { // 로그인 성공
+      MembersVO membersVO = membersProc.mem_readByID(id_save);
+      session.setAttribute("membersno",  membersVO.getMembersno());
+      session.setAttribute("id", id);
+      session.setAttribute("name", membersVO.getName());
+      
+      if (id_save.equals("Y")) { // id를 저장할 경우
+        Cookie ck_id = new Cookie("ck_id", id);
+        ck_id.setMaxAge(60 * 60 * 72 * 10); // 30 day, 초단위
+        response.addCookie(ck_id);
+      } else { // N, id를 저장하지 않는 경우
+        Cookie ck_id = new Cookie("ck_id", "");
+        ck_id.setMaxAge(0);
+        response.addCookie(ck_id);
+      }
+      Cookie ck_id_save = new Cookie("ck_id_save", id_save);
+      ck_id_save.setMaxAge(60 * 60 * 72 * 10); // 30 day
+      response.addCookie(ck_id_save);
+      
+      if (passwd_save.equals("Y")) { // 패스워드 저장할 경우
+        Cookie ck_passwd = new Cookie("ck_passwd", passwd);
+        ck_passwd.setMaxAge(60 * 60 * 72 * 10); // 30 day
+        response.addCookie(ck_passwd);
+      } else { // N, 패스워드를 저장하지 않을 경우
+        Cookie ck_passwd = new Cookie("ck_passwd", "");
+        ck_passwd.setMaxAge(0);
+        response.addCookie(ck_passwd);
+      }
+      Cookie ck_passwd_save = new Cookie("ck_passwd_save", passwd_save);
+      ck_passwd_save.setMaxAge(60 * 60 * 72 * 10); // 30 day
+      response.addCookie(ck_passwd_save);
+        
+      mav.setViewName("redirect:/index.do");
+    } else {
+      mav.setViewName("redirect:/members/msm_login_fail_msg.jsp");
+    }
     return mav;
   }
   
@@ -102,6 +160,91 @@ public class MembersCont {
     obj.put("count",count);
  
     return obj.toString();
-
   }
+  
+
+  @RequestMapping(value = "/members/mem_read.do", 
+                                          method = RequestMethod.GET)
+  public ModelAndView mem_read(int membersno) {
+    ModelAndView mav = new ModelAndView();
+
+    MembersVO membersVO = membersProc.mem_read(membersno);
+    mav.addObject("membersVO", membersVO);
+
+    mav.setViewName("/members/mem_read");
+
+    return mav;
+  }
+  
+  @RequestMapping(value = "/members/mem_update.do", 
+      method = RequestMethod.POST)
+  public ModelAndView mem_update(RedirectAttributes ra, MembersVO membersVO) {
+    ModelAndView mav = new ModelAndView();
+    
+    int count = membersProc.mem_update(membersVO);
+    ra.addAttribute("count", count);
+    ra.addAttribute("membersno", membersVO.getMembersno());
+    mav.setViewName("redirect:/members/update_msg.jsp");
+    return mav;  
+  }
+  
+  @RequestMapping(value="/members/passwd_update.do", method = RequestMethod.GET)
+  public ModelAndView passwd_update(int membersno){
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("/members/passwd_update");
+    return mav;
+  }
+  
+  @RequestMapping(value="/members/passwd_update.do", method=RequestMethod.POST)
+  public ModelAndView passwd_update(RedirectAttributes ra, int membersno,
+                                                  String passwd, String new_passwd) {
+    ModelAndView mav = new ModelAndView();
+    HashMap<Object, Object> map = new HashMap<Object, Object>();
+    map.put("membersno", membersno);
+    map.put("passwd", passwd);
+    int count = membersProc.passwd_check(map);
+    int update_count = 0;
+    
+    if(count ==0) {
+      ra.addAttribute("count", count);
+      mav.setViewName("redirect:/members/passwd_update_fail_msg.jsp");
+    } else {
+      map.put("passwd",  new_passwd);
+      update_count = membersProc.passwd_update(map);
+      ra.addAttribute("update_count", update_count);
+      mav.setViewName("redirect:/members/passwd_update_success_msg.jsp");
+    }
+    return mav;
+  }
+  
+  @RequestMapping(value = "/members/mem_logout.do", method=RequestMethod.GET)
+  public ModelAndView mem_logout(HttpSession session) {
+    ModelAndView mav = new ModelAndView();
+    session.invalidate();
+    mav.setViewName("redirect:/members/mem_logout.jsp");
+    return mav;
+  }
+  
+  @RequestMapping(value="/members/mem_delete.do", method = RequestMethod.GET)
+  public ModelAndView mem_delete(int membersno) {
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("/members/mem_delete");
+    
+    MembersVO membersVO = membersProc.mem_read(membersno);
+    mav.addObject("membersVO", membersVO);
+    
+    return mav;
+  }
+  
+  @RequestMapping(value="/members/mem_delete.do", method = RequestMethod.POST)
+  public ModelAndView mem_delete(RedirectAttributes ra, int membersno) {
+    ModelAndView mav = new ModelAndView();
+    String name = membersProc.mem_read(membersno).getName();
+    ra.addAttribute("name", name);
+    int count = membersProc.mem_delete(membersno);
+    ra.addAttribute("count", count);
+    mav.setViewName("redirect:/members/mem_delete_mas.jsp?count=" + count);
+    return mav;
+  }
+  
 }

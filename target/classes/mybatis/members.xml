@@ -8,12 +8,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <insert id="mem_create" parameterType="MembersVO">
      INSERT INTO members(membersno, id, name, passwd, tel, email, zipcode, address1, address2, rdate)
-      VALUES((SELECT NVL(MAX(membersno), 0) + 1 as mem_no FROM members),
+      VALUES((SELECT NVL(MAX(membersno), 0) + 1 as membersno FROM members),
        #{id}, #{name}, #{passwd}, #{tel}, #{email}, #{zipcode}, #{address1}, #{address2}, sysdate)
    </insert>
    
    <select id="list_mem_no_asc" resultType="MembersVO">
-     SELECT membersno, id, name, passwd, tel, email, zipcode, address1, address2, rdate
+     SELECT membersno, id, name, passwd, tel, email, zipcode, address1, address2, rdate, ps
      FROM members
      ORDER BY mem_no ASC
    </select>
@@ -23,6 +23,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       FROM members
       WHERE id=#{id}
   </select> 
+  
+  <select id="mem_read"  resultType="MembersVO" parameterType="int">
+    SELECT membersno, id, name, passwd, tel, email, zipcode, address1, address2, rdate
+    FROM members
+    WHERE membersno = #{membersno}
+  </select>
+  
+  <select id="mem_readById" resultType="MembersVO" parameterType="String">
+    SELECT membersno, id, name, passwd, tel, email, zipcode, address1, address2, rdate
+    FROM members
+    WHERE id = #{id}
+  </select>
+  
+    <update id="mem_update" parameterType="MembersVO">
+    UPDATE members 
+    SET name=#{name}, tel=#{tel}, zipcode=#{zipcode},
+          address1=#{address1}, address2=#{address2}
+    WHERE membersno=#{membersno}
+  </update>
+  
+  <select id="passwd_check" resultType="int" parameterType="HashMap">
+    SELECT COUNT(membersno) as cnt
+    FROM members
+    WHERE membersno=#{membersno} AND passwd=#{passwd}
+  </select>
+  
+  <update id="passwd_update" parameterType="HashMap">
+    UPDATE members
+    SET passwd=#{passwd}
+    WHERE membersno=#{membersno}
+  </update>
+  
+  <delete id="mem_delete" parameterType="int">
+    DELETE FROM members
+    WHERE membersno=#{membersno}
+  </delete>
+  
+  <select id="mem_login" resultType="int" parameterType="Map">
+    SELECT COUNT(membersno) as cnt
+    FROM members
+    WHERE id=#{id} AND passwd=#{passwd}
+  </select>
   
   
 

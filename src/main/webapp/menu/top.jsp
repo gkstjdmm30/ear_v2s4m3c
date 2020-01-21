@@ -45,7 +45,11 @@
             
           <spen class='menubar'>
             <li class="nav-item">
+<<<<<<< HEAD
               <a class="nav-link" href="${root}/members/mem_login.do">로그인</a>
+=======
+              <a class="nav-link" href="/members/mem_login.do">로그인</a>
+>>>>>>> branch 'master' of https://github.com/gkstjdmm30/ear_v2s4m3c
             </li>
           </ul>
           </spen>

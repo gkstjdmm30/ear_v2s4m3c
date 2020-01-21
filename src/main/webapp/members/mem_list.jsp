@@ -51,14 +51,16 @@ function delete_form(membersno) {
  
 <table class = 'table table-striped'>
   <colgroup>
-    <col style='width: 4%;'/>
+    <col style='width: 5%;'/>
+    <col style='width: 8%;'/>
+    <col style='width: 6%;'/>
+    <col style='width: 10%;'/>    
+    <col style='width: 15%;'/>
     <col style='width: 10%;'/>
-    <col style='width: 4%;'/>
-    <col style='width: 12%;'/>    
-    <col style='width: 16%;'/>
-    <col style='width: 14%;'/>
-    <col style='width: 30%;'/>
+    <col style='width: 25%;'/>
     <col style='width: 10%;'/>
+    <col style='width: 5%;'/>
+    <col style='width: 6%;'/>
   </colgroup>  
   
   <thead>  
@@ -71,6 +73,8 @@ function delete_form(membersno) {
     <TH class='th_basic'>이메일</TH>
     <TH class='th_basic'>주소</TH>
     <TH class='th_basic'>가입 날짜</TH>
+    <TH class='th_basic'>등급</TH>
+    <TH class='th_basic'>기타</TH>
   </TR>
   </thead>
   
@@ -87,6 +91,7 @@ function delete_form(membersno) {
       <TD style='text-align: center;'>${membersVO.email }</TD>
       <TD style='text-align: center;'>(${membersVO.zipcode}) ${membersVO.address1 } ${membersVO.address2 }</TD>
       <TD style='text-align: center;'>${membersVO.rdate.substring(0, 10) }</TD>
+      <TD style='text-align: center;'>${membersVO.ps }</TD>
       <TD style='text-align: center;'>
         <A href="javascript: update_form(${membersno });"><IMG src='./images/update.png' title='수정'></A>
         <A href="javascript: delete_form(${membersno });"><IMG src='./images/delete.png' title='삭제'></A>
