@@ -47,7 +47,7 @@ function delete_form(categrpno) {
 </head> 
  
 <body>
-<jsp:include page="/menu/top.jsp" />
+<jsp:include page="/menu/top.jsp"  /> <%-- flush='false' --%>
 
   <div class="row">
   <jsp:include page="../menu/notice_categrp_left.jsp" />
@@ -94,14 +94,16 @@ function delete_form(categrpno) {
         </thead>
         
         <tbody>
-        <c:forEach var="noticeVO" items = "${list}">
-          <c:set var="categrpno" value="${noticeVO.categrpno }" />
+        <c:forEach var="notice_categrpVO" items = "${list}">
+          <c:set var="categrpno" value="${notice_categrpVO.categrpno }" />
           
           <TR>
-            <TD style='text-align: center;'>${noticeVO.categrpno }</TD>
-            <TD style='text-align: left: ;'>${noticeVO.name }(${noticeVO.cnt })</TD>
-            <TD style='text-align: center;'>${noticeVO.seqno }</TD>
-            <TD style='text-align: center;'>${noticeVO.rdate.substring(0, 10) }</TD>
+            <TD style='text-align: center;'>${notice_categrpVO.categrpno }</TD>
+            <TD style='text-align: left: ;'>
+              <A href='../notice/list.do?categrpno=${categrpno }'>${notice_categrpVO.name }</A>(${notice_categrpVO.cnt })
+            </TD>
+            <TD style='text-align: center;'>${notice_categrpVO.seqno }</TD>
+            <TD style='text-align: center;'>${notice_categrpVO.rdate.substring(0, 10) }</TD>
             <TD style='text-align: center;'>
               <A href="./update_seqno_up.do?categrpno=${categrpno }"><IMG src='./images/up.png' title='우선순위 높임' style='width: 16px;'></A>
               <A href="./update_seqno_down.do?categrpno=${categrpno }"><IMG src='./images/down.png' title='우선순위 낮춤' style='width: 16px;'></A>
@@ -120,7 +122,7 @@ function delete_form(categrpno) {
   </div>
   <!-- /.row -->
     
-<jsp:include page="/menu/bottom.jsp" />
+<jsp:include page="/menu/bottom.jsp"  /> <%-- flush='false' --%>
 </body>
  
 </html> 

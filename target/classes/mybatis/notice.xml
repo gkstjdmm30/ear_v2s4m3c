@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<!-- dev.mvc.notice.NoticeDAOInter 패키지에 등록된 interface 명시,
+      패키지명과 인터페이스명은 실제로 존재해야함,
+      Spring이 내부적으로 자동으로 interface를 구현해줌. -->
+<mapper namespace="dev.mvc.notice.NoticeDAOInter"> 
+  <!-- 
+  insert: INSERT SQL 실행
+  id: Spring에서 호출시 사용
+  parameterType: 전달받는 데이터 객체
+  return: 등록한 레코드 갯수 리턴
+  SQL선언시 ';'은 삭제
+  #{}: ? 동일
+  #{name}: public String getName(){...
+   -->
+   
+   <!-- 리스트 : 카테고리별 검색 목록 + 페이징 -->
+   <select id="list_by_categrpno_search_paging" resultType="NoticeVO" parameterType="int">
+     SELECT noticeno, categrpno, title, content,
+                recom, cnt, replycnt, rdate, word, r
+     FROM (
+                SELECT noticeno, categrpno, title, content,
+                           recom, cnt, replycnt, rdate, word, rownum as r
+                FROM (
+                           SELECT noticeno, categrpno, title, content,
+                                      recom, cnt, replycnt, rdate, word
+                           FROM notice
+                           <choose>
+                             <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+                               WHERE categrpno=#{categrpno}
+                             </when>
+                             <otherwise>
+                               WHERE categrpno=#{categrpno} AND word LIKE '%' || #{word} || '%'
+                             </otherwise>
+                           </choose>
+                           ORDER BY noticeno DESC  
+                 )
+     )
+     where r &gt; = #{startNum} and r &lt; = #{endNum}
+       <!-- 
+       1 page: where r> = 1 and r <= 10; 
+       2 page: where r> = 11 and r <= 20; 
+       3 page: where r> = 21 and r <= 30; 
+       -->
+   </select>
+   
+    <!-- 카테고리별 검색 레코드 갯수 -->
+   <select id="search_count" resultType="int" parameterType="HashMap">
+     SELECT COUNT(*) as cnt
+     FROM notice
+     <choose>
+       <when test="word == null or word == ''">
+         WHERE categrpno=#{categrpno}
+       </when>
+       <otherwise>
+         WHERE categrpno=#{categrpno} AND word LIKE '%' || #{word} || '%'
+       </otherwise>
+     </choose>
+   </select>     
+   
+   <insert id="create" parameterType="NoticeVO">
+     INSERT INTO notice(noticeno, categrpno, title, content,
+                              recom, cnt, replycnt, rdate, word)
+     VALUES((SELECT NVL(MAX(noticeno), 0) + 1 as noticeno FROM notice),
+                  #{memberno}, #{categrpno}, #{title}, #{content},
+                  0, 0, 0, sysdate, #{word})
+   </insert>
+   
+   <select id="read" resultType="NoticeVO" parameterType="int">
+     SELECT noticeno, categrpno, title, content,
+                recom, cnt, replycnt, rdate, word
+     FROM notice
+     WHERE noticesno=#{noticesno}
+   </select>
+
+   
+</mapper>
+
+

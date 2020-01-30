@@ -18,7 +18,7 @@ public class Notice_categrpCont {
   private Notice_categrpProcInter notice_categrpProc;
   
   public Notice_categrpCont() {
-    System.out.println("--> team4) Notice_categrpCont created.");
+    System.out.println("--> Notice_categrpCont created.");
   }
   
   // seqno 오름차순 출력 목록

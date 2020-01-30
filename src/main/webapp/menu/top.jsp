@@ -33,9 +33,9 @@
             
           <spen class='menubar'>
             <li class="nav-item">
-              <a class="nav-link" href="#">공지사항</a>
+              <a class="nav-link" href="${root}/notice/list.do?categrpno=1">공지사항</a>
                 <ul>
-                   <li><a href="#">공지사항</a></li>
+                   <li><a href="${root}/notice/list.do?categrpno=1">공지사항</a></li>
                    <li><a href="#">자료실</a></li>
                    <li><a href="#">Q&A</a></li>
                    <li><a href="${root}/notice_categrp/list.do">카테고리 관리(관리자)</a></li>
@@ -46,7 +46,6 @@
           <spen class='menubar'>
             <li class="nav-item">
               <a class="nav-link" href="${root}/members/mem_login.do">로그인</a>
-              <a class="nav-link" href="/members/mem_login.do">로그인</a>
             </li>
           </ul>
           </spen>
