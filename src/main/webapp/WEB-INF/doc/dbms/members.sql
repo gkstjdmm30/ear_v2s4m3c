@@ -31,7 +31,7 @@ COMMENT ON COLUMN members.rdate is '등록일';
 COMMENT ON COLUMN members.ps is '등급';
 
 INSERT INTO members(membersno, id, name, passwd, tel, email, zipcode, address1, address2, rdate)
-VALUES((SELECT NVL(MAX(membersno), 0) + 1 as mem_no FROM members),
+VALUES((SELECT NVL(MAX(membersno), 0) + 1 as membersno FROM members),
    'admin', 'ADMIN', '1234', '0', '0', '0', '0', '0', sysdate);
    
 INSERT INTO members(membersno, id, name, passwd, tel, email, zipcode, address1, address2, rdate)
@@ -39,3 +39,5 @@ VALUES((SELECT NVL(MAX(membersno), 0) + 1 as mem_no FROM members),
    'user1', 'USER1', '1234', '0', '0', '0', '0', '0', sysdate);
    
 SELECT * FROM members;
+
+SELECT to_char(sysdate,'yyyy-mm-dd hh24:mi:ss') FROM dual;

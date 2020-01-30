@@ -27,6 +27,7 @@ DROP TABLE notice_categrp;
 DROP TABLE notice;
 CREATE TABLE notice(
 		noticeno                    		NUMBER(10)		 NOT NULL PRIMARY KEY,
+		membersno                    NUMBER(10)     NOT NULL,
 		categrpno                     		NUMBER(7)		 NOT NULL,
 		title                         		VARCHAR2(300)		 NOT NULL,
 		content                       		CLOB      		 NOT NULL,
@@ -35,11 +36,13 @@ CREATE TABLE notice(
 		replycnt                      		NUMBER(10)		 DEFAULT 0		 NOT NULL,
 		rdate                         		DATE		 NOT NULL,
 		word                          		VARCHAR2(100)		 NULL ,
-  FOREIGN KEY (categrpno) REFERENCES notice_categrp (categrpno)
+  FOREIGN KEY (categrpno) REFERENCES notice_categrp (categrpno),
+  FOREIGN KEY (membersno) REFERENCES members (membersno)
 );
 
 COMMENT ON TABLE notice is '공지사항';
 COMMENT ON COLUMN notice.noticeno is '공지사항 번호';
+COMMENT ON COLUMN notice.membersno is '회원 번호';
 COMMENT ON COLUMN notice.categrpno is '카테고리 그룹번호';
 COMMENT ON COLUMN notice.title is '제목';
 COMMENT ON COLUMN notice.content is '내용';
@@ -57,32 +60,32 @@ SELECT NVL(MAX(noticeno), 0) + 1 as noticeno FROM notice;
  ----------
           1
 
-INSERT INTO notice(noticeno,
+INSERT INTO notice(noticeno, membersno,
                                 categrpno, title, content, 
                                 recom, cnt, replycnt, rdate, word)
 VALUES((SELECT NVL(MAX(noticeno), 0) + 1 as noticeno FROM notice),
-             1, '제목1', '내용1',
+             2, 1, '제목1', '내용1',
              0, 0, 0, sysdate, '검색어1');
              
-INSERT INTO notice(noticeno,
+INSERT INTO notice(noticeno, membersno,
                                 categrpno, title, content, 
                                 recom, cnt, replycnt, rdate, word)
 VALUES((SELECT NVL(MAX(noticeno), 0) + 1 as noticeno FROM notice),
-             1, '제목2', '내용2',
+             2, 1, '제목2', '내용2',
              0, 0, 0, sysdate, '검색어2');
              
-INSERT INTO notice(noticeno,
+INSERT INTO notice(noticeno, membersno,
                                 categrpno, title, content, 
                                 recom, cnt, replycnt, rdate, word)
 VALUES((SELECT NVL(MAX(noticeno), 0) + 1 as noticeno FROM notice),
-             1, '제목3', '내용3',
+             2, 1, '제목3', '내용3',
              0, 0, 0, sysdate, '검색어3');
              
-INSERT INTO notice(noticeno,
+INSERT INTO notice(noticeno, membersno,
                                 categrpno, title, content, 
                                 recom, cnt, replycnt, rdate, word)
 VALUES((SELECT NVL(MAX(noticeno), 0) + 1 as noticeno FROM notice),
-             1, '제목4', '내용4',
+             2, 1, '제목4', '내용4',
              0, 0, 0, sysdate, '검색어4');
              
  SELECT * FROM notice;
