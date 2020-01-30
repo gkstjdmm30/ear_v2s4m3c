@@ -152,9 +152,9 @@ public class Product_categrpCont {
  }
 
  
-  // 왼쪽 메뉴
-  @RequestMapping(value = "/product_categrp/list_index_left.do", method = RequestMethod.GET)
-  public ModelAndView list_index_left() {
+  // 상품 카테고리 메뉴
+  @RequestMapping(value = "/product_categrp/list_product_menu.do", method = RequestMethod.GET)
+  public ModelAndView list_product_menu() {
     ModelAndView mav = new ModelAndView();
 
     List<Product_categrpVO> list = product_categrpProc.list_seqno_asc();
@@ -163,10 +163,29 @@ public class Product_categrpCont {
     int total_count = productProc.total_count();
     mav.addObject("total_count", total_count);
 
-    mav.setViewName("/product_categrp/list_index_left"); // /webapp/product_categrp/list_index_left.jsp
+    mav.setViewName("/product_categrp/list_product_menu"); // /webapp/product_categrp/list_index_left.jsp
 
     return mav;
   }
+  
+  // 왼쪽 메뉴
+  @RequestMapping(value = "/product_categrp/list_left_menu.do", method = RequestMethod.GET)
+  public ModelAndView list_left_menu() {
+    ModelAndView mav = new ModelAndView();
+
+    List<Product_categrpVO> list = product_categrpProc.list_seqno_asc();
+    mav.addObject("list", list);
+
+    int total_count = productProc.total_count();
+    mav.addObject("total_count", total_count);
+
+    mav.setViewName("/product_categrp/list_left_menu"); // /webapp/product_categrp/list_index_left.jsp
+
+    return mav;
+  }  
+  
+  
+  
   
 }
 
