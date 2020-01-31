@@ -41,3 +41,7 @@ VALUES((SELECT NVL(MAX(membersno), 0) + 1 as mem_no FROM members),
 SELECT * FROM members;
 
 SELECT to_char(sysdate,'yyyy-mm-dd hh24:mi:ss') FROM dual;
+
+SELECT membersno, id, name, passwd, tel, email, zipcode, address1, address2, rdate
+FROM members
+WHERE id = 'user1';

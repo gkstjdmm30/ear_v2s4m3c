@@ -28,7 +28,7 @@
         <input type='hidden' name='categrpno' value='${noitce_categrpVO.categrpno }'>
         
         <ASIDE style='float: left;'>
-          <A href='../notice_categrp/list.do'>카테고리 그룹</A> > 
+          카테고리 그룹 > 
           <A href='./list.do?categrpno=${notice_categrpVO.categrpno }'>${notice_categrpVO.name }</A>
           <c:if test="${param.word.length() > 0 }">
             > [${param.word }] 검색 목록 (${search_count } 건)
@@ -36,8 +36,10 @@
         </ASIDE>
         <ASIDE style='float: right;'>
           <A href="javascript:location.reload();">새로고침</A>
+          <c:if test="${sessionScope.id != null}">
             <span class='menu_divide' > | </span>
             <A href='./create.do?categrpno=${notice_categrpVO.categrpno }'>등록</A>
+          </c:if>
           
           <c:choose>
             <c:when test="${param.word != '' }">
@@ -55,15 +57,24 @@
           </c:if>
         </ASIDE> 
       </form>
-      <DIV class='menu_line' style='clear: both;'></DIV>
+      <DIV class='menu_line' style='margin-top: 30px; clear: both;'></DIV>
       
       <div style='width: 100%;'>
         <table class="table table-striped" style='width: 100%;'>
           <colgroup>
+          <c:choose>
+            <c:when test="${sessionScope.id != null}">
               <col style="width: 15%;"></col>
               <col style="width: 60%;"></col>
               <col style="width: 10%;"></col>
               <col style="width: 15%;"></col>
+            </c:when>
+            <c:otherwise>
+              <col style="width: 15%;"></col>
+              <col style="width: 75%;"></col>
+              <col style="width: 10%;"></col>
+            </c:otherwise>
+          </c:choose>
             
           </colgroup>
           <!-- table 컬럼 -->
@@ -72,9 +83,11 @@
               <th style='text-align: center; font-size: 0.9em;'>등록일</th>
               <th style='text-align: center; font-size: 0.9em;'>제목</th>
               <th style='text-align: center; font-size: 0.9em;'>추천</th>
+              <c:if test="${sessionScope.id != null}">
                 <th style='text-align: center; font-size: 0.9em;'>
                   기타
                 </th>
+              </c:if>
             </tr>
           
           </thead>
@@ -90,11 +103,13 @@
                   <a href="./read.do?noticeno=${noticeno}&word=${param.word}&nowPage=${param.nowPage}">${noticeVO.title}</a>
                 </td> 
                 <td style='text-align: center;'>${noticeVO.recom}</td>
+                <c:if test="${sessionScope.id != null}">
                   <td style='text-align: center;'>
                     <a href="./update.do?noticeno=${noticeno}&categrpno=${notice_categrpVO.categrpno}"><img src="./images/update.png" title="수정"></a>
                     <a href="./delete.do?noticeno=${noticeno}&categrpno=${notice_categrpVO.categrpno}"><img src="./images/delete.png" title="삭제"></a>
                     <a href="../attachfile/create.do?noticeno=${noticeno}&categrpno=${notice_categrpVO.categrpno}"><img src="./images/upload.png" title="파일 업로드"></a>
                   </td>
+                </c:if>
               </tr>
             </c:forEach>
             

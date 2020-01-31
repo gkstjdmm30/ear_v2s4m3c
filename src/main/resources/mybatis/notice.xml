@@ -63,19 +63,60 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    </select>     
    
    <insert id="create" parameterType="NoticeVO">
-     INSERT INTO notice(noticeno, categrpno, title, content,
+     INSERT INTO notice(noticeno, membersno, categrpno, title, content,
                               recom, cnt, replycnt, rdate, word)
      VALUES((SELECT NVL(MAX(noticeno), 0) + 1 as noticeno FROM notice),
-                  #{memberno}, #{categrpno}, #{title}, #{content},
+                  #{membersno}, #{categrpno}, #{title}, #{content},
                   0, 0, 0, sysdate, #{word})
    </insert>
    
    <select id="read" resultType="NoticeVO" parameterType="int">
-     SELECT noticeno, categrpno, title, content,
+     SELECT noticeno, membersno, categrpno, title, content,
                 recom, cnt, replycnt, rdate, word
      FROM notice
      WHERE noticesno=#{noticesno}
    </select>
+   
+   <select id="total_count" resultType="int">
+     SELECT COUNT(*) as count
+     FROM notice
+   </select>
+   
+   <update id='update' parameterType="NoticeVO">
+     UPDATE notice
+     SET title=#{title}, content=#{content}, word=#{word}
+     WHERE noticeno = #{noticeno}
+   </update>
+   
+   <delete id="delete" parameterType="int">
+     DELETE FROM notice
+     WHERE noticeno=#{noticeno}
+   </delete> 
+   
+   <!-- FK 컬럼 값이 사용된 레코드 갯수 산출: id="count_by_categrpno" -->  
+   <select id="count_by_categrpno" resultType="int">
+     SELECT COUNT(*) as cnt
+     FROM notice
+     WHERE categrpno=#{categrpno}
+   </select> 
+   
+   <!-- FK 컬럼 값이 사용된 레코드 삭제: id="delete_by_categrpno" -->  
+   <delete id="delete_by_categrpno" parameterType="int">
+     DELETE FROM notice
+     WHERE categrpno=#{categrpno}
+   </delete> 
+   
+   <update id="increaseReplycnt" parameterType="int">
+     UPDATE notice
+     SET replycnt = replycnt + 1
+     WHERE noticeno = #{noticeno}
+   </update>
+
+   <update id="decreaseReplycnt" parameterType="int">
+     UPDATE notice
+     SET replycnt = replycnt + 1
+     WHERE noticeno = #{noticeno}
+   </update>
 
    
 </mapper>

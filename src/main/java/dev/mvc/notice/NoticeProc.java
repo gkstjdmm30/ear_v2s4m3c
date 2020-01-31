@@ -136,4 +136,46 @@ public class NoticeProc implements NoticeProcInter {
 		return noticeVO;
 	}
 
+	@Override
+	public int create(NoticeVO noticeVO) {
+		int count = noticeDAO.create(noticeVO);
+		return count;
+	}
+
+	@Override
+	public int update(NoticeVO noticeVO) {
+		int count = noticeDAO.update(noticeVO);
+		return count;
+	}
+
+	@Override
+	public int delete(int noticeno) {
+		int count = noticeDAO.delete(noticeno);
+		return count;
+	}
+
+	@Override
+	public int count_by_categrpno(int categrpno) {
+		int count = noticeDAO.count_by_categrpno(categrpno);
+		return count;
+	}
+
+	@Override
+	public int delete_by_categrpno(int categrpno) {
+		int count = noticeDAO.delete_by_categrpno(categrpno);
+		return count;
+	}
+
+	@Override
+	public int increaseReplycnt(int noticeno) {
+		int count = noticeDAO.increaseReplycnt(noticeno);
+		return count;
+	}
+
+	@Override
+	public int decreaseReplycnt(int noticeno) {
+		int count = noticeDAO.decreaseReplycnt(noticeno);
+		return count;
+	}
+
 }

@@ -5,6 +5,8 @@ public class NoticeVO {
 
 	/** 공지사항 번호 */ 
 	private int noticeno;
+	/** 회원 번호 */ 
+	private int membersno;
 	/** 카테고리 그룹번호 */ 
 	private int categrpno;
 	/** 제목 */ 
@@ -75,6 +77,13 @@ public class NoticeVO {
 	public void setWord(String word) {
 		this.word = word;
 	}
+	public int getMembersno() {
+		return membersno;
+	}
+	public void setMembersno(int membersno) {
+		this.membersno = membersno;
+	}
+	
 	
 	
 	
