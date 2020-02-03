@@ -5,6 +5,8 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.PixelGrabber;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -300,7 +302,18 @@ public class Tool {
     return ret;
   }
  
-
+  /**
+   * 동시 접속자 다운로드의 충돌 처리
+   * 2019-12-06_123020_100
+   * @return
+   */
+  public static String getRandomDate(){
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_hhmmss");
+    String date = sdf.format(new Date());
+    date = date + "_" + (int)(Math.random()*1000);
+ 
+    return date;
+  }
   
 }
 
