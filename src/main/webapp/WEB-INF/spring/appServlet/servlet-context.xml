@@ -23,10 +23,12 @@
   </beans:bean>
   
   <context:component-scan base-package="dev.mvc.ear" />
-  <context:component-scan base-package="dev.mvc.notice_categrp" />  
+  <context:component-scan base-package="dev.mvc.notice_categrp" />  <!-- 아이린 -->
+  <context:component-scan base-package="dev.mvc.notice" />  <!-- 아이린 -->
   <context:component-scan base-package="dev.mvc.product_categrp" /> <!-- 왕눈이 -->
   <context:component-scan base-package="dev.mvc.product" /> <!-- 왕눈이 -->
-  <context:component-scan base-package="dev.mvc.members" /> <!-- 왕눈이 -->
+  <context:component-scan base-package="dev.mvc.members" /> <!-- 손한성 -->
+  <context:component-scan base-package="dev.mvc.product_order" /> <!-- 손한성 -->
   
 </beans:beans>
 

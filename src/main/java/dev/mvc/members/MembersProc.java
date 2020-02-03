@@ -70,7 +70,7 @@ public class MembersProc implements MembersProcInter {
 
   @Override
   public MembersVO mem_readByID(String id) {
-    MembersVO membersVO = membersDAO.mem_readByID(id);
+    MembersVO membersVO = membersDAO.mem_readById(id);
     return membersVO;
   }
 

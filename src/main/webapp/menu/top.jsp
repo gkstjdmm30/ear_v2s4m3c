@@ -33,9 +33,9 @@
             
           <spen class='menubar'>
             <li class="nav-item">
-              <a class="nav-link" href="#">공지사항</a>
+              <a class="nav-link" href="${root}/notice/list.do?categrpno=1">공지사항</a>
                 <ul>
-                   <li><a href="#">공지사항</a></li>
+                   <li><a href="${root}/notice/list.do?categrpno=1">공지사항</a></li>
                    <li><a href="#">자료실</a></li>
                    <li><a href="#">Q&A</a></li>
                    <li><a href="${root}/notice_categrp/list.do">카테고리 관리(관리자)</a></li>
@@ -45,8 +45,14 @@
             
           <spen class='menubar'>
             <li class="nav-item">
-              <a class="nav-link" href="${root}/members/mem_login.do">로그인</a>
-              <a class="nav-link" href="/members/mem_login.do">로그인</a>
+              <c:choose>
+                <c:when test="${sessionScope.id == null}">
+                  <a class="nav-link" href="${root}/members/mem_login.do">로그인</a>
+                </c:when>
+                <c:otherwise>
+                  <A class='nav-link'  href='${root}/members/mem_logout.do' >${sessionScope.id } 로그아웃</A>
+                </c:otherwise>
+              </c:choose>
             </li>
           </ul>
           </spen>

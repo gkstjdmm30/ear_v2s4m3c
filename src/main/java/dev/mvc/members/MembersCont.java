@@ -43,7 +43,7 @@ public class MembersCont {
     int count = membersProc.mem_create(membersVO);
     
     if(count ==0) {
-      mav.setViewName("redirecct:/members/mem_create_msg.jsp?count=" + count);      
+      mav.setViewName("redirect:/members/mem_create_msg.jsp?count=" + count);      
     } else {
       mav.setViewName("redirect:/members/mem_list.do");
     }
@@ -111,7 +111,7 @@ public class MembersCont {
     
     int count = membersProc.mem_login(map);
     if (count == 1) { // 로그인 성공
-      MembersVO membersVO = membersProc.mem_readByID(id_save);
+      MembersVO membersVO = membersProc.mem_readByID(id);
       session.setAttribute("membersno",  membersVO.getMembersno());
       session.setAttribute("id", id);
       session.setAttribute("name", membersVO.getName());
@@ -142,7 +142,7 @@ public class MembersCont {
       ck_passwd_save.setMaxAge(60 * 60 * 72 * 10); // 30 day
       response.addCookie(ck_passwd_save);
         
-      mav.setViewName("redirect:/index.do");
+      mav.setViewName("redirect:/index.jsp");
     } else {
       mav.setViewName("redirect:/members/msm_login_fail_msg.jsp");
     }

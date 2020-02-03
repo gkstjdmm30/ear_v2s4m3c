@@ -7,9 +7,9 @@ public class ReplyMemberVO {
   /** 댓글 번호 */
   private int replyno;
   /** 관련 글 번호 */
-  private int contentsno;
+  private int productno;
   /** 회원 번호 */
-  private int memberno;
+  private int membersno;
   /** 내용 */
   private String content;
   /** 패스워드 */
@@ -29,17 +29,17 @@ public class ReplyMemberVO {
   public void setReplyno(int replyno) {
     this.replyno = replyno;
   }
-  public int getContentsno() {
-    return contentsno;
+  public int getProductno() {
+    return productno;
   }
-  public void setContentsno(int contentsno) {
-    this.contentsno = contentsno;
+  public void setProductno(int productno) {
+    this.productno = productno;
   }
-  public int getMemberno() {
-    return memberno;
+  public int getMembersno() {
+    return membersno;
   }
-  public void setMemberno(int memberno) {
-    this.memberno = memberno;
+  public void setMembersno(int membersno) {
+    this.membersno = membersno;
   }
   public String getContent() {
     return content;

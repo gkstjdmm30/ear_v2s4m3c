@@ -1,5 +1,6 @@
 package dev.mvc.product;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -83,6 +84,12 @@ public interface ProductDAOInter {
    */
   public int search_count(HashMap<String, Object> hashMap);
   
+  /**
+   * 검색 + 페이징 목록
+   * @param map
+   * @return
+   */
+  public ArrayList<ProductVO> list_by_search_paging(HashMap<String, Object> map);
 }
 
 

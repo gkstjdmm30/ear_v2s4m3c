@@ -42,11 +42,11 @@ public class ReplyCont {
 
   }
   
-  /*@RequestMapping(value="/reply/list.do", method=RequestMethod.GET)
+  @RequestMapping(value="/reply/list.do", method=RequestMethod.GET)
   public ModelAndView list(HttpSession session) {
     ModelAndView mav = new ModelAndView();
     
-    if (adminProc.isAdmin(session)) {
+    /*if (adminProc.isAdmin(session)) {
       List<ReplyVO> list = replyProc.list();
       
       mav.addObject("list", list);
@@ -54,11 +54,11 @@ public class ReplyCont {
 
     } else {
       mav.setViewName("redirect:/admin/login_need.jsp"); // /webapp/admin/login_need.jsp
-    }
+    }*/
     
     return mav;
   }
-*/
+
    // http://localhost:9090/ojt/reply/list_by_productno.do?productno=1
   @ResponseBody
   @RequestMapping(value = "/reply/list_by_contentsno.do",

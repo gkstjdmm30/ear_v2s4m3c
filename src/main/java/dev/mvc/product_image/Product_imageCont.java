@@ -39,7 +39,7 @@ public class Product_imageCont {
   private Product_imageProcInter product_imageProc;
   
   public Product_imageCont(){
-    System.out.println("--> Product_imageCont created.");
+    System.out.println("--> Product_image Cont created.");
   }
   
   // http://localhost:9090/team4/product_image/create.do?productcateno=1&productno=1
@@ -51,7 +51,7 @@ public class Product_imageCont {
     mav.addObject("product_categrpVO", product_categrpVO);
 
     mav.setViewName("/product_image/create"); // /webapp/attachfile/create.jsp
-
+    
     return mav;
   }
   

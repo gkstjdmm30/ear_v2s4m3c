@@ -74,33 +74,65 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      WHERE productno = #{productno}
    </update>
    
-   <!-- 카테고리별 검색 목록 -->
+   <!-- 검색 목록 -->
    <select id="list_by_search" resultType="ProductVO" parameterType="HashMap">
      SELECT productno, productcateno, name, content, 
                 recom, cnt, replycnt, rdate, word
      FROM product
      <choose>
        <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+        WHERE productcateno=#{productcateno}
        </when>
        <otherwise>
-         WHERE word LIKE '%' || #{word} || '%'
+         WHERE productcateno=#{productcateno} AND word LIKE '%' || #{word} || '%'
        </otherwise>
      </choose>
      ORDER BY productno DESC   
    </select>
    
-   <!-- 카테고리별 검색 레코드 갯수 -->
+   <!-- 검색 레코드 갯수 -->
    <select id="search_count" resultType="int" parameterType="HashMap">
      SELECT COUNT(*) as cnt
      FROM product
      <choose>
        <when test="word == null or word == ''">
+        WHERE productcateno=#{productcateno}
        </when>
        <otherwise>
-         WHERE word LIKE '%' || #{word} || '%'
+         WHERE productcateno=#{productcateno} AND word LIKE '%' || #{word} || '%'
        </otherwise>
      </choose>
-   </select>        
+   </select>    
+   
+   <!-- 검색 목록 + 페이징 -->
+   <select id="list_by_search_paging" resultType="ProductVO" parameterType="HashMap">  
+      SELECT productno, productcateno, name, content, 
+                recom, cnt, replycnt, rdate, word, r
+        FROM(
+                  SELECT productno, membersno, productcateno, name, content, 
+                            recom, cnt, replycnt, rdate, word, rownum as r
+                  FROM (
+                             SELECT productno, membersno, productcateno, name, content, 
+                                        recom, cnt, replycnt, rdate, word
+                             FROM product
+                             <choose>
+                               <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+                                WHERE productcateno=#{productcateno}
+                               </when>
+                               <otherwise>
+                                 WHERE productcateno=#{productcateno} AND word LIKE '%' || #{word} || '%'
+                               </otherwise>
+                             </choose>
+                             ORDER BY productno DESC   
+                 )
+     )
+     where r &gt; = #{startNum} and r &lt; = #{endNum}
+     <!-- 
+     1 page: where r> = 1 and r <= 10; 
+     2 page: where r> = 11 and r <= 20; 
+     3 page: where r> = 21 and r <= 30; 
+     -->         
+    </select> 
    
    
    
