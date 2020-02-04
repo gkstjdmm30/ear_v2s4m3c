@@ -66,8 +66,8 @@ public class Notice_attachfileCont {
   public ModelAndView create(RedirectAttributes ra,
                                            HttpServletRequest request,
                                            Notice_attachfileVO notice_attachfileVO,
-                                           int categrpno) {
-    System.out.println("--> --> --> ");
+                                           int categrpno,
+                                           int nowPage) {
     
     ModelAndView mav = new ModelAndView();
     // -----------------------------------------------------
@@ -112,6 +112,7 @@ public class Notice_attachfileCont {
     ra.addAttribute("upload_count", upload_count);
     ra.addAttribute("categrpno", categrpno);
     ra.addAttribute("noticeno", notice_attachfileVO.getNoticeno());
+    ra.addAttribute("nowPage", nowPage);
     
     mav.setViewName("redirect:/notice_attachfile/create_msg.jsp");
     return mav;

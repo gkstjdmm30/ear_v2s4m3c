@@ -3,6 +3,8 @@ package dev.mvc.notice;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -37,8 +39,8 @@ public class NoticeCont {
 	
   /**
    * 목록 + 검색 + 페이징 지원
-   * http://localhost:9090/ojt/contents/list.do
-   * http://localhost:9090/ojt/contents/list.do?categrpno=1&word=&nowPage=1
+   * http://localhost:9090/ojt/notice/list.do
+   * http://localhost:9090/ojt/notice/list.do?categrpno=1&word=&nowPage=1
    * @param categoryno
    * @param word
    * @param nowPage
@@ -92,7 +94,7 @@ public class NoticeCont {
     return mav;
   }
    
-  // http://localhost:9090/ear/notice/create.do?memberno=2&categrpno=1
+  // http://localhost:9090/ear/notice/create.do?membersno=2&categrpno=1
   @RequestMapping(value = "/notice/create.do", method = RequestMethod.GET)
   public ModelAndView create(int categrpno) {
     ModelAndView mav = new ModelAndView();
@@ -165,6 +167,171 @@ public class NoticeCont {
     mav.addObject("notice_attachfile_list", notice_attachfile_list);
     
     mav.setViewName("/notice/file_delete"); // file_delete.jsp
+
+    return mav;
+  }
+  
+  /**
+   * 첨부 파일 1건 삭제 처리
+   * 
+   * @param noticeno
+   * @return
+   */
+  @RequestMapping(value = "/notice/file_delete_proc.do", 
+                             method = RequestMethod.GET)
+  public ModelAndView file_delete_proc(int noticeno, int attachfileno) {
+    ModelAndView mav = new ModelAndView();
+
+    NoticeVO noticeVO = noticeProc.read(noticeno);
+    mav.addObject("noticeVO", noticeVO);
+
+    Notice_categrpVO notice_categrpVO = notice_categrpProc.read(noticeVO.getCategrpno());
+    mav.addObject("notice_categrpVO", notice_categrpVO);
+
+    // 1건의 파일 삭제
+    notice_attachfileProc.delete(attachfileno);
+    
+    List<Notice_attachfileVO> notice_attachfile_list = notice_attachfileProc.list_by_noticeno(noticeno);
+    mav.addObject("notice_attachfile_list", notice_attachfile_list);
+    
+    mav.setViewName("/notice/file_delete"); // file_delete.jsp
+
+    return mav;
+  }
+  
+  /**
+   * 수정 폼
+   * @param 
+   * @return
+   */
+  // http://localhost:9090/ojt/contents/update.do?memberno=1&categrpno=1
+  @RequestMapping(value = "/notice/update.do", method = RequestMethod.GET)
+  public ModelAndView update(int categrpno, int noticeno) {
+    ModelAndView mav = new ModelAndView();
+
+    Notice_categrpVO notice_categrpVO = notice_categrpProc.read(categrpno);
+    mav.addObject("notice_categrpVO", notice_categrpVO);
+
+    NoticeVO noticeVO = noticeProc.read(noticeno);
+    mav.addObject("noticeVO", noticeVO);
+
+    mav.setViewName("/notice/update"); // /webapp/notice/update.jsp
+
+    return mav;
+  }
+  
+  /**
+   * 수정 처리
+   * @param noticeVO
+   * @return
+   */
+  @RequestMapping(value = "/notice/update.do", 
+                             method = RequestMethod.POST)
+  public ModelAndView update(RedirectAttributes ra,
+                                            NoticeVO noticeVO,
+                                            int nowPage) {
+    ModelAndView mav = new ModelAndView();
+
+    int count = noticeProc.update(noticeVO);
+
+    // mav.setViewName("/contents/create"); // /webapp/notice/create.jsp
+    // redirect: form에서 보낸 데이터 모두 삭제됨, 새로고침 중복 등록 방지용.
+    ra.addAttribute("count", count);
+    ra.addAttribute("categrpno", noticeVO.getCategrpno());
+    ra.addAttribute("noticeno", noticeVO.getNoticeno());
+    ra.addAttribute("nowPage", nowPage);
+    
+    mav.setViewName("redirect:/notice/update_msg.jsp");
+
+    return mav;
+  }
+  
+  /**
+   * 한건 삭제폼
+   * @param categrpno
+   * @param notice
+   * @return
+   */
+  // http://localhost:9090/ojt/notice/delete.do?categrpno=1&notice=1
+  @RequestMapping(value = "/notice/delete.do", 
+                             method = RequestMethod.GET)
+  public ModelAndView delete(int categrpno, int noticeno, int nowPage) {
+    ModelAndView mav = new ModelAndView();
+
+    Notice_categrpVO notice_categrpVO = notice_categrpProc.read(categrpno);
+    mav.addObject("notice_categrpProc", notice_categrpProc);
+
+    NoticeVO noticeVO = noticeProc.read(noticeno);
+    mav.addObject("noticeVO", noticeVO);
+    
+    // FK noticeno 컬럼 값이 사용된 레코드 갯수 산출: id="count_by_noticeno" 
+    int count_by_noticeno = notice_attachfileProc.count_by_noticeno(noticeno);
+    mav.addObject("count_by_noticeno", count_by_noticeno);
+    
+    mav.setViewName("/notice/delete"); // /webapp/notice/delete.jsp
+
+    return mav;
+  }
+  
+  /**
+   * 한건 삭제 처리
+   * @param ra
+   * @param notice
+   * @param contentsno
+   * @return
+   */
+  @RequestMapping(value = "/notice/delete.do", 
+                             method = RequestMethod.POST)
+  public ModelAndView delete(HttpSession session,
+                                           RedirectAttributes ra,
+                                            int categrpno,
+                                            int noticeno, 
+                                            int nowPage) {
+    ModelAndView mav = new ModelAndView();
+
+    int membersno = (Integer)session.getAttribute("membersno");
+    // 현재 로그인한 사용자와 글 등록자가 같은지 검사
+    if (membersno == noticeProc.read(noticeno).getMembersno()) {
+      int count = noticeProc.delete(noticeno);
+      if (count == 1) {
+        notice_categrpProc.decreaseCnt(categrpno);
+      }
+
+      ra.addAttribute("count", count);
+      ra.addAttribute("categrpno", categrpno);
+      ra.addAttribute("noticeno", noticeno);
+      ra.addAttribute("nowPage", nowPage);
+      
+      mav.setViewName("redirect:/notice/delete_msg.jsp");
+    } else {
+      ra.addAttribute("categrpno", categrpno);
+      mav.setViewName("redirect:/notice/auth_fail_msg.jsp");
+    }
+
+    return mav;
+  }
+  
+  /**
+   * FK 컬럼값을 이용한 레코드 삭제 처리
+   * @param ra
+   * @param categrpno
+   * @return
+   */
+  @RequestMapping(value = "/notice/delete_by_noticeno.do", 
+                             method = RequestMethod.POST)
+  public ModelAndView delete_by_categrpno(RedirectAttributes ra,
+                                            int categrpno) {
+    ModelAndView mav = new ModelAndView();
+
+    int count = noticeProc.delete_by_categrpno(categrpno);
+    if (count > 0) { // FK 컬럼 관련 글이 정상적으로 삭제되었다면 cnt 컬럼 0으로변경
+      notice_categrpProc.cnt_zero(categrpno);
+    }
+
+    ra.addAttribute("count", count); // 삭제된 레코드 갯수
+    ra.addAttribute("categrpno", categrpno);
+    
+    mav.setViewName("redirect:/notice/delete_by_categrpno_msg.jsp");
 
     return mav;
   }
