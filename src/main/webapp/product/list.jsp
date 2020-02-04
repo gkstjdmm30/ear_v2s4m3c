@@ -83,9 +83,6 @@
               </div>
               <div class="card-footer">
                 <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                <laval>ddd</laval>
-                dd
-              </div>
             </div>
           </div> 
           
