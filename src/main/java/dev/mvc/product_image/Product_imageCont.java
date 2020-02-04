@@ -73,7 +73,7 @@ public class Product_imageCont {
     String thumb = ""; // Preview 이미지
     int upload_count = 0; // 정상처리된 레코드 갯수
     
-    String upDir = Tool.getRealPath(request, "/product_imageVO/storage");
+    String upDir = Tool.getRealPath(request, "/product_image/storage");
     // 전송 파일이 없어서도 fnamesMF 객체가 생성됨.
     List<MultipartFile> fnamesMF = product_imageVO.getFnamesMF();
     int count = fnamesMF.size(); // 전송 파일 갯수
@@ -104,6 +104,7 @@ public class Product_imageCont {
     
     ra.addAttribute("upload_count", upload_count);
     ra.addAttribute("productcateno", productcateno);
+    ra.addAttribute("nowPage", nowPage);
     ra.addAttribute("productno", product_imageVO.getProductno());
     
     mav.setViewName("redirect:/product_image/create_msg.jsp");
