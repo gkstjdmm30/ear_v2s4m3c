@@ -31,7 +31,7 @@
 
 <body>
 <c:set var="categrpno" value="${notice_categrpVO.categrpno}" />
-<c:set var="contentsno" value="${noticeVO.noticeno }" />
+<c:set var="noticeno" value="${noticeVO.noticeno }" />
 
 <jsp:include page="/menu/top.jsp" flush='false' />
   <ASIDE style='float: left;'>
@@ -43,50 +43,50 @@
     <span class='menu_divide' > | </span> 
     <A href='./list.do?categrpno=${categrpno }&nowPage=${param.nowPage}'>목록</A>
     <span class='menu_divide' > | </span> 
-    <A href='./update.do?categrpno=${categrpno }&contentsno=${contentsno}&nowPage=${param.nowPage}'>수정</A>
+    <A href='./update.do?categrpno=${categrpno }&noticeno=${noticeno}&nowPage=${param.nowPage}'>수정</A>
     <span class='menu_divide' > | </span> 
-    <a href="../attachfile/create.do?contentsno=${contentsno}&categrpno=${categrpVO.categrpno}&nowPage=${param.nowPage}">첨부 파일 등록</A>
+    <a href="../notice_attachfile/create.do?noticeno=${noticeno}&categrpno=${categrpno}&nowPage=${param.nowPage}">첨부 파일 등록</A>
     <span class='menu_divide' > | </span> 
-    <A href='./delete.do?categrpno=${categrpno }&contentsno=${contentsno}&nowPage=${param.nowPage}'>삭제</A>
+    <A href='./delete.do?categrpno=${categrpno }&noticeno=${noticeno}&nowPage=${param.nowPage}'>삭제</A>
     
   </ASIDE> 
   
   <div class='menu_line'></div>
 
   <FORM name='frm' method="get" action='./update.do'>
-      <input type="hidden" name="contentsno" value="${contentsno}">
+      <input type="hidden" name="noticeno" value="${noticeno}">
       <fieldset class="fieldset">
         <ul>
           <li class="li_none" style='border-bottom: solid 1px #AAAAAA;'>
             <span class="glyphicon glyphicon-list-alt"></span> 
-            <span>${contentsVO.title}</span>
-            (<span>${contentsVO.recom}</span>)
-            <span>${contentsVO.rdate.substring(0, 16)}</span>
+            <span>${noticeVO.title}</span>
+            (<span>${noticeVO.recom}</span>)
+            <span>${noticeVO.rdate.substring(0, 16)}</span>
           </li>
           <li class="li_none">
             <DIV id='attachfile_panel' style="width: 80%; margin: 0px auto;"></DIV> <!-- 원본 이미지 출력 -->
           </li>
           <li class="li_none" style='text-align: center;'>
-            <c:forEach var="attachfileVO" items="${attachfile_list }">
-              <c:set var="thumb" value="${attachfileVO.thumb.toLowerCase() }" />
+            <c:forEach var="notice_attachfileVO" items="${notice_attachfile_list }">
+              <c:set var="thumb" value="${notice_attachfileVO.thumb.toLowerCase() }" />
               
               <c:choose>
                 <c:when test="${thumb.endsWith('jpg') || thumb.endsWith('png') || thumb.endsWith('gif')}">
-                  <A href="javascript:panel_img('${attachfileVO.fname }')"><IMG src='../attachfile/storage/${thumb }' style='margin-top: 2px;'></A>
-                  <A href="./file_delete_proc.do?contentsno=${contentsno}&attachfileno=${attachfileVO.attachfileno }"><span class="glyphicon glyphicon-remove"></span></A>
+                  <A href="javascript:panel_img('${notice_attachfileVO.fname }')"><IMG src='../notice_attachfile/storage/${thumb }' style='margin-top: 2px;'></A>
+                  <A href="./file_delete_proc.do?noticeno=${noticeno}&attachfileno=${notice_attachfileVO.attachfileno }"><IMG src='../notice_attachfile/images/x.png' style='margin-top: 2px; width: 20px;'></A>
                 </c:when>
               </c:choose>
             </c:forEach>
           </li>
           <li class="li_center" >
-            <button type="button" onclick="location.href='./read.do?contentsno=${contentsno}'"
+            <button type="button" onclick="location.href='./read.do?noticeno=${noticeno}&nowPage=${param.nowPage}'"
                         class="btn btn-info">첨부 파일 삭제 취소</button>
           </li>
         </ul>
       </fieldset>
   </FORM>
 
-<jsp:include page="/menu/bottom.jsp" flush='false' />
+<jsp:include page="/menu/bottom2.jsp" flush='false' />
 </body>
 
 </html>

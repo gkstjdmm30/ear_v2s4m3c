@@ -59,8 +59,6 @@ public class Notice_attachfileCont {
 
     mav.setViewName("/notice_attachfile/create"); // /webapp/notice_attachfile/create.jsp
     
-    System.out.println("--> 1categrpno: " + categrpno);
-    
     return mav;
   }
   
@@ -69,7 +67,6 @@ public class Notice_attachfileCont {
                                            HttpServletRequest request,
                                            Notice_attachfileVO notice_attachfileVO,
                                            int categrpno) {
-    System.out.println("--> 2categrpno: " + categrpno);
     System.out.println("--> --> --> ");
     
     ModelAndView mav = new ModelAndView();

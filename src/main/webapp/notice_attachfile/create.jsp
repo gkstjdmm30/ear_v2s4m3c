@@ -54,7 +54,7 @@
     </FORM>
   </DIV>
   
-<jsp:include page="/menu/bottom.jsp" flush='false' />
+<jsp:include page="/menu/bottom2.jsp" flush='false' />
 </body>
  
 </html> 
