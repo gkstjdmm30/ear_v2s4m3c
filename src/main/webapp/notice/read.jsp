@@ -18,7 +18,7 @@
   
 <script type="text/javascript">
   $(function() { // 자동 실행
-    list_by_noticeno(${noticeVO.noticeno });  // JS의 EL 접근
+    list_by_noticeno(${noticeVO.noticeno});  // JS의 EL 접근
     
     if ('${sessionScope.membersno}' != '') { // 로그인된 경우
       // alert('sessionScope.membersno: ' + '${sessionScope.membersno}');
@@ -27,17 +27,6 @@
       $('#content', frm_reply).attr('placeholder', '댓글 작성');
     }
   });
-  
-  function panel_img(file) {
-    var tag = "";
-    tag = "<A href=\"javascript: $('#attachfile_panel').hide();\">";
-    tag += "  <IMG src='../notice_attachfile/storage/" + file
-        + "' style='width: 100%;'>";
-    tag += "</A>";
-
-    $('#attachfile_panel').html(tag);
-    $('#attachfile_panel').show();
-  }
   
   function create_reply() {
     var frm_reply = $('#frm_reply');
@@ -277,25 +266,25 @@
         </div>
       </div>
     </div>
-  </div> <!-- Modal 알림창 종료 -->
+  </div> <!-- Modal 알림창 종료 --><!-- 알림창 종료합니따 -->
   
   <ASIDE style='float: left;'>
     카테고리 그룹 > 
-    <A href='./list.do?categrpno=${categrpno }&word=${param.word}'>${notice_categrpVO.name }</A>
+    <A href='./list.do?categrpno=${categrpno }&word=${param.word}&nowPage=${param.nowPage}'>${notice_categrpVO.name }</A>
   </ASIDE>
   <ASIDE style='float: right;'>
     <A href="javascript:location.reload();">새로고침</A>
     <span class='menu_divide' > | </span> 
-    <A href='./list.do?categrpno=${categrpno }&word=${param.word}'>목록</A>
+    <A href='./list.do?categrpno=${categrpno }&word=${param.word}&nowPage=${param.nowPage}'>목록</A>
     <c:if test="${sessionScope.id != null}">
       <span class='menu_divide' > | </span> 
-      <A href='./update.do?categrpno=${categrpno }&noticeno=${noticeno}&nowPage=${param.nowPage}'>수정</A>
+      <A href='./update.do?categrpno=${categrpno }&noticeno=${noticeno}&nowPage=${param.nowPage}&nowPage=${param.nowPage}'>수정</A>
       <span class='menu_divide' > | </span> 
-      <a href="../notice_attachfile/create.do?noticeno=${noticeno}&categrpno=${notice_categrpVO.categrpno}">첨부 파일 등록</A>
+      <a href="../notice_attachfile/create.do?noticeno=${noticeno}&categrpno=${notice_categrpVO.categrpno}&nowPage=${param.nowPage}">첨부 파일 등록</A>
       <span class='menu_divide' > | </span> 
-      <a href="./file_delete.do?noticeno=${noticeno}&categrpno=${notice_categrpVO.categrpno}">첨부 파일 삭제</A>
+      <a href="./file_delete.do?noticeno=${noticeno}&categrpno=${notice_categrpVO.categrpno}&nowPage=${param.nowPage}">첨부 파일 삭제</A>
       <span class='menu_divide' > | </span> 
-      <A href='./delete.do?categrpno=${categrpno }&noticeno=${noticeno}&nowPage=${param.nowPage}'>삭제</A>
+      <A href='./delete.do?categrpno=${categrpno }&noticeno=${noticeno}&nowPage=${param.nowPage}&nowPage=${param.nowPage}'>삭제</A>
     </c:if>
   </ASIDE> 
   
@@ -311,21 +300,6 @@
             (<span>${noticeVO.recom}</span>)
             <span>${noticeVO.rdate.substring(0, 16)}</span>
           </li>
-          <li class="li_none">
-            <DIV id='attachfile_panel' style="width: 80%; margin: 0px auto;"></DIV> <!-- 원본 이미지 출력 -->
-          </li>
-          <li class="li_none" style='text-align: center;' >
-            <c:forEach var="notice_attachfileVO" items="${attachfile_list }">
-              <c:set var="thumb" value="${notice_attachfileVO.thumb.toLowerCase() }" />
-              
-              <c:choose>
-                <c:when test="${thumb.endsWith('jpg') || thumb.endsWith('png') || thumb.endsWith('gif')}">
-                  <A href="javascript:panel_img('${notice_attachfileVO.fname }')"><IMG src='../notice_attachfile/storage/${thumb }' style='margin-top: 2px;'></A>
-                </c:when>
-              </c:choose>
-            </c:forEach>
-          </li>
-          
           <li class="li_none">
             <DIV>${noticeVO.content }</DIV>
           </li>
@@ -344,7 +318,7 @@
             <DIV>
               <c:forEach var="notice_attachfileVO" items="${attachfile_list }">
                 <c:set var="fname" value="${notice_attachfileVO.fname.toLowerCase() }" />
-                <A href='${root}/download2?dir=/notice_attachfile/storage&filename=${notice_attachfileVO.fupname}&downname=${notice_attachfileVO.fname}'>${notice_attachfileVO.fname}</A>              
+                ( <A href='${root}/download2?dir=/notice_attachfile/storage&filename=${notice_attachfileVO.fupname}&downname=${notice_attachfileVO.fname}'>${notice_attachfileVO.fname}</A> )              
               </c:forEach>
             </DIV>  
           </li>                    

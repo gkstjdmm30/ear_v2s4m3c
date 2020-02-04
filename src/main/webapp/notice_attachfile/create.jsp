@@ -20,8 +20,8 @@
 <jsp:include page="/menu/top.jsp" flush='false' />
   <ASIDE style='float: left;'>
     카테고리 그룹 >
-    <A href='./list.do?categrpno=${notice_categrpVO.categrpno }'>${notice_categrpVO.name }</A> >
-    신규 등록
+    <A href='../notice/list.do?categrpno=${notice_categrpVO.categrpno }&nowPage=${param.nowPage}'>${notice_categrpVO.name }</A> >
+    파일 등록
   </ASIDE>
   <ASIDE style='float: right;'>
     <A href='./list.do?categrpno=${param.categrpno }'>목록</A>
@@ -47,15 +47,12 @@
       <DIV class='content_bottom_menu'>
         <button type="submit" class="btn btn-info">파일 전송</button>
         <button type="button" 
-                    onclick="location.href='./list.do?categrpno=${param.categrpno}'" 
+                    onclick="location.href='../notice/list.do?categrpno=${notice_categrpVO.categrpno }&nowPage=${param.nowPage}'" 
                     class="btn btn-info">취소[목록]</button>
       </DIV>
        
     </FORM>
   </DIV>
-  
-  카테넘버 : ${param.categrpno } <br>
-  공지넘버 : ${param.noticeno }
   
 <jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>

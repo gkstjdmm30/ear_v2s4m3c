@@ -20,7 +20,7 @@ VALUES((SELECT NVL(MAX(membersno), 0) + 1 as membersno FROM members),
 INSERT INTO members(membersno, id, name, passwd, tel, email, zipcode, address1, address2, rdate)
 VALUES((SELECT NVL(MAX(membersno), 0) + 1 as mem_no FROM members),
    'user1', 'USER1', '1234', '1', '1', '1', '1', '1', sysdate);
-   
+   DELETE from members;
    SELECT *
    FROM members;
 
@@ -30,20 +30,29 @@ CREATE TABLE product_categrp(
     productcateno          NUMBER(10)     NOT NULL    PRIMARY KEY,
     name                      VARCHAR2(50)     NOT NULL,
     seqno                     NUMBER(10)    DEFAULT 0     NOT NULL,
-    cnt                         NUMBER(10)    DEFAULT 0     NOT NULL     
+    rdate                             DATE     NOT NULL,
+    cnt                         NUMBER(10)    DEFAULT 0     NOT NULL           
 );
 
-INSERT INTO product_categrp(productcateno, name, seqno, cnt)
-VALUES((SELECT NVL(MAX(productcateno), 0) + 1 as categrpno FROM product_categrp),
-            '무선', 1, 0);
-            
-INSERT INTO product_categrp(productcateno, name, seqno, cnt)
-VALUES((SELECT NVL(MAX(productcateno), 0) + 1 as categrpno FROM product_categrp),
-            '유선', 2, 0);
+COMMENT ON TABLE product_categrp is '상품 카테고리';
+COMMENT ON COLUMN product_categrp.productcateno is '상품 카테고리 번호';
+COMMENT ON COLUMN product_categrp.name is '상품 카테고리 이름';
+COMMENT ON COLUMN product_categrp.seqno is '출력 순서';
+COMMENT ON COLUMN categrp.rdate is '그룹 생성일';
+COMMENT ON COLUMN product_categrp.cnt is '등록된 상품 수';
 
-INSERT INTO product_categrp(productcateno, name, seqno, cnt)
+-- 등록
+INSERT INTO product_categrp(productcateno, name, seqno, rdate, cnt)
 VALUES((SELECT NVL(MAX(productcateno), 0) + 1 as categrpno FROM product_categrp),
-            '스피커', 3, 0);
+            '무선', 1, sysdate, 0);
+            
+INSERT INTO product_categrp(productcateno, name, seqno, rdate, cnt)
+VALUES((SELECT NVL(MAX(productcateno), 0) + 1 as categrpno FROM product_categrp),
+            '유선', 2, sysdate, 0);
+
+INSERT INTO product_categrp(productcateno, name, seqno, rdate, cnt)
+VALUES((SELECT NVL(MAX(productcateno), 0) + 1 as categrpno FROM product_categrp),
+            '스피커', 3, sysdate, 0);
         
    SELECT *
    FROM product_categrp;       
@@ -53,7 +62,8 @@ VALUES((SELECT NVL(MAX(productcateno), 0) + 1 as categrpno FROM product_categrp)
 DROP TABLE product;
 CREATE TABLE product(
     productno                        NUMBER(10)     NOT NULL    PRIMARY KEY,
-    productcateno                          NUMBER(10)     NOT NULL,
+    productcateno                   NUMBER(10)     NOT NULL,
+    membersno                     NUMBER(10)     NOT NULL,
     name                             VARCHAR2(300)    NOT NULL,
     content                           CLOB           NOT NULL,
     recom                             NUMBER(7)    DEFAULT 0     NOT NULL,
@@ -61,23 +71,36 @@ CREATE TABLE product(
     replycnt                          NUMBER(10)     DEFAULT 0     NOT NULL,
     rdate                             DATE     NOT NULL,
     word                              VARCHAR2(100)    NULL ,
-  FOREIGN KEY (productcateno) REFERENCES product_categrp (productcateno)
+  FOREIGN KEY (productcateno) REFERENCES product_categrp (productcateno),
+  FOREIGN KEY (membersno) REFERENCES members (membersno)
 );
 
-INSERT INTO product(productno, productcateno, name, content, recom, cnt, replycnt, rdate, word)
+COMMENT ON TABLE product is '상품';
+COMMENT ON COLUMN product.productno is '상품번호';
+COMMENT ON COLUMN product.productcateno is '상품 카테고리 번호';
+COMMENT ON COLUMN product.membersno is '회원번호';
+COMMENT ON COLUMN product.name is '상품이름';
+COMMENT ON COLUMN product.content is '내용';
+COMMENT ON COLUMN product.recom is '추천수';
+COMMENT ON COLUMN product.cnt is '조회수';
+COMMENT ON COLUMN product.replycnt is '댓글수';
+COMMENT ON COLUMN product.rdate is '등록일';
+COMMENT ON COLUMN product.word is '검색어';
+
+INSERT INTO product(productno, productcateno, membersno, name, content, recom, cnt, replycnt, rdate, word)
 VALUES((SELECT NVL(MAX(productno), 0) + 1 as productno FROM product),
-             1, '상품1a', '내용1',
-             0, 0, 0, sysdate, '');
-             
-INSERT INTO product(productno, productcateno, name, content, recom, cnt, replycnt, rdate, word)
+             1, 1, '상품1', '내용1',
+             0, 0, 0, sysdate, '상품4');
+    
+INSERT INTO product(productno, productcateno, membersno, name, content, recom, cnt, replycnt, rdate, word)
 VALUES((SELECT NVL(MAX(productno), 0) + 1 as productno FROM product),
-             2, '상품2a', '내용1',
-             0, 0, 0, sysdate, '');
-             
-INSERT INTO product(productno, productcateno, name, content, recom, cnt, replycnt, rdate, word)
+             2, 1, '상품2', '내용1',
+             0, 0, 0, sysdate, '상품4');
+    
+INSERT INTO product(productno, productcateno, membersno, name, content, recom, cnt, replycnt, rdate, word)
 VALUES((SELECT NVL(MAX(productno), 0) + 1 as productno FROM product),
-             3, '상품3a', '내용1',
-             0, 0, 0, sysdate, '');
+             3, 1, '상품3', '내용1',
+             0, 0, 0, sysdate, '상품4');
 
 select * from product;
                     

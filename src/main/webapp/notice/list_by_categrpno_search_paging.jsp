@@ -38,7 +38,7 @@
           <A href="javascript:location.reload();">새로고침</A>
           <c:if test="${sessionScope.id != null}">
             <span class='menu_divide' > | </span>
-            <A href='./create.do?categrpno=${notice_categrpVO.categrpno }'>등록</A>
+            <A href='./create.do?categrpno=${notice_categrpVO.categrpno }&nowPage=${param.nowPage}'>등록</A>
           </c:if>
           
           <c:choose>

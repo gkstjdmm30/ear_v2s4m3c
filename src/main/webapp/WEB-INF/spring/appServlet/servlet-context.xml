@@ -29,6 +29,8 @@
   <context:component-scan base-package="dev.mvc.notice_attachfile" />  <!-- 아이린 -->
   <context:component-scan base-package="dev.mvc.product_categrp" /> <!-- 왕눈이 -->
   <context:component-scan base-package="dev.mvc.product" /> <!-- 왕눈이 -->
+  <context:component-scan base-package="dev.mvc.product_image" /> <!-- 왕눈이 -->
+  <context:component-scan base-package="dev.mvc.reply" /> <!-- 왕눈이 -->
   <context:component-scan base-package="dev.mvc.members" /> <!-- 손한성 -->
   <context:component-scan base-package="dev.mvc.product_order" /> <!-- 손한성 -->
   

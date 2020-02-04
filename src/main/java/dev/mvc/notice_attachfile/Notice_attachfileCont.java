@@ -215,7 +215,7 @@ public class Notice_attachfileCont {
     }
  
     // download ¼­ºí¸´ ¿¬°á
-    mav.setViewName("redirect:/download?dir=" + dir + "&filename=" + zip);    
+    mav.setViewName("redirect:/download?dir=" + dir + "&filename=" + zip);
     
     return mav;
   }

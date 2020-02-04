@@ -9,11 +9,11 @@
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>회원 로그인</title>
  
-  <link href="./css/style.css" rel="Stylesheet" type="text/css">
+  <link href="../css/style.css" rel="Stylesheet" type="text/css">
   <!-- Bootstrap core CSS -->
-  <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom styles for this template -->
-  <link href="css/shop-homepage.css" rel="stylesheet">
+  <link href="../css/shop-homepage.css" rel="stylesheet">
 
 </head>
 <body>
@@ -60,6 +60,13 @@
 </DIV>
 
 
-<jsp:include page="/menu/bottom.jsp" />
+    </div>
+  </div>
+
+  <footer class="py-4 bg-dark" style="position:fixed; bottom:0px; width:100%;">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+  </footer>
 </body>
 </html>

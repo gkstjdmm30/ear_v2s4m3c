@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "dev.mvc.product_image.Product_imageDAOInter">
+  <insert id="create" parameterType="Product_imageVO">
+    INSERT INTO product_image(productimgno, productno, fname, fupname, thumb, fsize, rdate)
+    VALUES((SELECT NVL(MAX(productimgno), 0) + 1 as productimgno FROM product_image),
+                 #{productno}, #{fname}, #{fupname}, #{thumb}, #{fsize}, sysdate)
+  </insert>
+  
+  <select id="list" resultType="Product_imageVO"> 
+    SELECT productimgno, productno, fname, fupname, thumb, fsize, rdate
+    FROM product_image
+    ORDER BY productno DESC,  productimgno ASC
+  </select>
+
+  <select id="list_by_productno" resultType="Product_imageVO" parameterType="int">
+    SELECT productimgno, productno, fname, fupname, thumb, fsize, rdate
+    FROM product_image
+    WHERE productno = #{productno}
+    ORDER BY fname ASC
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM product_image
+    WHERE productimgno = #{productimgno}
+  </delete>
+  
+  <!-- FK 컬럼 값이 사용된 레코드 갯수 산출: id="count_by_contentsno" -->
+  <select id="count_by_productno" resultType="int" parameterType="int">
+    SELECT COUNT(*) as cnt
+    FROM product_image
+    WHERE productno=#{productno}
+  </select>
+  
+  <!-- FK 컬럼 값이 사용된 레코드 삭제: id="delete_by_contentsno" -->
+  <delete id="delete_by_productno" parameterType="int">
+    DELETE FROM product_image
+    WHERE productno=#{productno}
+  </delete> 
+
+</mapper> 
+ 
+ 
+
+ 
+ 
