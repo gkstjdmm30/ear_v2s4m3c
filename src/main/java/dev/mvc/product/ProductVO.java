@@ -9,6 +9,8 @@ public class ProductVO {
   private int membersno;
   /** 이름 */
   private String name;
+  /** 가격 */
+  private int price;
   /** 내용 */
   private String content;
   /** 추천 */
@@ -45,6 +47,13 @@ public class ProductVO {
   }
   public void setName(String name) {
     this.name = name;
+  }
+  
+  public int getPrice() {
+    return price;
+  }
+  public void setPrice(int price) {
+    this.price = price;
   }
   public String getContent() {
     return content;

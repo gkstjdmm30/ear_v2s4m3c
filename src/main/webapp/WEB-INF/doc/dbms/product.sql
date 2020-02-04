@@ -7,6 +7,7 @@ CREATE TABLE product(
     productcateno                   NUMBER(10)     NOT NULL,
     membersno                     NUMBER(10)     NOT NULL,
     name                             VARCHAR2(300)    NOT NULL,
+    price                                NUMBER(10)     NOT NULL,
     content                           CLOB           NOT NULL,
     recom                             NUMBER(7)    DEFAULT 0     NOT NULL,
     cnt                               NUMBER(7)    DEFAULT 0     NOT NULL,
@@ -22,6 +23,7 @@ COMMENT ON COLUMN product.productno is '상품번호';
 COMMENT ON COLUMN product.productcateno is '상품 카테고리 번호';
 COMMENT ON COLUMN product.membersno is '회원번호';
 COMMENT ON COLUMN product.name is '상품이름';
+COMMENT ON COLUMN product.price is '가격';
 COMMENT ON COLUMN product.content is '내용';
 COMMENT ON COLUMN product.recom is '추천수';
 COMMENT ON COLUMN product.cnt is '조회수';
