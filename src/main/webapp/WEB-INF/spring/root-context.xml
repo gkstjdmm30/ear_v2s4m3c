@@ -27,10 +27,14 @@
     <property name="dataSource" ref="dataSource" />
     <!-- 아래부분은 매핑할 xml파일이 있는 패키지경로를 설정한다. -->
     <property name="typeAliasesPackage"  value="dev.mvc.ear,
+                                                               nation.web.tool,
                                                                dev.mvc.notice_categrp,
                                                                dev.mvc.notice,
+                                                               dev.mvc.notice_attachfile,
                                                                dev.mvc.product_categrp,
                                                                dev.mvc.product,
+                                                               dev.mvc.product_image,
+                                                               dev.mvc.reply,
                                                                dev.mvc.members,
                                                                dev.mvc.product_order" />
     <!-- /src/main/resources/mybatis 폴더 -->                   

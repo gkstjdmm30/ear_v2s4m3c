@@ -74,7 +74,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      SELECT noticeno, membersno, categrpno, title, content,
                 recom, cnt, replycnt, rdate, word
      FROM notice
-     WHERE noticesno=#{noticesno}
+     WHERE noticeno=#{noticeno}
    </select>
    
    <select id="total_count" resultType="int">

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import dev.mvc.notice_attachfile.Notice_attachfileProcInter;
+import dev.mvc.notice_attachfile.Notice_attachfileVO;
 import dev.mvc.notice_categrp.Notice_categrpProcInter;
 import dev.mvc.notice_categrp.Notice_categrpVO;
 
@@ -24,6 +26,10 @@ public class NoticeCont {
 	@Autowired
 	@Qualifier("dev.mvc.notice_categrp.Notice_categrpProc")
 	private Notice_categrpProcInter notice_categrpProc;
+	
+	@Autowired
+	@Qualifier("dev.mvc.notice_attachfile.Notice_attachfileProc")
+	private Notice_attachfileProcInter notice_attachfileProc;
 	
   public NoticeCont() {
     System.out.println("--> NoticeCont created.");
@@ -116,6 +122,24 @@ public class NoticeCont {
     ra.addAttribute("categrpno", noticeVO.getCategrpno());
     
     mav.setViewName("redirect:/notice/create_msg.jsp");
+
+    return mav;
+  }
+  
+  @RequestMapping(value = "/notice/read.do", method = RequestMethod.GET)
+  public ModelAndView read(int noticeno) {
+    ModelAndView mav = new ModelAndView();
+
+    NoticeVO noticeVO = noticeProc.read(noticeno);
+    mav.addObject("noticeVO", noticeVO);
+
+    Notice_categrpVO notice_categrpVO = notice_categrpProc.read(noticeVO.getCategrpno());
+    mav.addObject("notice_categrpVO", notice_categrpVO);
+    
+    List<Notice_attachfileVO> attachfile_list = notice_attachfileProc.list_by_noticeno(noticeno);
+    mav.addObject("attachfile_list", attachfile_list);
+    
+    mav.setViewName("/notice/read");
 
     return mav;
   }

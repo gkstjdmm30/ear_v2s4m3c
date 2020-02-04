@@ -38,10 +38,10 @@
       <LI class='li_none'>
         <br>
         <button type='button' 
-                    onclick="location.href='./create.do?categrpno=${param.categrpno}'"
+                    onclick="location.href='./create.do?categrpno=${param.categrpno}&nowPage=${param.nowPage}'"
                     class="btn btn-info">새로운 컨텐츠 등록</button>
         <button type='button' 
-                    onclick="location.href='./list.do?categrpno=${param.categrpno}'"
+                    onclick="location.href='./list.do?categrpno=${param.categrpno}&nowPage=${param.nowPage}'"
                     class="btn btn-info">목록</button>
       </LI>
      </UL>

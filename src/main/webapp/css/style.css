@@ -580,13 +580,9 @@
   }
   /* menubar 종료 */
   
-  /* 하단고정 */
-  .footer {
-    position:fixed;
-    bottom:0px;
-    width:100%;
-    }
-    
+ .footer {
+ 
+}
 
   
   

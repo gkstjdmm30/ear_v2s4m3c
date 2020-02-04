@@ -30,7 +30,7 @@
     신규 등록
   </ASIDE>
   <ASIDE style='float: right;'>
-    <A href='./list.do?categrpno=${param.categrpno }'>목록</A>
+    <A href='./list.do?categrpno=${param.categrpno }&nowPage=${param.nowPage}'>목록</A>
     <!-- <span class='menu_divide' >│</span> --> 
   </ASIDE> 
  
@@ -64,7 +64,7 @@
       <DIV class='content_bottom_menu'>
         <button type="submit" class="btn btn-info">등록</button>
         <button type="button" 
-                    onclick="location.href='./list.do?categrpno=${param.categrpno}'" 
+                    onclick="location.href='./list.do?categrpno=${param.categrpno}&nowPage=${param.nowPage}'" 
                     class="btn btn-info">취소[목록]</button>
       </DIV>
        
