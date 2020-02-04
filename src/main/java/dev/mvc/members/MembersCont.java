@@ -115,6 +115,7 @@ public class MembersCont {
       session.setAttribute("membersno",  membersVO.getMembersno());
       session.setAttribute("id", id);
       session.setAttribute("name", membersVO.getName());
+      session.setAttribute("ps", membersVO.getPs());
       
       if (id_save.equals("Y")) { // id를 저장할 경우
         Cookie ck_id = new Cookie("ck_id", id);

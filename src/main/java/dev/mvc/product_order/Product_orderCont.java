@@ -42,12 +42,11 @@ public class Product_orderCont {
     
     MembersVO membersVO = membersProc.mem_read(membersno);
     ProductVO productVO = productProc.read(productno);
-    
-    System.out.println("id :" + membersVO.getId());
-    System.out.println("id :" + productVO.getName());
+//    Product_imageVO imageVO = product_imageProc.read(productno);
     
     mav.addObject("membersVO", membersVO);
     mav.addObject("productVO", productVO);
+//    mav.addObject("product_imageVO", imageVO);
     
     mav.setViewName("/product_order/create");
     return mav;

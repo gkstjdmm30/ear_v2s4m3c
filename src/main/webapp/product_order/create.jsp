@@ -90,7 +90,7 @@
    <div style="width: 40%; height: 70%; float: left;">
       <div class="form-group"> 
         <div class="col-md-10">
-          <img style="width: 100%; height: 100%; text-align: center;" src="./Lisa.jpg">
+          <img style="width: 100%; height: 100%; text-align: center;" src="${product_imageVO.thumb }">
         </div>
       </div>   
    </div>

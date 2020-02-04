@@ -8,6 +8,9 @@
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>회원 등록</title>
+
+ <script type="text/JavaScript"
+          src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
  
   <link href="../css/style.css" rel="Stylesheet" type="text/css">
   <!-- Bootstrap core CSS -->
