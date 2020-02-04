@@ -8,30 +8,116 @@
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>주문 신청</title>
  
-<link href="../css/style.css" rel="Stylesheet" type="text/css">
- 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+ 
+  <link href="../css/style.css" rel="Stylesheet" type="text/css">
+  <!-- Bootstrap core CSS -->
+  <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="../css/shop-homepage.css" rel="stylesheet">
+  
 
-<!-- Bootstrap -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    
 <script type="text/javascript">
   $(function(){
- 
+    var price = 10000;
+    var count = <%= Integer.parseInt(request.getParameter("count"))%>
+    var shipping = ((price*count)>10000?0:2500);
+    var total = (price*count) + shipping;
+    $('#total').val(total);
   });
 </script>
  
 </head> 
  
 <body>
-<jsp:include page="/menu/top.jsp" flush='false' />
+<jsp:include page="/menu/top.jsp" />
+
+
+<DIV class='title_line'>주문</DIV>
+<FORM name='frm' id='frm' method='POST' action='./product_order_create.do' 
+              onsubmit="return send();" class="form-horizontal">
+<div>
+   <div style="width: 60%; height: 70%;  float: left;">
+      <div class="form-group">
+            
+        <div class="col-md-10">
+         구매자 <input type='text' class="form-control input-lg" name='id' id='id' value='${membersVO.id }'  style='width: 90%;' readonly >
+        </div>
+      </div>   
+                  
+      <div class="form-group">   
+        <div class="col-md-10">
+         상품 <input type='text' class="form-control input-lg" name='name' id='name' value='${productVO.name }' required="required" style='width: 90%;' readonly>
+        </div>
+      </div>   
+      
+      <div class="form-group">    
+        <div class="col-md-10" >
+         가격 <input type='text' class="form-control input-lg" name='price' id='price' 
+                     value="<%-- ${productVO.price } --%>" required="required" style='width: 90%;'>
+        </div>
+      </div>   
+      
+      <div class="form-group">
+        <div class="col-md-10" >
+         갯수 <input type='text' class="form-control input-lg" name='count' id='count' 
+                     value="<%=request.getParameter("count") %>" required="required" style='width: 90%;' >
+        </div>
+      </div>   
+      
+      <div class="form-group">    
+        <div class="col-md-10">
+         배송비 <input type='text' class="form-control input-lg" name='shipping' id='shipping' 
+                     value='배송비(받아올것)' required="required" style='width: 90%;' readonly>
+        </div>
+      </div>      
 
 
 
-<jsp:include page="/menu/bottom.jsp" flush='false' />
+      <div class="form-group">
+        <div class="col-md-10">
+         총 가격 <input type='text' class="form-control input-lg" name='total' id='total' 
+                     value="" required="required" style='width: 90%;' >
+        </div>
+      </div>
+      
+   </div>
+   
+
+
+
+   <div style="width: 40%; height: 70%; float: left;">
+      <div class="form-group"> 
+        <div class="col-md-10">
+          <img style="width: 100%; height: 100%; text-align: center;" src="./Lisa.jpg">
+        </div>
+      </div>   
+   </div>
+ </div>
+ 
+ 
+ 
+ 
+ <div class ="width: 40%;">
+   <div>
+      <input type='text' class="form-control input-lg" name='zipcode' id='zipcode' value='${membersVO.zipcode }'  style='width: 40%; margin: 5px;' readonly >
+      <input type='text' class="form-control input-lg" name='address1' id='address1' value='${membersVO.address1 }'  style='width: 40%; margin: 5px;' readonly >
+      <input type='text' class="form-control input-lg" name='address2' id='address2' value='${membersVO.address2 }'  style='width: 40%; margin: 5px;' readonly >
+   </div>   
+   <div class= "" style="float: right; padding: 12px; margin-right: 66px;">
+      <select class="btn btn-light" name="선택하시오" id="code">
+        <option>선택</option>
+        <option>신용카드</option>
+        <option>계좌이체</option>
+      </select>
+      <button type="button" class="btn btn-primary">결제하기</button>
+      <a href="javascript:history.back();"><button type="button" class="btn btn-secondary">취소</button></a> 
+   </div>
+ </div>
+  </FORM>
+
+<jsp:include page="/menu/bottom2.jsp" />
 </body>
  
 </html> 

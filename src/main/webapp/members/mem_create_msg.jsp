@@ -8,11 +8,11 @@
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>회원 로그인 메세지</title>
  
-  <link href="./css/style.css" rel="Stylesheet" type="text/css">
+  <link href="../css/style.css" rel="Stylesheet" type="text/css">
   <!-- Bootstrap core CSS -->
-  <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom styles for this template -->
-  <link href="css/shop-homepage.css" rel="stylesheet">
+  <link href="../css/shop-homepage.css" rel="stylesheet">
 
 </head>
 <body>
@@ -35,7 +35,7 @@
       <LI class='li_none'>
         <br>
         <button type='button' onclick="location.href='./mem_create.do'">회원 등록</button>
-        <button type='button' onclick="location.href='./mem_list.do'">목록</button>
+        <button type='button' onclick="location.href='../index.jsp'">홈</button>
       </LI>
      </UL>
   </fieldset>

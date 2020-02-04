@@ -23,6 +23,7 @@
 <body>
 <jsp:include page="/menu/top.jsp" flush='false' />
  
+ #{param.membersno }
  
 
 <jsp:include page="/menu/bottom.jsp" flush='false' />

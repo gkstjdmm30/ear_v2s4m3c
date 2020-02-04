@@ -24,6 +24,12 @@ VALUES((SELECT NVL(MAX(membersno), 0) + 1 as mem_no FROM members),
    SELECT *
    FROM members;
 
+         SELECT COUNT(id) as cnt
+      FROM members
+      WHERE id='admin';
+      
+ SELECT * FROM members;
+ 
 -- product_categrp
 DROP TABLE product_categrp;
 CREATE TABLE product_categrp(

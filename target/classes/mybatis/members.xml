@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="dev.mvc.members.MembersDAOInter"> 
 
-<insert id="mem_create" parameterType="MembersVO">
+    <insert id="mem_create" parameterType="MembersVO">
      INSERT INTO members(membersno, id, name, passwd, tel, email, zipcode, address1, address2, rdate)
       VALUES((SELECT NVL(MAX(membersno), 0) + 1 as membersno FROM members),
        #{id}, #{name}, #{passwd}, #{tel}, #{email}, #{zipcode}, #{address1}, #{address2}, sysdate)
@@ -55,7 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     WHERE membersno=#{membersno}
   </update>
   
-  <delete id="mem_delete" parameterType="int">
+  <delete id="mem_delete" parameterType="int" >
     DELETE FROM members
     WHERE membersno=#{membersno}
   </delete>
