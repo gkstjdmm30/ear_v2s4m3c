@@ -17,8 +17,18 @@
   <!-- Custom styles for this template -->
   <link href="../css/shop-homepage.css" rel="stylesheet">
   
-
+<script>
+function button_address() {
+  var zipcode = ${membersVO.zipcode}; 
+  var address1 = ${membersVO.address1}; 
+  var address2 = ${membersVO.address2}; 
+  $('#zipcode').val(zipcode);
+  $('#address1').val(address1);
+  $('#address2').val(address2);
+}
+</script>
 <script type="text/javascript">
+
 <%--   $(function(){
     
     var price = 10000;
@@ -28,7 +38,6 @@
     $('#totalprice').val(totalprice);
   }); --%>
   $(function(){
-    
     var price = $('#price').val();
     var count = <%= Integer.parseInt(request.getParameter("count"))%>
     var shipping = ((price*count)>10000?0:2500);
@@ -115,11 +124,12 @@
  
  <div class ="width: 40%;">
    <div>
-      <input type='text' class="form-control input-lg" name='zipcode' id='zipcode' value='${membersVO.zipcode }'  style='width: 40%; margin: 5px;' readonly >
-      <input type='text' class="form-control input-lg" name='address1' id='address1' value='${membersVO.address1 }'  style='width: 40%; margin: 5px;' readonly >
-      <input type='text' class="form-control input-lg" name='address2' id='address2' value='${membersVO.address2 }'  style='width: 40%; margin: 5px;' readonly >
+      <input type='text' class="form-control input-lg" name='zipcode' id='zipcode' value=''  style='width: 40%; margin: 5px;'  >
+      <input type='text' class="form-control input-lg" name='address1' id='address1' value=''  style='width: 40%; margin: 5px;'  >
+      <input type='text' class="form-control input-lg" name='address2' id='address2' value=''  style='width: 40%; margin: 5px;'  >
    </div>   
    <div class= "" style="float: right; padding: 12px; margin-right: 66px;">
+      <button id="button_address" name="button_address" onclick="button_address" class="btn btn-secondary">기존 주소</button>
       <select class="btn btn-light" name="howorder" id="howorder">
         <option value="1">신용카드</option>
         <option value="2">계좌이체</option>
@@ -135,4 +145,6 @@
  
 </html> 
   
+
+
    

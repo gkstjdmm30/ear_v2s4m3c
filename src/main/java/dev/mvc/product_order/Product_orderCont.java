@@ -66,10 +66,10 @@ public class Product_orderCont {
     ProductVO productVO = productProc.read(productno);
     System.out.println("membersVO : " + membersVO.getMembersno());
     System.out.println("productno : " + productVO.getProductno());
-    
-    System.out.println("orderno : " + orderVO.getOrderno());
     System.out.println("membersno : " + orderVO.getMembersno());
     System.out.println("productno : " + orderVO.getProductno());
+    
+    System.out.println("orderno : " + orderVO.getOrderno());
     System.out.println("count : " + orderVO.getCount());
     System.out.println("price : " + orderVO.getPrice());
     System.out.println("shippding : " + orderVO.getShipping());

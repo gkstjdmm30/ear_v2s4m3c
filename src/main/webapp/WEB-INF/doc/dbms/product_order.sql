@@ -5,11 +5,11 @@ CREATE TABLE members(
     id                            VARCHAR2(50)     NOT NULL,
     name                          VARCHAR2(50)     NOT NULL,
     passwd                        VARCHAR2(32)     NOT NULL,
-    tel                           VARCHAR2(50)     NOT NULL UNIQUE,
+    tel                           VARCHAR2(50)     NOT NULL,
     email                         VARCHAR2(70)     NOT NULL,
-    zipcode                      VARCHAR2(8)    NOT NULL UNIQUE,
-    address1                      VARCHAR2(100)    NULL UNIQUE,
-    address2                       VARCHAR2(100)    NULL UNIQUE,
+    zipcode                      VARCHAR2(8)    NOT NULL,
+    address1                      VARCHAR2(100)    NULL,
+    address2                       VARCHAR2(100)    NULL,
     rdate                         DATE     NOT NULL,
     ps                            NUMBER(1) DEFAULT 1 NOT NULL 
 );
@@ -142,11 +142,7 @@ CREATE table product_order(
 	address2                       VARCHAR2(100)    NULL,
   odate         DATE NOT NULL,
   FOREIGN KEY (productno) REFERENCES product (productno),
-  FOREIGN KEY (membersno) REFERENCES members (membersno),
-  FOREIGN KEY (tel) REFERENCES members (tel),
-  FOREIGN KEY (zipcode) REFERENCES members (zipcode),
-  FOREIGN KEY (address1) REFERENCES members (address1),
-  FOREIGN KEY (address2) REFERENCES members (address2)
+  FOREIGN KEY (membersno) REFERENCES members (membersno)
 );
 
 
