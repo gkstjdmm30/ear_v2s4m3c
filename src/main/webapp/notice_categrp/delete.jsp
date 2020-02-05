@@ -37,6 +37,18 @@
         삭제될 카테고리 그룹 이름: ${notice_categrpVO.name }
       </li>
       
+      <c:if test="${count_by_categrpno > 0 }">
+        <li class='li_none' style="text-decoration: underline;">
+          관련된 글 ${count_by_categrpno } 건이 발견되었습니다.
+        </li>
+        <li class='li_none'> 
+          관련글을 삭제해야 카테고리 그룹을 삭제 할 수 있습니다.<br>
+          <span style='color: #FF0000'>관련글이 삭제되면 복구 할 수 없습니다.</span><br>
+          관련 글을 삭제 하시겠습니까?
+          <button type='button' onclick="delete_by_categrpno();" class="btn btn-info">예(삭제진행)</button> 
+        </li>
+      </c:if>
+      
       <li class='li_none'>
         삭제하면 복구 할 수 없습니다.<br>
         삭제를 진행 하시겠습니까?

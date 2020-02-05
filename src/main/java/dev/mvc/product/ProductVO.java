@@ -5,6 +5,8 @@ public class ProductVO {
   private int productno;
   /** 상품 카테고리 번호 */
   private int productcateno;
+  /** 회원 번호 */
+  private int membersno;
   /** 이름 */
   private String name;
   /** 내용 */
@@ -31,6 +33,12 @@ public class ProductVO {
   }
   public void setProductcateno(int productcateno) {
     this.productcateno = productcateno;
+  }
+  public int getMembersno() {
+    return membersno;
+  }
+  public void setMembersno(int membersno) {
+    this.membersno = membersno;
   }
   public String getName() {
     return name;

@@ -7,15 +7,12 @@
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>Resort world</title>
  
-<link href="../css/style.css" rel="Stylesheet" type="text/css">
- 
-<script type="text/JavaScript"
-          src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
- 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
- 
+  <link href="../css/style.css" rel="Stylesheet" type="text/css">
+  <!-- Bootstrap core CSS -->
+  <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="../css/shop-homepage.css" rel="stylesheet">
+
  
 <script type="text/javascript">
   $(function(){
@@ -48,15 +45,7 @@
     </div>
   </div> <!-- Modal END -->
     
-  
-  <ASIDE style='float: right;'>
-    <A href="javascript:location.reload();">새로고침</A>
-    <span class='menu_divide' >│</span> 
-    <A href='./mem_create.do'>회원 가입</A>
-    <span class='menu_divide' >│</span> 
-    <A href='./mem_list.do'>목록</A>
-  </ASIDE> 
- 
+
   <div class='menu_line'></div>
   
  
@@ -69,7 +58,8 @@
     <div class="form-group">
       <label class="col-md-2 control-label" style='font-size: 0.8em;'>아이디</label>    
       <div class="col-md-10">
-        ${membersVO.id }        
+        <input type='text' class="form-control input-lg" name='id' id='id' 
+                   value='${membersVO.id }' required="required" style='width: 30%;' placeholder="아이디" readonly>        
       </div>
     </div>   
                 

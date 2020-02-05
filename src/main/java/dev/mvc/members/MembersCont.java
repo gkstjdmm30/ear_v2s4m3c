@@ -43,9 +43,9 @@ public class MembersCont {
     int count = membersProc.mem_create(membersVO);
     
     if(count ==0) {
-      mav.setViewName("redirecct:/members/mem_create_msg.jsp?count=" + count);      
+      mav.setViewName("redirect:/members/mem_create_msg.jsp?count=" + count);      
     } else {
-      mav.setViewName("redirect:/members/mem_list.do");
+      mav.setViewName("redirect:/index.jsp");
     }
     return mav;
   }
@@ -111,10 +111,11 @@ public class MembersCont {
     
     int count = membersProc.mem_login(map);
     if (count == 1) { // 로그인 성공
-      MembersVO membersVO = membersProc.mem_readByID(id_save);
+      MembersVO membersVO = membersProc.mem_readByID(id);
       session.setAttribute("membersno",  membersVO.getMembersno());
       session.setAttribute("id", id);
       session.setAttribute("name", membersVO.getName());
+      session.setAttribute("ps", membersVO.getPs());
       
       if (id_save.equals("Y")) { // id를 저장할 경우
         Cookie ck_id = new Cookie("ck_id", id);
@@ -142,7 +143,7 @@ public class MembersCont {
       ck_passwd_save.setMaxAge(60 * 60 * 72 * 10); // 30 day
       response.addCookie(ck_passwd_save);
         
-      mav.setViewName("redirect:/index.do");
+      mav.setViewName("redirect:/index.jsp");
     } else {
       mav.setViewName("redirect:/members/msm_login_fail_msg.jsp");
     }
@@ -184,7 +185,7 @@ public class MembersCont {
     int count = membersProc.mem_update(membersVO);
     ra.addAttribute("count", count);
     ra.addAttribute("membersno", membersVO.getMembersno());
-    mav.setViewName("redirect:/members/update_msg.jsp");
+    mav.setViewName("redirect:/members/mem_update_msg.jsp");
     return mav;  
   }
   
@@ -228,11 +229,11 @@ public class MembersCont {
   @RequestMapping(value="/members/mem_delete.do", method = RequestMethod.GET)
   public ModelAndView mem_delete(int membersno) {
     ModelAndView mav = new ModelAndView();
-    mav.setViewName("/members/mem_delete");
     
     MembersVO membersVO = membersProc.mem_read(membersno);
     mav.addObject("membersVO", membersVO);
     
+    mav.setViewName("/members/mem_delete");
     return mav;
   }
   
@@ -240,10 +241,12 @@ public class MembersCont {
   public ModelAndView mem_delete(RedirectAttributes ra, int membersno) {
     ModelAndView mav = new ModelAndView();
     String name = membersProc.mem_read(membersno).getName();
+    String id = membersProc.mem_read(membersno).getId();
     ra.addAttribute("name", name);
+    ra.addAttribute("id", id);
     int count = membersProc.mem_delete(membersno);
     ra.addAttribute("count", count);
-    mav.setViewName("redirect:/members/mem_delete_mas.jsp?count=" + count);
+    mav.setViewName("redirect:/members/mem_delete_msg.jsp?count=" + count);
     return mav;
   }
   

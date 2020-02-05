@@ -86,3 +86,11 @@ SELECT * FROM survey_categrp ORDER BY categrpno ASC;
          2 1번 설문     1 Y       2019-11-29 15:22:14.0   0
          3 2번 설문     1 Y       2019-11-29 15:22:15.0   0
          4 3번 설문     1 Y       2019-11-29 15:22:16.0   0
+         
+ update notice_categrp
+ set cnt = 0
+ where categrpno=1;
+ 
+ UPDATE contents
+SET title='제목 수정', content='내용 수정', word='검색어'
+WHERE contentsno = 1;

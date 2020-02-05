@@ -1,5 +1,7 @@
 package dev.mvc.product;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public interface ProductDAOInter {
@@ -52,20 +54,42 @@ public interface ProductDAOInter {
 
   /**
    * 부모 카테고리 번호별 레코드 갯수
-   * @param categrpno
+   * @param productcateno
    * @return
    */
   public int count_by_productcateno(int productcateno);
   
   /**
    * 부모 카테고리 번호별 레코드 삭제
-   * @param categrpno
+   * @param productcateno
    * @return
    */
   public int delete_by_productcateno(int productcateno);
   
-
+  public int increaseReplycnt(int productno);
   
+  public int decreaseReplycnt(int productno);
+
+  /**
+   * 검색 목록
+   * @param hashMap
+   * @return
+   */
+  public List<ProductVO> list_by_search(HashMap<String, Object> hashMap);
+  
+  /**
+   * 카테고리별 검색 레코드 갯수
+   * @param hashMap
+   * @return
+   */
+  public int search_count(HashMap<String, Object> hashMap);
+  
+  /**
+   * 검색 + 페이징 목록
+   * @param map
+   * @return
+   */
+  public ArrayList<ProductVO> list_by_search_paging(HashMap<String, Object> map);
 }
 
 

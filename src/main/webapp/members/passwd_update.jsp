@@ -7,15 +7,12 @@
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>패스워드 변경</title>
  
-<link href="../css/style.css" rel="Stylesheet" type="text/css">
- 
-<script type="text/JavaScript"
-          src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
- 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
- 
+  <link href="../css/style.css" rel="Stylesheet" type="text/css">
+  <!-- Bootstrap core CSS -->
+  <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="../css/shop-homepage.css" rel="stylesheet">
+
 <script type="text/javascript" src="../js/jquery.cookie.js"></script>
 <script type="text/javascript">
 function send() {
@@ -61,24 +58,12 @@ function send() {
     </div>
   </div> <!-- Modal END -->
  
-  <ASIDE style='float: left;'>
-      <A href='./members/mem_list.do'>회원 목록</A>  
-  </ASIDE>
-  <ASIDE style='float: right;'>
-    <A href="javascript:location.reload();">새로고침</A>
-    <span class='menu_divide' >│</span> 
-    <A href='./mem_create.do'>회원 가입</A>
-    <span class='menu_divide' >│</span> 
-    <A href='./mem_list.do'>목록</A>
-  </ASIDE> 
- 
-  <div class='menu_line'></div>
     
   <DIV class='title_line'>패스워드 변경</DIV>
  
   <FORM name='frm' id='frm' method='POST' action='./passwd_update.do' 
               class="form-horizontal">
-    <input type='hidden' name='memberno' value='${param.memberno }'>
+    <input type='hidden' name='membersno' value='${param.membersno }'>
               
     <div class="form-group">
       <label class="col-md-6 control-label" style="font-size: 0.8em;">현재 패스워드</label>    
@@ -110,7 +95,7 @@ function send() {
     <div class="form-group">
       <div class="col-md-offset-6 col-md-6">
         <button type="button" onclick="send();" class="btn btn-primary btn-md">변경</button>
-        <button type="button" onclick="location.href='./mem_list.do'" class="btn btn-primary btn-md">취소</button>
+        <button type="button" onclick="location.href='../index.jsp'" class="btn btn-primary btn-md">취소</button>
  
       </div>
     </div>   

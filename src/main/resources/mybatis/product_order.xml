@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.mvc.product_order.Product_orderDAOInter">
+  
+  <insert id="product_order_create" parameterType="Product_orderVO">
+      INSERT INTO product_order(orderno, productno, membersno, count, price, 
+      shipping, totalprice, howorder, tel, zipcode, address1, address2, odate)
+      VALUES((SELECT NVL(MAX(orderno), 0) + 1 as orderno FROM product_order),
+         #{productno}, #{membersno}, #{count}, #{price}, #{shipping}, #{totalprice}, #{howorder}, #{tel}, #{zipcode}, #{address1}, #{address2}, sysdate)
+  </insert>
+
+  <select id="product_order_select" resultType="Product_orderVO">
+    SELECT orderno, productno, membersno, count, price, 
+      shipping, totalprice, howorder, tel, zipcode, address1, address2, odate
+    FROM product_order
+    ORDER BY orderno ASC
+  </select>
+  
+  <select id="product_order_read_orderno" resultType="Product_orderVO" parameterType="int">
+    SELECT orderno, productno, membersno, count, price, 
+      shipping, totalprice, howorder, tel, zipcode, address1, address2, odate
+    FROM product_order
+    WHERE orderno = #{orderno}
+  </select>
+  
+  <select id="product_order_read_membersno" resultType="Product_orderVO" parameterType="int">
+    SELECT orderno, productno, membersno, count, price, 
+      shipping, totalprice, howorder, tel, zipcode, address1, address2, odate
+    FROM product_order
+    WHERE membersno = #{membersno}
+  </select>
+  
+  <update id="product_order_update" parameterType="Product_orderVO">
+    UPDATE product_order
+    SET howorder=#{howorder}
+  </update>
+  
+  <delete id="product_order_delete" parameterType="int">
+    DELETE FROM product_order
+    WHERE orderno = #{orderno}
+  </delete>
+  
+  
+  </mapper> 

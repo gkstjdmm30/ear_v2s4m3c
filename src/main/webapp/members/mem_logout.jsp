@@ -9,17 +9,13 @@
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>로그아웃</title>
- 
-<link href="../css/style.css" rel="Stylesheet" type="text/css">
- 
-<script type="text/JavaScript"
-          src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- 
-<!-- Bootstrap -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    
+
+  <link href="../css/style.css" rel="Stylesheet" type="text/css">
+  <!-- Bootstrap core CSS -->
+  <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="../css/shop-homepage.css" rel="stylesheet">
+
 <script type="text/javascript">
   $(function(){ 
   
@@ -37,7 +33,7 @@
         <li class='li_none'>이용해 주셔서감사합니다.</li>
         <li class='li_none'>
           <button type="button" 
-                      onclick="location.href='${pageContext.request.contextPath}/index.do'" 
+                      onclick="location.href='${pageContext.request.contextPath}/index.jsp'" 
                       class="btn btn-primary btn-md">확인</button>
         </li>
         

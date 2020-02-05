@@ -8,14 +8,16 @@
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>회원 등록</title>
+
+ <script type="text/JavaScript"
+          src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
  
-<link href="../css/style.css" rel="Stylesheet" type="text/css">
- 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
- 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <link href="../css/style.css" rel="Stylesheet" type="text/css">
+  <!-- Bootstrap core CSS -->
+  <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="../css/shop-homepage.css" rel="stylesheet">
+
 <script type="text/javascript">
 $(function() {
   $.cookie('checkId', 'FALSE');  // Cookie 초기화
@@ -24,8 +26,7 @@ $(function() {
 function checkId() {
   var frm = $('#frm');
   var params = 'id=' + $('#id', frm).val();  // #: id 
-  // alert('checkId() 호출됨: ' + params);
-  
+
   $.ajax({
     url: "./mem_checkId.do", // action 대상 주소
     type: "get",           // get, post
@@ -34,7 +35,6 @@ function checkId() {
     dataType: "json",   // 응답 형식: json, xml, html...
     data: params,        // 서버로 전달하는 데이터
     success: function(rdata) { // 서버로부터 성공적으로 응답이 온경우
-      // alert(rdata);
       var msg = "";
       
       if (rdata.count > 0) {
@@ -105,7 +105,7 @@ function send() {
     <div class="form-group">
       <label class="col-md-2 control-label">아이디</label>    
       <div class="col-md-10">
-        <input type='text' class="form-control input-lg" name='id' id='id' value='user' required="required" style='width: 30%;' placeholder="아이디" autofocus="autofocus">
+        <input type='text' class="form-control input-lg" name='id' id='id' value='' required="required" style='width: 30%;' placeholder="아이디" autofocus="autofocus">
         <button type='button' onclick="checkId()" class="btn btn-info btn-md">중복확인</button>
         <SPAN id='id_span'></SPAN> <!-- ID 중복 관련 메시지 -->        
       </div>
@@ -114,22 +114,22 @@ function send() {
     <div class="form-group">
       <label class="col-md-2 control-label">패스워드</label>    
       <div class="col-md-10">
-        <input type='password' class="form-control input-lg" name='passwd' id='passwd' value='1234' required="required" style='width: 30%;' placeholder="패스워드">
+        <input type='password' class="form-control input-lg" name='passwd' id='passwd' value='' required="required" style='width: 30%;' placeholder="패스워드">
       </div>
     </div>   
  
     <div class="form-group">
       <label class="col-md-2 control-label">패스워드 확인</label>    
       <div class="col-md-10">
-        <input type='password' class="form-control input-lg" name='passwd2' id='passwd2' value='1234' required="required" style='width: 30%;' placeholder="패스워드">
+        <input type='password' class="form-control input-lg" name='passwd2' id='passwd2' value='' required="required" style='width: 30%;' placeholder="패스워드">
       </div>
     </div>   
     
     <div class="form-group">
       <label class="col-md-2 control-label">성명</label>    
       <div class="col-md-10">
-        <input type='text' class="form-control input-lg" name='name' id='name' 
-                   value='개발자' required="required" style='width: 30%;' placeholder="성명">
+        <input type='text' class="form-control input-lg" name='name' id='' 
+                   value='' required="required" style='width: 30%;' placeholder="성명">
       </div>
     </div>   
  
@@ -137,7 +137,7 @@ function send() {
       <label class="col-md-2 control-label">전화번호</label>    
       <div class="col-md-10">
         <input type='text' class="form-control input-lg" name='tel' id='tel' 
-                   value='010-0000-0000' required="required" style='width: 30%;' placeholder="전화번호"> 예) 010-0000-0000
+                   value='' required="required" style='width: 30%;' placeholder="전화번호"> 예) 010-0000-0000
       </div>
     </div>
        
@@ -145,7 +145,7 @@ function send() {
       <label class="col-md-2 control-label">이메일</label>    
       <div class="col-md-10">
         <input type='text' class="form-control input-lg" name='email' id='email' 
-                   value='010-0000-0000' required="required" style='width: 30%;' placeholder="전화번호">
+                   value='' required="required" style='width: 30%;' placeholder="전화번호">
       </div>
     </div>   
  
@@ -153,7 +153,7 @@ function send() {
       <label class="col-md-2 control-label">우편번호</label>    
       <div class="col-md-10">
         <input type='text' class="form-control input-lg" name='zipcode' id='zipcode' 
-                   value='12345' required="required" style='width: 30%;' placeholder="우편번호">
+                   value='' required="required" style='width: 30%;' placeholder="우편번호">
         <input type="button" onclick="DaumPostcode()" value="우편번호 찾기" class="btn btn-info btn-md">
       </div>
     </div>  

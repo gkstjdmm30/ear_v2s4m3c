@@ -5,7 +5,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="dev.mvc.product.ProductDAOInter"> 
-
    <insert id="create" parameterType="ProductVO">
      INSERT INTO product(productno, productcateno, name, content, recom, cnt, replycnt, rdate, word)
      VALUES((SELECT NVL(MAX(productno), 0) + 1 as productno FROM product),
@@ -62,6 +61,80 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      DELETE FROM product
      WHERE productcateno=#{productcateno}
    </delete>
+   
+   <update id="increaseReplycnt" parameterType="int">
+     UPDATE product
+     SET replycnt = replycnt + 1
+     WHERE productno = #{productno}
+   </update>
+
+   <update id="decreaseReplycnt" parameterType="int">
+     UPDATE product
+     SET replycnt = replycnt + 1
+     WHERE productno = #{productno}
+   </update>
+   
+   <!-- 검색 목록 -->
+   <select id="list_by_search" resultType="ProductVO" parameterType="HashMap">
+     SELECT productno, productcateno, name, content, 
+                recom, cnt, replycnt, rdate, word
+     FROM product
+     <choose>
+       <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+        WHERE productcateno=#{productcateno}
+       </when>
+       <otherwise>
+         WHERE productcateno=#{productcateno} AND word LIKE '%' || #{word} || '%'
+       </otherwise>
+     </choose>
+     ORDER BY productno DESC   
+   </select>
+   
+   <!-- 검색 레코드 갯수 -->
+   <select id="search_count" resultType="int" parameterType="HashMap">
+     SELECT COUNT(*) as cnt
+     FROM product
+     <choose>
+       <when test="word == null or word == ''">
+        WHERE productcateno=#{productcateno}
+       </when>
+       <otherwise>
+         WHERE productcateno=#{productcateno} AND word LIKE '%' || #{word} || '%'
+       </otherwise>
+     </choose>
+   </select>    
+   
+   <!-- 검색 목록 + 페이징 -->
+   <select id="list_by_search_paging" resultType="ProductVO" parameterType="HashMap">  
+      SELECT productno, productcateno, name, content, 
+                recom, cnt, replycnt, rdate, word, r
+        FROM(
+                  SELECT productno, membersno, productcateno, name, content, 
+                            recom, cnt, replycnt, rdate, word, rownum as r
+                  FROM (
+                             SELECT productno, membersno, productcateno, name, content, 
+                                        recom, cnt, replycnt, rdate, word
+                             FROM product
+                             <choose>
+                               <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+                                WHERE productcateno=#{productcateno}
+                               </when>
+                               <otherwise>
+                                 WHERE productcateno=#{productcateno} AND word LIKE '%' || #{word} || '%'
+                               </otherwise>
+                             </choose>
+                             ORDER BY productno DESC   
+                 )
+     )
+     where r &gt; = #{startNum} and r &lt; = #{endNum}
+     <!-- 
+     1 page: where r> = 1 and r <= 10; 
+     2 page: where r> = 11 and r <= 20; 
+     3 page: where r> = 21 and r <= 30; 
+     -->         
+    </select> 
+   
+   
    
    
  
