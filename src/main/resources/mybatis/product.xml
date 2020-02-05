@@ -6,26 +6,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
 <mapper namespace="dev.mvc.product.ProductDAOInter"> 
    <insert id="create" parameterType="ProductVO">
-     INSERT INTO product(productno, productcateno, name, content, recom, cnt, replycnt, rdate, word)
+     INSERT INTO product(productno, productcateno, name, price, content, recom, cnt, replycnt, rdate, word)
      VALUES((SELECT NVL(MAX(productno), 0) + 1 as productno FROM product),
-             #{productcateno}, #{name}, #{content},
+             #{productcateno}, #{name}, #{price}, #{content},
              #{recom}, #{cnt}, #{replycnt}, sysdate, #{word});
    </insert>
    
     <select id="list_all" resultType="ProductVO">
-     SELECT productno, productcateno, name, content, 
+     SELECT productno, productcateno, name, price, content, 
                 recom, cnt, replycnt, rdate, word
      FROM product
      ORDER BY productno DESC
    </select> 
 
    <select id="list_by_productcateno" resultType="ProductVO" parameterType="int">
-     SELECT productno, productcateno, name, content, 
+     SELECT productno, productcateno, name, price, content, 
                 recom, cnt, replycnt, rdate, word
      FROM product
      WHERE productcateno=#{productcateno}
      ORDER BY productno DESC
    </select> 
+   
+   <select id="list_by_product_image_join" resultType="Product_imageProductVO"  parameterType="int">
+    SELECT i.fname, i.fupname, i.thumb
+               p.productno, p.productcateno, p.name, p.price, p.content, 
+               p.recom, p.cnt, p.replycnt, p.rdate, p.word
+    FROM product_image i, product p
+    WHERE (i.productno= p.productno) AND p.productno=#{productno}
+    ORDER BY productno DESC
+  </select>
+   
 
    <select id="total_count" resultType="int">
      SELECT COUNT(*) as count
@@ -33,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    </select> 
    
    <select id="read" resultType="ProductVO" parameterType="int">
-     SELECT productno, productcateno, name, content, 
+     SELECT productno, productcateno, name, price, content, 
                 recom, cnt, replycnt, rdate, word
      FROM product
      WHERE productno=#{productno}
@@ -41,7 +51,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    
    <update id='update' parameterType="ProductVO">
      UPDATE product
-     SET name=#{name}, content=#{content}, word=#{word}
+     SET name=#{name}, price=#{price} content=#{content}, word=#{word}
      WHERE productno = #{productno}
    </update>
    
@@ -76,7 +86,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    
    <!-- 검색 목록 -->
    <select id="list_by_search" resultType="ProductVO" parameterType="HashMap">
-     SELECT productno, productcateno, name, content, 
+     SELECT productno, productcateno, name, price, content, 
                 recom, cnt, replycnt, rdate, word
      FROM product
      <choose>
@@ -106,13 +116,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    
    <!-- 검색 목록 + 페이징 -->
    <select id="list_by_search_paging" resultType="ProductVO" parameterType="HashMap">  
-      SELECT productno, productcateno, name, content, 
+      SELECT productno, productcateno, name, price, content, 
                 recom, cnt, replycnt, rdate, word, r
         FROM(
-                  SELECT productno, membersno, productcateno, name, content, 
+                  SELECT productno, membersno, productcateno, name, price, content, 
                             recom, cnt, replycnt, rdate, word, rownum as r
                   FROM (
-                             SELECT productno, membersno, productcateno, name, content, 
+                             SELECT productno, membersno, productcateno, name, price, content, 
                                         recom, cnt, replycnt, rdate, word
                              FROM product
                              <choose>
