@@ -61,35 +61,31 @@
             <span class="sr-only">Next</span>
           </a>
         </div> 
-        <FORM name='frm' method="get" action='./update.do'>
-        <input type="hidden" name="productno" value="${productno}">
+        
         <div class="row">
+        
         <c:forEach var="productVO" items="${list }">
           <c:set var="productno" value="${productVO.productno }" />
 
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="./read.do?productno=${productno}&word=${param.word}"><IMG class="card-img-top" src='./images/에어팟 프로.jpg' alt=""></a>
-              <c:forEach var="product_imageVO" items="${product_image_list }">
-                <c:set var="thumb" value="${product_imageVO.thumb.toLowerCase() }" />
-                <%-- <a href="./read.do?productno=${productno}&word=${param.word}"><IMG class="card-img-top" src='../product_image/storage/${thumb }' alt=""></a> --%>
-              </c:forEach>
+              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
               <div class="card-body">
                 <h5>
                   <a href="./read.do?productno=${productno}&word=${param.word}">${productVO.name}</a>
                 </h5>
-                <h5>30000원${product_imageVO.fname}dd</h5>
+                <h5>30000원</h5>
                 <p class="card-text"><IMG src='./images/추천.jpeg' title=''>&nbsp${productVO.recom}</p>
               </div>
               <div class="card-footer">
                 <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+              </div>
             </div>
           </div> 
           
         </c:forEach>  
         
         </div>
-        </FORM>
         <!-- /.row -->
 
       </div>
@@ -99,7 +95,8 @@
     <!-- /.row -->
 
   </div>
-  <!-- /.container -->          
+  <!-- /.container --> 
+   <DIV class='bottom_menu'>${paging }</DIV>              
 
 
 

@@ -99,7 +99,7 @@ public class Product_orderCont {
     return mav;
   }
   
-
+  // http://localhost:9090/ear/product_order/product_order_read.do?orderno=1&membersno=1&productno=1
   @RequestMapping(value="/product_order/product_order_read.do", method=RequestMethod.GET)
   public ModelAndView product_order_read(int orderno, int membersno, int productno) {
     ModelAndView mav = new ModelAndView();

@@ -141,8 +141,8 @@ public class ProductCont {
     Product_categrpVO product_categrpVO = product_categrpProc.read(productVO.getProductcateno());
     mav.addObject("product_categrpVO", product_categrpVO);
     
-    /*List<AttachfileVO> attachfile_list = attachfileProc.list_by_contentsno(contentsno);
-    mav.addObject("attachfile_list", attachfile_list);*/
+    List<Product_imageVO> product_image = product_imageProc.list_by_productno(productno);
+    mav.addObject("product_image" ,product_image);
     
     mav.setViewName("/product/read");
 
@@ -282,7 +282,7 @@ public class ProductCont {
    * @param contentsno
    * @return
    */
-  @RequestMapping(value = "/contents/file_delete_proc.do", 
+  @RequestMapping(value = "/product/file_delete_proc.do", 
                              method = RequestMethod.GET)
   public ModelAndView file_delete_proc(int productno, int productimgno) {
     ModelAndView mav = new ModelAndView();
@@ -313,7 +313,7 @@ public class ProductCont {
    * @return
    */
   @ResponseBody
-  @RequestMapping(value = "/contents/reply_delete.do", 
+  @RequestMapping(value = "/product/reply_delete.do", 
                               method = RequestMethod.POST,
                               produces = "text/plain;charset=UTF-8")
   public String reply_delete(int replyno, String passwd) {
@@ -338,8 +338,8 @@ public class ProductCont {
   
   /**
    * 목록 + 검색 + 페이징 지원
-   * http://localhost:9090/ojt/contents/list.do
-   * http://localhost:9090/ojt/contents/list.do?categrpno=1&word=&nowPage=1
+   * http://localhost:9090/ojt/product/list.do
+   * http://localhost:9090/ojt/product/list.do?categrpno=1&word=&nowPage=1
    * @param categoryno
    * @param word
    * @param nowPage
@@ -350,7 +350,8 @@ public class ProductCont {
   public ModelAndView list_by_search_paging(
       @RequestParam(value="productcateno", defaultValue="1") int productcateno, // 기본값
       @RequestParam(value="word", defaultValue="") String word,           // 기본값
-      @RequestParam(value="nowPage", defaultValue="1") int nowPage    // 기본값
+      @RequestParam(value="nowPage", defaultValue="1") int nowPage,    // 기본값
+      Product_imageVO product_imageVO
       ) { 
     System.out.println("--> nowPage: " + nowPage);
     
@@ -364,15 +365,24 @@ public class ProductCont {
     map.put("nowPage", nowPage);       
     
     // 검색 목록
+    
     List<ProductVO> list = productProc.list_by_search_paging(map); // 목록을 만들어서
     mav.addObject("list", list); // 리턴해줌
+    
+    /*List<Product_imageProductVO> product_image = productProc.list_by_product_image_join(product_imageVO.getProductno());
+    mav.addObject("product_image" ,product_image);*/
+    
+    /*List<Product_imageVO> product_image = product_imageProc.list_by_productno(product_imageVO.getProductno());
+    mav.addObject("product_image" ,product_image);*/
+    
+    List<Product_imageVO> product_image = product_imageProc.list();
+    mav.addObject("product_image" ,product_image);
+    
+    
     
     // 검색된 레코드 갯수
     int search_count = productProc.search_count(map);
     mav.addObject("search_count", search_count);
-    
-    Product_categrpVO product_categrpVO = product_categrpProc.read(productcateno);
-    mav.addObject("product_categrpVO", product_categrpVO);
   
     /*
      * SPAN태그를 이용한 박스 모델의 지원, 1 페이지부터 시작 

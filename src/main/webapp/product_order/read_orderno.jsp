@@ -14,21 +14,10 @@
   <!-- Custom styles for this template -->
   <link href="../css/shop-homepage.css" rel="stylesheet">
   
- 
-<script type="text/javascript">
-$(function(){
-  
-  var price = $('#price').val();
-  var count = <%= Integer.parseInt(request.getParameter("count"))%>
-  var shipping = ((price*count)>10000?0:2500);
-  var totalprice = (price*count) + shipping;
-  $('#shipping').val(shipping);
-  $('#totalprice').val(totalprice);
-});
-</script>
+
 </head>
-<body>
- <c:forEach var="product_orderVO" items = "${list}">
+<body>.
+  <c:forEach var="product_orderVO" items = "${list}">
 <jsp:include page="/menu/top.jsp" />
 
 
@@ -57,21 +46,21 @@ $(function(){
       <div class="form-group">    
         <div class="col-md-10" >
          가격 <input type='text' class="form-control input-lg" name='price' id='price' 
-                     value="${productVO.price }" required="required" style='width: 90%; readonly'>
+                     value="${orderVO.price }" required="required" style='width: 90%;' readonly>
         </div>
       </div>   
       
       <div class="form-group">
         <div class="col-md-10" >
          갯수 <input type='text' class="form-control input-lg" name='count' id='count' 
-                     value="<%=request.getParameter("count") %>" required="required" style='width: 90%;' readonly>
+                     value="${orderVO.count }" required="required" style='width: 90%;' readonly>
         </div>
       </div>   
       
       <div class="form-group">    
         <div class="col-md-10">
          배송비 <input type='text' class="form-control input-lg" name='shipping' id='shipping' 
-                     value='' required="required" style='width: 90%;' readonly>
+                     value='${orverVO.shipping }' required="required" style='width: 90%;' readonly>
         </div>
       </div>      
 
@@ -80,7 +69,7 @@ $(function(){
       <div class="form-group">
         <div class="col-md-10">
          총 가격 <input type='text' class="form-control input-lg" name='totalprice' id='totalprice' 
-                     value="" required="required" style='width: 90%;' readonly>
+                     value="${orderVO.totalprice }" required="required" style='width: 90%;' readonly>
         </div>
       </div>
       
@@ -103,9 +92,9 @@ $(function(){
  
  <div class ="width: 40%;">
    <div>
-      <input type='text' class="form-control input-lg" name='zipcode' id='zipcode' value='${membersVO.zipcode }'  style='width: 40%; margin: 5px;' readonly >
-      <input type='text' class="form-control input-lg" name='address1' id='address1' value='${membersVO.address1 }'  style='width: 40%; margin: 5px;' readonly >
-      <input type='text' class="form-control input-lg" name='address2' id='address2' value='${membersVO.address2 }'  style='width: 40%; margin: 5px;' readonly >
+      <input type='text' class="form-control input-lg" name='zipcode' id='zipcode' value='${orderVO.zipcode }'  style='width: 40%; margin: 5px;' readonly >
+      <input type='text' class="form-control input-lg" name='address1' id='address1' value='${orderVO.address1 }'  style='width: 40%; margin: 5px;' readonly >
+      <input type='text' class="form-control input-lg" name='address2' id='address2' value='${orderVO.address2 }'  style='width: 40%; margin: 5px;' readonly >
    </div>   
    <div class= "" style="float: right; padding: 12px; margin-right: 66px;">
       <select class="btn btn-light" name="howorder" id="howorder" >
