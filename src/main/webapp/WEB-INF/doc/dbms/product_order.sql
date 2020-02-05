@@ -31,7 +31,10 @@ VALUES((SELECT NVL(MAX(membersno), 0) + 1 as mem_no FROM members),
  SELECT * FROM members;
  
 -- product_categrp
+-- 昏力
 DROP TABLE product_categrp;
+
+-- 积己
 CREATE TABLE product_categrp(
     productcateno          NUMBER(10)     NOT NULL    PRIMARY KEY,
     name                      VARCHAR2(50)     NOT NULL,
@@ -59,13 +62,16 @@ VALUES((SELECT NVL(MAX(productcateno), 0) + 1 as categrpno FROM product_categrp)
 INSERT INTO product_categrp(productcateno, name, seqno, rdate, cnt)
 VALUES((SELECT NVL(MAX(productcateno), 0) + 1 as categrpno FROM product_categrp),
             '胶乔目', 3, sysdate, 0);
-        
+           
    SELECT *
    FROM product_categrp;       
 
 
 -- product
+-- 昏力
 DROP TABLE product;
+
+-- 积己
 CREATE TABLE product(
     productno                        NUMBER(10)     NOT NULL    PRIMARY KEY,
     productcateno                   NUMBER(10)     NOT NULL,
@@ -107,7 +113,11 @@ INSERT INTO product(productno, productcateno, membersno, name, content, recom, c
 VALUES((SELECT NVL(MAX(productno), 0) + 1 as productno FROM product),
              3, 1, '惑前3', '郴侩1',
              0, 0, 0, sysdate, '惑前4');
-
+    
+INSERT INTO product(productno, productcateno, membersno, name, content, recom, cnt, replycnt, rdate, word)
+VALUES((SELECT NVL(MAX(productno), 0) + 1 as productno FROM product),
+             3, 1, '惑前4', '郴侩1',
+             0, 0, 0, sysdate, '惑前4');
 select * from product;
                     
 

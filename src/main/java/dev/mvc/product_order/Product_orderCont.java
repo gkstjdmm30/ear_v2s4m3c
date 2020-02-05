@@ -1,19 +1,18 @@
 package dev.mvc.product_order;
-import dev.mvc.members.MembersProcInter;
-import dev.mvc.members.MembersVO;
-import dev.mvc.product.ProductProcInter;
-import dev.mvc.product.ProductVO;
-import dev.mvc.product_image.Product_imageProcInter;
-
 import java.util.List;
 
-import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import dev.mvc.members.MembersProcInter;
+import dev.mvc.members.MembersVO;
+import dev.mvc.product.ProductProcInter;
+import dev.mvc.product.ProductVO;
+import dev.mvc.product_image.Product_imageProcInter;
 
 
 @Controller
@@ -63,26 +62,30 @@ public class Product_orderCont {
     orderVO.setProductno(productno);
     orderVO.setTel(tel);
     
+    MembersVO membersVO = membersProc.mem_read(membersno);
+    ProductVO productVO = productProc.read(productno);
+    System.out.println("membersVO : " + membersVO.getMembersno());
+    System.out.println("productno : " + productVO.getProductno());
     
-//    System.out.println("orderno : " + orderVO.getOrderno());
-//    System.out.println("membersno : " + orderVO.getMembersno());
-//    System.out.println("productno : " + orderVO.getProductno());
-//    System.out.println("count : " + orderVO.getCount());
-//    System.out.println("price : " + orderVO.getPrice());
-//    System.out.println("shippding : " + orderVO.getShipping());
-//    System.out.println("total : " + orderVO.getTotalprice());
-//    System.out.println("how : " + orderVO.getHoworder());
-//    System.out.println("tel : " + orderVO.getTel());
-//    System.out.println("zipcode : " + orderVO.getZipcode());
-//    System.out.println("address1 : " + orderVO.getAddress1());
-//    System.out.println("address2 : " + orderVO.getAddress2());
+    System.out.println("orderno : " + orderVO.getOrderno());
+    System.out.println("membersno : " + orderVO.getMembersno());
+    System.out.println("productno : " + orderVO.getProductno());
+    System.out.println("count : " + orderVO.getCount());
+    System.out.println("price : " + orderVO.getPrice());
+    System.out.println("shippding : " + orderVO.getShipping());
+    System.out.println("total : " + orderVO.getTotalprice());
+    System.out.println("how : " + orderVO.getHoworder());
+    System.out.println("tel : " + orderVO.getTel());
+    System.out.println("zipcode : " + orderVO.getZipcode());
+    System.out.println("address1 : " + orderVO.getAddress1());
+    System.out.println("address2 : " + orderVO.getAddress2());
     int count = orderProc.product_order_create(orderVO);
-    
-    if(count == 1) {
-      mav.setViewName("redirect:/product_order/read_membersno.jsp?membersno=" + orderVO.getMembersno());
-    } else {
-      mav.setViewName("redirect:/product_order/create_msg.jsp?count=" + count);
-    }
+//    
+//    if(count == 1) {
+//      mav.setViewName("redirect:/product_order/read_membersno.jsp?membersno=" + orderVO.getMembersno());
+//    } else {
+//      mav.setViewName("redirect:/product_order/create_msg.jsp?count=" + count);
+//    }
     return mav;
     
   } 
