@@ -20,11 +20,10 @@
 </head>
 <body>
 <jsp:include page="/menu/top.jsp" flush='false' />
-  <!-- Page Content -->
   <div class="container">
 
     <div class="row">
-
+    
       <div class="col-lg-3">
 
         <h1 class="my-4">이어팔아</h1>
@@ -78,11 +77,12 @@
                 <h5>
                   <a href="./read.do?productno=${productno}&word=${param.word}">${productVO.name}</a>
                 </h5>
-                <h5>30000원${product_imageVO.fname}dd</h5>
+                <h5>30000원${product_imageVO.fname}</h5>
                 <p class="card-text"><IMG src='./images/추천.jpeg' title=''>&nbsp${productVO.recom}</p>
               </div>
               <div class="card-footer">
                 <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+              </div>
             </div>
           </div> 
           
@@ -94,12 +94,13 @@
 
       </div>
       <!-- /.col-lg-9 -->
-
-    </div>
+      
+      </div>
     <!-- /.row -->
 
   </div>
-  <!-- /.container -->          
+  <!-- /.container -->
+  <DIV class='bottom_menu'>${paging }</DIV>      
 
 
 

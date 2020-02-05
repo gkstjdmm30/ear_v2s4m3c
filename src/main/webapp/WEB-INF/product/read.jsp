@@ -334,7 +334,6 @@
               <c:choose>
                 <c:when test="${thumb.endsWith('jpg') || thumb.endsWith('png') || thumb.endsWith('gif')}">
                   <A href="javascript:panel_img('${product_imageVO.fname }')"><IMG src='../product_image/storage/${thumb }' style='margin-top: 2px;'></A>
-                  &nbsp&nbsp&nbsp&nbsp&nbsp구매 갯수: <input type='number' name='order_count' id='order_count' value='1' > 
                 </c:when>
               </c:choose>
             </c:forEach>

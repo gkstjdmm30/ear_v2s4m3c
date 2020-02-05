@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import dev.mvc.reply.ReplyMemberVO;
+
 public interface ProductDAOInter {
   
   /**
@@ -25,6 +27,8 @@ public interface ProductDAOInter {
    */
   public List<ProductVO> list_by_productcateno(int productcateno);
 
+  public List<Product_imageProductVO> list_by_product_image_join(int productno);
+  
   /**
    * 전체 등록 레코드 갯수 
    * @return 전체 등록 레코드 갯수

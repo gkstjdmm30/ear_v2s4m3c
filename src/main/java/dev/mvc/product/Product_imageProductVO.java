@@ -1,6 +1,17 @@
 package dev.mvc.product;
 
-public class ProductVO {
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
+public class Product_imageProductVO {
+  /** 원본 파일명 */
+  private String fname;
+  /** 업로드된 파일명 */
+  private String fupname;
+  /** Thumb 이미지 */
+  private String thumb;
+  
   /** 상품 번호 */
   private int productno;
   /** 상품 카테고리 번호 */
@@ -24,6 +35,25 @@ public class ProductVO {
   /** 검색어 */
   private String word;
   
+  
+  public String getFname() {
+    return fname;
+  }
+  public void setFname(String fname) {
+    this.fname = fname;
+  }
+  public String getFupname() {
+    return fupname;
+  }
+  public void setFupname(String fupname) {
+    this.fupname = fupname;
+  }
+  public String getThumb() {
+    return thumb;
+  }
+  public void setThumb(String thumb) {
+    this.thumb = thumb;
+  }
   public int getProductno() {
     return productno;
   }
@@ -92,7 +122,5 @@ public class ProductVO {
     this.word = word;
   }
   
-  
-
 
 }
