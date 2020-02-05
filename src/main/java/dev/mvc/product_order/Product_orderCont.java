@@ -5,6 +5,9 @@ import dev.mvc.product.ProductProcInter;
 import dev.mvc.product.ProductVO;
 import dev.mvc.product_image.Product_imageProcInter;
 
+import java.util.List;
+
+import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -54,8 +57,25 @@ public class Product_orderCont {
   
   
   @RequestMapping(value="/product_order/product_order_create.do", method = RequestMethod.POST)
-  public ModelAndView product_order_create(Product_orderVO orderVO) {
+  public ModelAndView product_order_create(Product_orderVO orderVO, int membersno, int productno, String tel) {
     ModelAndView mav = new ModelAndView();
+    orderVO.setMembersno(membersno);
+    orderVO.setProductno(productno);
+    orderVO.setTel(tel);
+    
+    
+//    System.out.println("orderno : " + orderVO.getOrderno());
+//    System.out.println("membersno : " + orderVO.getMembersno());
+//    System.out.println("productno : " + orderVO.getProductno());
+//    System.out.println("count : " + orderVO.getCount());
+//    System.out.println("price : " + orderVO.getPrice());
+//    System.out.println("shippding : " + orderVO.getShipping());
+//    System.out.println("total : " + orderVO.getTotalprice());
+//    System.out.println("how : " + orderVO.getHoworder());
+//    System.out.println("tel : " + orderVO.getTel());
+//    System.out.println("zipcode : " + orderVO.getZipcode());
+//    System.out.println("address1 : " + orderVO.getAddress1());
+//    System.out.println("address2 : " + orderVO.getAddress2());
     int count = orderProc.product_order_create(orderVO);
     
     if(count == 1) {
@@ -67,14 +87,15 @@ public class Product_orderCont {
     
   } 
   
-//  @RequestMapping(value="/product_order/product_order_select.do", method=RequestMethod.GET)
-//  public List<Product_orderVO> product_order_select() {
-//    ModelAndView mav = new ModelAndView();
-//    List<orderVO> select = orderProc.product_order_select();
-//    mav.addObject("list", list);
-//    return mav;
-//  }
-//  
+  @RequestMapping(value="/product_order/product_order_select.do", method=RequestMethod.GET)
+  public ModelAndView product_order_select() {
+    ModelAndView mav = new ModelAndView();
+    List<Product_orderVO> list = orderProc.product_order_select();
+    mav.addObject("list", list);
+    mav.setViewName("/product_order/list");
+    return mav;
+  }
+  
 //  
 //  @RequestMapping(value="/product_order/product_order_read_orderno.do")
 //  @RequestMapping(value="/product_order/product_order_read_membersno.do")

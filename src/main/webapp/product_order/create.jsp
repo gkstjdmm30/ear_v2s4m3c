@@ -20,11 +20,12 @@
 
 <script type="text/javascript">
   $(function(){
+    
     var price = 10000;
     var count = <%= Integer.parseInt(request.getParameter("count"))%>
     var shipping = ((price*count)>10000?0:2500);
-    var total = (price*count) + shipping;
-    $('#total').val(total);
+    var totalprice = (price*count) + shipping;
+    $('#totalprice').val(totalprice);
   });
 </script>
  
@@ -37,6 +38,10 @@
 <DIV class='title_line'>주문</DIV>
 <FORM name='frm' id='frm' method='POST' action='./product_order_create.do' 
               onsubmit="return send();" class="form-horizontal">
+<input type='hidden' name='productno' value='${productVO.productno } '>   
+<input type='hidden' name='membersno' value='${membersVO.membersno } '>   
+<input type='hidden' name='tel' value='${membersVO.tel } '>   
+
 <div>
    <div style="width: 60%; height: 70%;  float: left;">
       <div class="form-group">
@@ -69,7 +74,7 @@
       <div class="form-group">    
         <div class="col-md-10">
          배송비 <input type='text' class="form-control input-lg" name='shipping' id='shipping' 
-                     value='배송비(받아올것)' required="required" style='width: 90%;' readonly>
+                     value='' required="required" style='width: 90%;'>
         </div>
       </div>      
 
@@ -77,7 +82,7 @@
 
       <div class="form-group">
         <div class="col-md-10">
-         총 가격 <input type='text' class="form-control input-lg" name='total' id='total' 
+         총 가격 <input type='text' class="form-control input-lg" name='totalprice' id='totalprice' 
                      value="" required="required" style='width: 90%;' >
         </div>
       </div>
@@ -106,12 +111,11 @@
       <input type='text' class="form-control input-lg" name='address2' id='address2' value='${membersVO.address2 }'  style='width: 40%; margin: 5px;' readonly >
    </div>   
    <div class= "" style="float: right; padding: 12px; margin-right: 66px;">
-      <select class="btn btn-light" name="선택하시오" id="code">
-        <option>선택</option>
-        <option>신용카드</option>
-        <option>계좌이체</option>
+      <select class="btn btn-light" name="howorder" id="howorder">
+        <option value="1">신용카드</option>
+        <option value="2">계좌이체</option>
       </select>
-      <button type="button" class="btn btn-primary">결제하기</button>
+      <button type="submit" class="btn btn-primary">결제하기</button>
       <a href="javascript:history.back();"><button type="button" class="btn btn-secondary">취소</button></a> 
    </div>
  </div>
