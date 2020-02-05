@@ -99,8 +99,22 @@ public class Product_orderCont {
     return mav;
   }
   
-//  
-//  @RequestMapping(value="/product_order/product_order_read_orderno.do")
+
+  @RequestMapping(value="/product_order/product_order_read.do", method=RequestMethod.GET)
+  public ModelAndView product_order_read(int orderno, int membersno, int productno) {
+    ModelAndView mav = new ModelAndView();
+    MembersVO membersVO = membersProc.mem_read(membersno);
+    ProductVO productVO = productProc.read(productno);
+//    Product_imageVO imageVO = product_imageProc.read(productno);
+    
+    mav.addObject("membersVO", membersVO);
+    mav.addObject("productVO", productVO);
+//    mav.addObject("product_imageVO", imageVO);
+    Product_orderVO list = orderProc.product_order_read_orderno(orderno);
+    mav.addObject("list", list);
+    mav.setViewName("/product_order/read_orderno");
+    return mav;
+  }
 //  @RequestMapping(value="/product_order/product_order_read_membersno.do")
 //  @RequestMapping(value="/product_order/product_order_update.do")
 //  @RequestMapping(value="/product_order/product_order_delete.do")

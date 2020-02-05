@@ -19,12 +19,21 @@
   
 
 <script type="text/javascript">
-  $(function(){
+<%--   $(function(){
     
     var price = 10000;
     var count = <%= Integer.parseInt(request.getParameter("count"))%>
     var shipping = ((price*count)>10000?0:2500);
     var totalprice = (price*count) + shipping;
+    $('#totalprice').val(totalprice);
+  }); --%>
+  $(function(){
+    
+    var price = $('#price').val();
+    var count = <%= Integer.parseInt(request.getParameter("count"))%>
+    var shipping = ((price*count)>10000?0:2500);
+    var totalprice = (price*count) + shipping;
+    $('#shipping').val(shipping);
     $('#totalprice').val(totalprice);
   });
 </script>
@@ -60,7 +69,7 @@
       <div class="form-group">    
         <div class="col-md-10" >
          가격 <input type='text' class="form-control input-lg" name='price' id='price' 
-                     value="<%-- ${productVO.price } --%>" required="required" style='width: 90%;'>
+                     value="${productVO.price }" required="required" style='width: 90%;'>
         </div>
       </div>   
       
