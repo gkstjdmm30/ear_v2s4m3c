@@ -31,24 +31,24 @@ COMMENT ON COLUMN product.replycnt is '댓글수';
 COMMENT ON COLUMN product.rdate is '등록일';
 COMMENT ON COLUMN product.word is '검색어';
 
-INSERT INTO product(productno, productcateno, membersno, name, content, recom, cnt, replycnt, rdate, word)
+INSERT INTO product(productno, productcateno, membersno, name, price, content, recom, cnt, replycnt, rdate, word)
 VALUES((SELECT NVL(MAX(productno), 0) + 1 as productno FROM product),
-             1, 1, '상품1', '내용1',
+             1, 1, '에어팟 프로', 329000, '내용1',
              0, 0, 0, sysdate, '상품4');
     
-INSERT INTO product(productno, productcateno, membersno, name, content, recom, cnt, replycnt, rdate, word)
+INSERT INTO product(productno, productcateno, membersno, name, price, content, recom, cnt, replycnt, rdate, word)
 VALUES((SELECT NVL(MAX(productno), 0) + 1 as productno FROM product),
-             2, 1, '상품2', '내용1',
+             2, 1, '유선', 150000, '내용1',
              0, 0, 0, sysdate, '상품4');
     
-INSERT INTO product(productno, productcateno, membersno, name, content, recom, cnt, replycnt, rdate, word)
+INSERT INTO product(productno, productcateno, membersno, name, price, content, recom, cnt, replycnt, rdate, word)
 VALUES((SELECT NVL(MAX(productno), 0) + 1 as productno FROM product),
-             3, 1, '상품3', '내용1',
+             3, 1, '헤드셋1', 230000, '내용1',
              0, 0, 0, sysdate, '상품4');
     
-INSERT INTO product(productno, productcateno, membersno, name, content, recom, cnt, replycnt, rdate, word)
+INSERT INTO product(productno, productcateno, membersno, name, price, content, recom, cnt, replycnt, rdate, word)
 VALUES((SELECT NVL(MAX(productno), 0) + 1 as productno FROM product),
-             3, 1, '상품4', '내용1',
+             3, 1, '헤드셋2', 87000, '내용1',
              0, 0, 0, sysdate, '상품4');
                     
              

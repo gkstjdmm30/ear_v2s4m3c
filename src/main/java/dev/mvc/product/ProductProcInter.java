@@ -24,6 +24,8 @@ public interface ProductProcInter {
    * @return
    */
   public List<ProductVO> list_by_productcateno(int productcateno);
+  
+  public List<Product_imageProductVO> list_by_product_image_join(int productno);
 
   /**
    * 전체 등록 레코드 갯수 

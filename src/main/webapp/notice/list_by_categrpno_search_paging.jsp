@@ -127,7 +127,10 @@
   </div>
   <!-- /.row -->
  
-<jsp:include page="/menu/bottom.jsp" flush='false' />
+    </div> 
+  </div>
+  
+<jsp:include page="/menu/bottom2.jsp" flush='false' />
 </body>
  
 </html>

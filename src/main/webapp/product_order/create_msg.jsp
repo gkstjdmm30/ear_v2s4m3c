@@ -18,6 +18,8 @@
 <body>
 <jsp:include page="/menu/top.jsp" flush='false' />
 
+#{param.count }
+
 
 
 <jsp:include page="/menu/bottom.jsp" flush='false' />

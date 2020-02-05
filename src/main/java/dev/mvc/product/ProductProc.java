@@ -7,6 +7,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import dev.mvc.reply.ReplyMemberVO;
+
 @Component("dev.mvc.product.ProductProc")
 public class ProductProc implements ProductProcInter {
   @Autowired
@@ -27,6 +29,12 @@ public class ProductProc implements ProductProcInter {
   @Override
   public List<ProductVO> list_by_productcateno(int productcateno) {
     List<ProductVO> list = productDAO.list_by_productcateno(productcateno);
+    return list;
+  }
+  
+  @Override
+  public List<Product_imageProductVO> list_by_product_image_join(int productno) {
+    List<Product_imageProductVO> list = productDAO.list_by_product_image_join(productno);
     return list;
   }
 
@@ -206,6 +214,7 @@ public class ProductProc implements ProductProcInter {
     
     return list;
   }
+
   
 }
 

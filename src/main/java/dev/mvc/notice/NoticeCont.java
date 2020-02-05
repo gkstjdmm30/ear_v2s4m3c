@@ -143,6 +143,31 @@ public class NoticeCont {
 
     return mav;
   }
+  
+  /**
+   * Ã·ºÎ ÆÄÀÏ 1°Ç »èÁ¦ Æû
+   * 
+   * @param noticeno
+   * @return
+   */
+  @RequestMapping(value = "/notice/file_delete.do", 
+                             method = RequestMethod.GET)
+  public ModelAndView file_delete(int noticeno) {
+    ModelAndView mav = new ModelAndView();
+
+    NoticeVO noticeVO = noticeProc.read(noticeno);
+    mav.addObject("noticeVO", noticeVO);
+
+    Notice_categrpVO notice_categrpVO = notice_categrpProc.read(noticeVO.getCategrpno());
+    mav.addObject("notice_categrpVO", notice_categrpVO);
+    
+    List<Notice_attachfileVO> notice_attachfile_list = notice_attachfileProc.list_by_noticeno(noticeno);
+    mav.addObject("notice_attachfile_list", notice_attachfile_list);
+    
+    mav.setViewName("/notice/file_delete"); // file_delete.jsp
+
+    return mav;
+  }
    
    
    
