@@ -347,7 +347,7 @@ public class ProductCont {
    */
   @RequestMapping(value = "/product/list.do", 
                                        method = RequestMethod.GET)
-  public ModelAndView list_by_search_paging(
+  public ModelAndView list_by_productno_search_paging(
       @RequestParam(value="productcateno", defaultValue="1") int productcateno, // 기본값
       @RequestParam(value="word", defaultValue="") String word,           // 기본값
       @RequestParam(value="nowPage", defaultValue="1") int nowPage,    // 기본값
