@@ -42,6 +42,14 @@ SELECT * FROM members;
 
 SELECT to_char(sysdate,'yyyy-mm-dd hh24:mi:ss') FROM dual;
 
+UPDATE members
+SET ps = 0
+WHERE id = 'admin';
+
 SELECT membersno, id, name, passwd, tel, email, zipcode, address1, address2, rdate
+FROM members
+WHERE id = 'user1';
+
+SELECT membersno, id, name, passwd, tel, email, zipcode, address1, address2, rdate, ps
 FROM members
 WHERE id = 'user1';

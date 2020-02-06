@@ -21,27 +21,7 @@
 $(function(){
   
 });
-function update_form(membersno) {
-  
-  var url = './update.do?membersno=' + membersno;
-  var win = window.open(url, '회원 정보 수정', 'width=800px, height=400px');
-  
-  var x = (screen.width - 800) / 2;
-  var y = (screen.height - 400) / 2;
-  
-  win.moveTo(x, y); // 지정된 좌표로 이동    
-} 
 
-function delete_form(membersno) {
-  
-  var url = './delete.do?membersno=' + membersno;
-  var win = window.open(url, '회원 정보 삭제', 'width=800px, height=500px');
-  
-  var x = (screen.width - 800) / 2;
-  var y = (screen.height - 500) / 2;
-  
-  win.moveTo(x, y); // 지정된 좌표로 이동    
-} 
 </script>
     
 </head>
@@ -94,8 +74,8 @@ function delete_form(membersno) {
       <TD style='text-align: center;'>${membersVO.rdate }</TD>
       <TD style='text-align: center;'>${membersVO.ps }</TD>
       <TD style='text-align: center;'>
-        <A href="javascript: update_form(${membersno });"><IMG src='./images/update.png' title='수정'></A>
-        <A href="javascript: delete_form(${membersno });"><IMG src='./images/delete.png' title='삭제'></A>
+        <A href="./mem_read.do?membersno=${membersno }"><IMG src='../notice/images/update.png'></A>
+        <A href="./mem_delete.do?membersno=${membersno }"><IMG src='../notice/images/delete.png'></A>
       </TD>
     </TR>
   </c:forEach> 
