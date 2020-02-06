@@ -47,9 +47,9 @@
             
           <spen class='menubar'>
             <li class="nav-item">
-              <a class="nav-link" href="${root}/notice/list.do?categrpno=1">공지사항</a>
+              <a class="nav-link" href="${root}/notice/list.do?categrpno=1&nowPage=1">공지사항</a>
                 <ul>
-                   <li><a href="${root}/notice/list.do?categrpno=1">공지사항</a></li>
+                   <li><a href="${root}/notice/list.do?categrpno=1&nowPage=1">공지사항</a></li>
                    <li><a href="#">자료실</a></li>
                    <li><a href="#">Q&A</a></li>
                    <c:if test="${sessionScope.ps == 0}">

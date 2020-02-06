@@ -79,6 +79,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      WHERE categrpno=#{categrpno}
    </update>
    
+   <!-- FK 컬럼 값이 사용된 레코드 갯수 산출: id="cnt_zero" -->
+   <update id="cnt_zero" parameterType="int">
+     UPDATE notice_categrp 
+     SET cnt = 0 
+     WHERE categrpno=#{categrpno}
+   </update>
+   
 </mapper>
 
 

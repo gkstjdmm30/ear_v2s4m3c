@@ -33,7 +33,8 @@
     <col style='width: 10%;'/>
     <col style='width: 10%;'/>
     <col style='width: 10%;'/>
-    <col style='width: 40%;'/>    
+    <col style='width: 30%;'/>    
+    <col style='width: 10%;'/>
     <col style='width: 10%;'/>
     <col style='width: 10%;'/>
     <col style='width: 10%;'/>
@@ -48,27 +49,26 @@
     <TH class='th_basic'>배송방법</TH>
     <TH class='th_basic'>날짜</TH>
     <TH class='th_basic'>기타</TH>
+    <TH class='th_basic'>배송조회</TH>
   </TR>
   </thead>
   
   <tbody>
-  <c:forEach var="membersVO" items = "${list}">
-    <c:set var="membersno" value="${membersVO.membersno }" />
+  <c:forEach var="product_orderVO" items = "${list}">
+    <c:set var="orderno" value="${product_orderVO.orderno }" />
     
     <TR>
-      <TD style='text-align: center;'>${membersVO.membersno }</TD>
-      <TD style='text-align: center;'>${membersVO.id }</TD>
-      <TD style='text-align: left: ;'>${membersVO.name }</TD>
-      <TD style='text-align: center;'>${membersVO.passwd }</TD>
-      <TD style='text-align: center;'>${membersVO.tel }</TD>
-      <TD style='text-align: center;'>${membersVO.email }</TD>
-      <TD style='text-align: center;'>(${membersVO.zipcode}) ${membersVO.address1 } ${membersVO.address2 }</TD>
-      <TD style='text-align: center;'>${membersVO.rdate }</TD>
-      <TD style='text-align: center;'>${membersVO.ps }</TD>
+      <TD style='text-align: center;'> <A href="./product_order_select.do?orderno=${orderno }&membersno=${product_orderVO.membersno}&productno=${product_orderVO.productno}">${product_orderVO.orderno }</A></TD>
+      <TD style='text-align: center;'>${product_orderVO.productno }</TD>
+      <TD style='text-align: center;'>${product_orderVO.membersno }</TD>
+      <TD style='text-align: left;'>(${product_orderVO.price}) X ${product_orderVO.count } + ${product_orderVO.shipping } = ${product_orderVO.totalprice }</TD>
+      <TD style='text-align: center;'>${product_orderVO.howorder }</TD>
+      <TD style='text-align: center;'>${product_orderVO.odate }</TD>
       <TD style='text-align: center;'>
-        <A href="./mem_read.do?membersno=${membersno }"><IMG src='../notice/images/update.png'></A>
-        <A href="./mem_delete.do?membersno=${membersno }"><IMG src='../notice/images/delete.png'></A>
+        <A href="./update.do?orderno=${orderno }"><IMG src='../notice/images/update.png'></A>
+        <A href="./delete.do?orderno=${orderno }"><IMG src='../notice/images/delete.png'></A>
       </TD>
+      <TD style='text-align: center;'><A href="#">배송 조회</A></TD>
     </TR>
   </c:forEach> 
   </tbody>

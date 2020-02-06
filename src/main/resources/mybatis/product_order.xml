@@ -7,10 +7,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dev.mvc.product_order.Product_orderDAOInter">
   
   <insert id="product_order_create" parameterType="Product_orderVO">
-      INSERT INTO product_order(orderno, productno, membersno, count, price, 
-      shipping, totalprice, howorder, tel, zipcode, address1, address2, odate)
-      VALUES((SELECT NVL(MAX(orderno), 0) + 1 as orderno FROM product_order),
-         #{productno}, #{membersno}, #{count}, #{price}, #{shipping}, #{totalprice}, #{howorder}, #{tel}, #{zipcode}, #{address1}, #{address2}, sysdate)
+    INSERT INTO product_order(orderno, productno, membersno, count, price, 
+    shipping, totalprice, howorder, tel, zipcode, address1, address2, odate)
+    VALUES((SELECT NVL(MAX(orderno), 0) + 1 as orderno FROM product_order),
+       #{productno}, #{membersno}, #{count}, #{price}, #{shipping}, #{totalprice}, #{howorder}, #{tel}, #{zipcode}, #{address1}, #{address2}, sysdate)
   </insert>
 
   <select id="product_order_select" resultType="Product_orderVO">

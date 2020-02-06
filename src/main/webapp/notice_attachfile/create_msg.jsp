@@ -42,10 +42,10 @@
       <LI class='li_none'>
         <br>
         <button type='button' 
-                    onclick="location.href='../notice/read.do?categrpno=${param.categrpno}&noticeno=${param.noticeno }'"
+                    onclick="location.href='../notice/read.do?categrpno=${param.categrpno}&noticeno=${param.noticeno }&nowPage=${param.nowPage}'"
                     class="btn btn-info">업로드된 파일 확인</button>
         <button type='button' 
-                    onclick="location.href='../notice/list.do?categrpno=${param.categrpno}'"
+                    onclick="location.href='../notice/list.do?categrpno=${param.categrpno}&nowPage=${param.nowPage}'"
                     class="btn btn-info">목록</button>
       </LI>
      </UL>

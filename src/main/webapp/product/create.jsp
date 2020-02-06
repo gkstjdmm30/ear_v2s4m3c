@@ -49,20 +49,23 @@
       
       <div class="form-group">   
         <div class="col-md-12">
-          상품 이름: <input type='text' class="form-control input-lg" name='name' value='' placeholder="상품 이름" required="required" style='width: 50%;'>
-          상품 가격: <input type='number' class="form-control input-lg" name='price' value='' placeholder="상품 가격" required= "required" style= 'width: 50%;'>  
+          상품 이름 <input type='text' class="form-control input-lg" name='name' value='' placeholder="상품 이름" required="required" style='width: 50%;'>
         </div>
-      </div>   
-      
+      </div> 
       <div class="form-group">   
         <div class="col-md-12">
-          내용: <textarea class="form-control input-lg" name='content' id='content' rows='3' placeholder="내용"></textarea>
+          상품 가격 <input type='number' class="form-control input-lg" name='price' value='' placeholder="상품 가격" required= "required" style= 'width: 50%;'>  
+        </div>
+      </div>
+      <div class="form-group">   
+        <div class="col-md-12">
+          내용 <textarea class="form-control input-lg" name='content' id='content' rows='3' placeholder="내용"></textarea>
         </div>
       </div>
       
       <div class="form-group">   
         <div class="col-md-12">
-          검색어: <input type='text' class="form-control input-lg" name='word'  value='' placeholder="검색어">
+          검색어 <input type='text' class="form-control input-lg" name='word'  value='' placeholder="검색어">
         </div>
       </div>
 

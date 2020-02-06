@@ -31,16 +31,18 @@
       </c:if>
     </ASIDE>
     <ASIDE style='float: right;'>
-      <A href="javascript:location.reload();">새로고침</A>
+      <c:if test="${sessionScope.ps == 1 || sessionScope.id == null }">
+        상품 카테고리 별 검색 >
+      </c:if>
+      
       <c:if test="${sessionScope.ps == 0}">
-        <span class='menu_divide' > | </span>
         <A href='./create.do?productcateno=${product_categrpVO.productcateno }&nowPage=${param.nowPage}'>등록</A>
       </c:if>
       
       <c:choose>
         <c:when test="${param.word != '' }">
           <input type='text' name='word' id='word' value='${param.word }' 
-                     style='width: 35%;'>
+                     style='width: 40%;'>
         </c:when>
         <c:otherwise>
           <input type='text' name='word' id='word' value='' style='width: 35%;'>
