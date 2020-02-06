@@ -80,12 +80,12 @@ public class Product_orderCont {
     System.out.println("address1 : " + orderVO.getAddress1());
     System.out.println("address2 : " + orderVO.getAddress2());
     int count = orderProc.product_order_create(orderVO);
-//    
-//    if(count == 1) {
-//      mav.setViewName("redirect:/product_order/read_membersno.jsp?membersno=" + orderVO.getMembersno());
-//    } else {
-//      mav.setViewName("redirect:/product_order/create_msg.jsp?count=" + count);
-//    }
+    
+    if(count == 1) {
+      mav.setViewName("redirect:/product_order/read_membersno.jsp?membersno=" + orderVO.getMembersno());
+    } else {
+      mav.setViewName("redirect:/product_order/create_msg.jsp?count=" + count);
+    }
     return mav;
     
   } 
