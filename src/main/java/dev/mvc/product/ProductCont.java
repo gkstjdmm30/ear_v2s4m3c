@@ -76,7 +76,7 @@ public class ProductCont {
     // redirect: form에서 보낸 데이터 모두 삭제됨, 새로고침 중복 등록 방지용.
     
     ra.addAttribute("count", count); // redirect parameter 적용
-    ra.addAttribute("categrpno", productVO.getProductcateno());
+    ra.addAttribute("productcateno", productVO.getProductcateno());
     
     mav.setViewName("redirect:/product/create_msg.jsp");
 
@@ -383,6 +383,9 @@ public class ProductCont {
     // 검색된 레코드 갯수
     int search_count = productProc.search_count(map);
     mav.addObject("search_count", search_count);
+    
+    Product_categrpVO product_categrpVO = product_categrpProc.read(productcateno);
+    mav.addObject("product_categrpVO", product_categrpVO);
   
     /*
      * SPAN태그를 이용한 박스 모델의 지원, 1 페이지부터 시작 

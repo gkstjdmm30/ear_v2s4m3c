@@ -72,7 +72,7 @@
               <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
               <div class="card-body">
                 <h5>
-                  <a href="#">${productVO.name}</a>
+                  <a href="./read.do?productno=${productno}&word=${param.word}">${productVO.name}</a>
                 </h5>
                 <h5>30000원</h5>
                 <p class="card-text"><IMG src='./images/추천.jpeg' title=''>&nbsp${productVO.recom}</p>
@@ -95,7 +95,8 @@
     <!-- /.row -->
 
   </div>
-  <!-- /.container -->          
+  <!-- /.container --> 
+   <DIV class='bottom_menu'>${paging }</DIV>              
 
 
 

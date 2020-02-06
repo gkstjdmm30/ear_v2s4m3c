@@ -73,7 +73,7 @@
               <c:choose>
                 <c:when test="${thumb.endsWith('jpg') || thumb.endsWith('png') || thumb.endsWith('gif')}">
                   <A href="javascript:panel_img('${product_imageVO.fname }')"><IMG src='../product_image/storage/${thumb }' style='margin-top: 2px;'></A>
-                  <A href="./file_delete_proc.do?productno=${productno}&productimgno=${product_imageVO.productimgno }"><span class="glyphicon glyphicon-remove"></span></A>
+                  <A href="./file_delete_proc.do?productno=${productno}&productimgno=${product_imageVO.productimgno }">삭제</A>
                 </c:when>
               </c:choose>
             </c:forEach>

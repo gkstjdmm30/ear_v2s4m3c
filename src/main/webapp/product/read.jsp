@@ -217,13 +217,13 @@
   <ASIDE style='float: right;'>
     <A href="javascript:location.reload();">새로고침</A>
     <span class='menu_divide' > | </span> 
+    <A href='./list.do?categrpno=${categrpno }&word=${param.word}&nowPage=${param.nowPage}'>목록</A>
+    <c:if test="${sessionScope.ps == 0}">
+      <span class='menu_divide' > | </span>  
      <a href="../product_image/create.do?productno=${productno}&productcateno=${product_categrpVO.productcateno}&nowPage=${param.nowPage}">첨부 파일 등록</A>
       <span class='menu_divide' > | </span> 
       <a href="./file_delete.do?productno=${productno}&productcateno=${product_categrpVO.productcateno}&nowPage=${param.nowPage}">첨부 파일 삭제</A>
-    <span class='menu_divide' > | </span> 
-    <A href='./list.do?categrpno=${categrpno }&word=${param.word}&nowPage=${param.nowPage}'>목록</A>
-    <c:if test="${sessionScope.id != null}">
-      <span class='menu_divide' > | </span> 
+      <span class='menu_divide' > | </span>
       <A href='./update.do?productcateno=${productcateno }&productno=${productno}&nowPage=${param.nowPage}'>수정</A>
       <span class='menu_divide' > | </span> 
       <A href='./delete.do?productcateno=${productcateno }&productno=${productno}&nowPage=${param.nowPage}'>삭제</A>
