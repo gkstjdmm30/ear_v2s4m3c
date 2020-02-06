@@ -5,11 +5,11 @@ CREATE TABLE members(
     id                            VARCHAR2(50)     NOT NULL,
     name                          VARCHAR2(50)     NOT NULL,
     passwd                        VARCHAR2(32)     NOT NULL,
-    tel                           VARCHAR2(50)     NOT NULL UNIQUE,
+    tel                           VARCHAR2(50)     NOT NULL,
     email                         VARCHAR2(70)     NOT NULL,
-    zipcode                      VARCHAR2(8)    NOT NULL UNIQUE,
-    address1                      VARCHAR2(100)    NULL UNIQUE,
-    address2                       VARCHAR2(100)    NULL UNIQUE,
+    zipcode                      VARCHAR2(8)    NOT NULL,
+    address1                      VARCHAR2(100)    NULL,
+    address2                       VARCHAR2(100)    NULL,
     rdate                         DATE     NOT NULL,
     ps                            NUMBER(1) DEFAULT 1 NOT NULL 
 );
@@ -31,7 +31,10 @@ VALUES((SELECT NVL(MAX(membersno), 0) + 1 as mem_no FROM members),
  SELECT * FROM members;
  
 -- product_categrp
+-- 삭제
 DROP TABLE product_categrp;
+
+-- 생성
 CREATE TABLE product_categrp(
     productcateno          NUMBER(10)     NOT NULL    PRIMARY KEY,
     name                      VARCHAR2(50)     NOT NULL,
@@ -59,18 +62,22 @@ VALUES((SELECT NVL(MAX(productcateno), 0) + 1 as categrpno FROM product_categrp)
 INSERT INTO product_categrp(productcateno, name, seqno, rdate, cnt)
 VALUES((SELECT NVL(MAX(productcateno), 0) + 1 as categrpno FROM product_categrp),
             '스피커', 3, sysdate, 0);
-        
+           
    SELECT *
    FROM product_categrp;       
 
 
 -- product
+-- 삭제
 DROP TABLE product;
+
+-- 생성
 CREATE TABLE product(
     productno                        NUMBER(10)     NOT NULL    PRIMARY KEY,
     productcateno                   NUMBER(10)     NOT NULL,
     membersno                     NUMBER(10)     NOT NULL,
     name                             VARCHAR2(300)    NOT NULL,
+    price                                NUMBER(10)     NOT NULL,
     content                           CLOB           NOT NULL,
     recom                             NUMBER(7)    DEFAULT 0     NOT NULL,
     cnt                               NUMBER(7)    DEFAULT 0     NOT NULL,
@@ -86,6 +93,7 @@ COMMENT ON COLUMN product.productno is '상품번호';
 COMMENT ON COLUMN product.productcateno is '상품 카테고리 번호';
 COMMENT ON COLUMN product.membersno is '회원번호';
 COMMENT ON COLUMN product.name is '상품이름';
+COMMENT ON COLUMN product.price is '가격';
 COMMENT ON COLUMN product.content is '내용';
 COMMENT ON COLUMN product.recom is '추천수';
 COMMENT ON COLUMN product.cnt is '조회수';
@@ -93,21 +101,27 @@ COMMENT ON COLUMN product.replycnt is '댓글수';
 COMMENT ON COLUMN product.rdate is '등록일';
 COMMENT ON COLUMN product.word is '검색어';
 
-INSERT INTO product(productno, productcateno, membersno, name, content, recom, cnt, replycnt, rdate, word)
+INSERT INTO product(productno, productcateno, membersno, name, price, content, recom, cnt, replycnt, rdate, word)
 VALUES((SELECT NVL(MAX(productno), 0) + 1 as productno FROM product),
-             1, 1, '상품1', '내용1',
+             1, 1, '에어팟 프로', 329000, '내용1',
              0, 0, 0, sysdate, '상품4');
     
-INSERT INTO product(productno, productcateno, membersno, name, content, recom, cnt, replycnt, rdate, word)
+INSERT INTO product(productno, productcateno, membersno, name, price, content, recom, cnt, replycnt, rdate, word)
 VALUES((SELECT NVL(MAX(productno), 0) + 1 as productno FROM product),
-             2, 1, '상품2', '내용1',
+             2, 1, '유선', 150000, '내용1',
              0, 0, 0, sysdate, '상품4');
     
-INSERT INTO product(productno, productcateno, membersno, name, content, recom, cnt, replycnt, rdate, word)
+INSERT INTO product(productno, productcateno, membersno, name, price, content, recom, cnt, replycnt, rdate, word)
 VALUES((SELECT NVL(MAX(productno), 0) + 1 as productno FROM product),
-             3, 1, '상품3', '내용1',
+             3, 1, '헤드셋1', 230000, '내용1',
              0, 0, 0, sysdate, '상품4');
-
+    
+INSERT INTO product(productno, productcateno, membersno, name, price, content, recom, cnt, replycnt, rdate, word)
+VALUES((SELECT NVL(MAX(productno), 0) + 1 as productno FROM product),
+             3, 1, '헤드셋2', 87000, '내용1',
+             0, 0, 0, sysdate, '상품4');
+                    
+   
 select * from product;
                     
 
@@ -128,11 +142,7 @@ CREATE table product_order(
 	address2                       VARCHAR2(100)    NULL,
   odate         DATE NOT NULL,
   FOREIGN KEY (productno) REFERENCES product (productno),
-  FOREIGN KEY (membersno) REFERENCES members (membersno),
-  FOREIGN KEY (tel) REFERENCES members (tel),
-  FOREIGN KEY (zipcode) REFERENCES members (zipcode),
-  FOREIGN KEY (address1) REFERENCES members (address1),
-  FOREIGN KEY (address2) REFERENCES members (address2)
+  FOREIGN KEY (membersno) REFERENCES members (membersno)
 );
 
 

@@ -83,6 +83,5 @@ public class Product_imageVO {
     this.rdate = rdate;
   }
   
-  
 
 }

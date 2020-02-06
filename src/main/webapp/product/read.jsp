@@ -1,14 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<c:set var="root" value="${pageContext.request.contextPath}" />
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>Resort world</title>
+<title>Shop</title>
 
 <link href="../css/style.css" rel="Stylesheet" type="text/css">
   <!-- Bootstrap core CSS -->
@@ -17,10 +16,6 @@
   <!-- Custom styles for this template -->
   <link href="../css/shop-homepage.css" rel="stylesheet">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
   $(function() { // 자동 실행
     list_by_productno(${productVO.productno });  // JS의 EL 접근
@@ -204,14 +199,50 @@
     
   }
 </script>
-
 </head>
 
 <body>
+
 <c:set var="productcateno" value="${product_categrpVO.productcateno}" />
 <c:set var="productno" value="${productVO.productno }" />
 
 <jsp:include page="/menu/top.jsp" flush='false' />
+<DIV class='content'>
+<!-- Page Content -->
+  <div class="container">
+    <ASIDE style='float: left;'>
+    <A href='../product_categrp/list.do'>카테고리 그룹</A> > 
+    <A href='./list.do?productcateno=${productcateno }&word=${param.word}'>${product_categrpVO.name }</A>
+  </ASIDE>
+  <ASIDE style='float: right;'>
+    <A href="javascript:location.reload();">새로고침</A>
+    <span class='menu_divide' > | </span> 
+     <a href="../product_image/create.do?productno=${productno}&productcateno=${product_categrpVO.productcateno}&nowPage=${param.nowPage}">첨부 파일 등록</A>
+      <span class='menu_divide' > | </span> 
+      <a href="./file_delete.do?productno=${productno}&productcateno=${product_categrpVO.productcateno}&nowPage=${param.nowPage}">첨부 파일 삭제</A>
+    <span class='menu_divide' > | </span> 
+    <A href='./list.do?categrpno=${categrpno }&word=${param.word}&nowPage=${param.nowPage}'>목록</A>
+    <c:if test="${sessionScope.id != null}">
+      <span class='menu_divide' > | </span> 
+      <A href='./update.do?productcateno=${productcateno }&productno=${productno}&nowPage=${param.nowPage}'>수정</A>
+      <span class='menu_divide' > | </span> 
+      <A href='./delete.do?productcateno=${productcateno }&productno=${productno}&nowPage=${param.nowPage}'>삭제</A>
+    </c:if>
+  </ASIDE> 
+  
+  <div class='menu_line'></div>
+
+    <div class="row">
+
+      <div class="col-lg-3">
+
+        <h1 class="my-4">이어팔아</h1>
+        <c:import url="/product_categrp/list_left_menu.do" />
+
+      </div>
+      <!-- /.col-lg-3 -->
+      
+      <div class="col-lg-9">
 
   <!-- Modal 알림창 시작 -->
   <div class="modal fade" id="modal_panel" role="dialog">
@@ -283,32 +314,6 @@
       </div>
     </div>
   </div> <!-- Modal 알림창 종료 -->
-  
-  <ASIDE style='float: left;'>
-    <A href='../product_categrp/list.do'>카테고리 그룹</A> > 
-    <A href='./list.do?productcateno=${productcateno }&word=${param.word}'>${product_categrpVO.name }</A>
-  </ASIDE>
-  <ASIDE style='float: right;'>
-    <A href="javascript:location.reload();">새로고침</A>
-    <span class='menu_divide' > | </span> 
-     <a href="../product_image/create.do?productno=${productno}&productcateno=${product_categrpVO.productcateno}&nowPage=${param.nowPage}">첨부 파일 등록</A>
-      <span class='menu_divide' > | </span> 
-      <a href="./file_delete.do?productno=${productno}&productcateno=${product_categrpVO.productcateno}&nowPage=${param.nowPage}">첨부 파일 삭제</A>
-    <span class='menu_divide' > | </span> 
-    <A href='./list.do?categrpno=${categrpno }&word=${param.word}&nowPage=${param.nowPage}'>목록</A>
-    <c:if test="${sessionScope.id != null}">
-      <span class='menu_divide' > | </span> 
-      <A href='./update.do?categrpno=${categrpno }&contentsno=${contentsno}&nowPage=${param.nowPage}'>수정</A>
-      <span class='menu_divide' > | </span> 
-      <a href="../attachfile/create.do?contentsno=${contentsno}&categrpno=${categrpVO.categrpno}&nowPage=${param.nowPage}">첨부 파일 등록</A>
-      <span class='menu_divide' > | </span> 
-      <a href="./file_delete.do?contentsno=${contentsno}&categrpno=${categrpVO.categrpno}&nowPage=${param.nowPage}">첨부 파일 삭제</A>
-      <span class='menu_divide' > | </span> 
-      <A href='./delete.do?categrpno=${categrpno }&contentsno=${contentsno}&nowPage=${param.nowPage}'>삭제</A>
-    </c:if>
-  </ASIDE> 
-  
-  <div class='menu_line'></div>
 
   <FORM name='frm' method="get" action='./update.do'>
       <input type="hidden" name="productno" value="${productno}">
@@ -323,13 +328,13 @@
           <li class="li_none">
             <DIV id='attachfile_panel' style="width: 80%; margin: 0px auto;"></DIV> <!-- 원본 이미지 출력 -->
           </li>
-          <li class="li_none" style='text-align: center;' >
-            <c:forEach var="product_imageVO" items="${product_image_list }">
+          <li class="li_none" >
+            <c:forEach var="product_imageVO" items="${product_image }">
               <c:set var="thumb" value="${product_imageVO.thumb.toLowerCase() }" />
-              
               <c:choose>
                 <c:when test="${thumb.endsWith('jpg') || thumb.endsWith('png') || thumb.endsWith('gif')}">
                   <A href="javascript:panel_img('${product_imageVO.fname }')"><IMG src='../product_image/storage/${thumb }' style='margin-top: 2px;'></A>
+                  &nbsp&nbsp&nbsp&nbsp&nbsp구매 갯수: <input type='number' name='order_count' id='order_count' value='1' > 
                 </c:when>
               </c:choose>
             </c:forEach>
@@ -344,24 +349,10 @@
               검색어(키워드): ${productVO.word }
             </DIV>
           </li>
-          <li class="li_none">
-            <DIV>
-              <span class="glyphicon glyphicon-download-alt"></span>
-              파일명을 클릭하면 다운로드가 가능합니다.
-              <A href='../product_image/downzip.do?productno=${productno}'><IMG src='./images/zip.png' title='zip 파일 다운로드'></A> 
-            </DIV>
-            <DIV>
-              <c:forEach var="product_imageVO" items="${attachfile_list }">
-                <c:set var="fname" value="${product_imageVO.fname.toLowerCase() }" />
-                <A href='${root}/download2?dir=/product_image/storage&filename=${product_imageVO.fupname}&downname=${product_imageVO.fname}'>${product_imageVO.fname}</A>              
-              </c:forEach>
-            </DIV>  
-          </li>                    
         </ul>
       </fieldset>
-  </FORM>
-  <!-- 댓글 영역 시작 -->
-  <DIV style='width: 80%;'>
+      <!-- 댓글 영역 시작 -->
+  <DIV style='width: 100%;'>
     <HR>
     <FORM name='frm_reply' id='frm_reply'>
       <input type='hidden' name='productno' id='productno' value='${productno}'>
@@ -379,6 +370,21 @@
   </DIV>
   
   <!-- 댓글 영역 종료 -->
+      
+  </FORM>
+    </div>
+    
+    <!-- /.col-lg-9 -->
+      </div>
+
+    <!-- /.row -->
+    
+
+  </div>
+  <!-- /.container -->     
+  
+  </DIV> <!-- content END -->
+  <br><br><br><br><br>
 
 <jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>

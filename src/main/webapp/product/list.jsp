@@ -83,7 +83,6 @@
               </div>
               <div class="card-footer">
                 <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
             </div>
           </div> 
           

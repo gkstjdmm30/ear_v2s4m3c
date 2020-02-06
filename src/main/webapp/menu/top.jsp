@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+<link href="../css/search.css" rel="Stylesheet" type="text/css">
 
 <c:set var="root" value="${pageContext.request.contextPath}" />
  
@@ -10,6 +12,26 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      <form name='frm' id='frm' method='get' action='./list.do' class="">
+        <input type='hidden' name='productcateno' value='${product_categrpVO.productcateno }'>
+
+    <ASIDE style='float: right;'>
+      <c:choose>
+        <c:when test="${param.word != '' }">
+          <input type="search" name='word' id='word' placeholder="Search"  value='${param.word }' 
+                     class="search-box">
+        </c:when>
+        <c:otherwise>
+          <input type="search" value="" placeholder="Search" class="search-box">
+        </c:otherwise>
+      </c:choose>
+      <button type="submit" class="search-btn">
+        <i class="fas fa-search"></i>
+      </button>
+    </ASIDE> 
+  </form>
+      
+      
       <div class="collapse navbar-collapse" id="navbarResponsive" style="text-align: right;">
         <ul class="navbar-nav ml-auto">
         
@@ -21,15 +43,7 @@
             </li>
           </spen>
             
-          <spen class='menubar'>
-            <li class="nav-item"><a class="nav-link" href="#" id="current">상품</a>
-              <ul>
-                 <li><a href="#">유선 이어폰</a></li>
-                 <li><a href="#">무선 이어폰</a></li>
-                 <li><a href="#">헤드셋</a></li>
-              </ul>
-            </li>
-          </spen>
+          <c:import url="/product_categrp/list_product_menu.do" />
             
           <spen class='menubar'>
             <li class="nav-item">
