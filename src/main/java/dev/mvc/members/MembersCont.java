@@ -145,7 +145,7 @@ public class MembersCont {
         
       mav.setViewName("redirect:/index.jsp");
     } else {
-      mav.setViewName("redirect:/members/msm_login_fail_msg.jsp");
+      mav.setViewName("redirect:/members/mem_login_fail_msg.jsp");
     }
     return mav;
   }

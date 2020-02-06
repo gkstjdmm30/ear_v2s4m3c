@@ -130,7 +130,7 @@ public class ProductCont {
     return mav;
   } */
   
-  // http://localhost:9090/team4/product/read.do?productno=1
+  // http://localhost:9090/ear/product/read.do?productno=1
   @RequestMapping(value = "/product/read.do", method = RequestMethod.GET)
   public ModelAndView read(int productno) {
     ModelAndView mav = new ModelAndView();
