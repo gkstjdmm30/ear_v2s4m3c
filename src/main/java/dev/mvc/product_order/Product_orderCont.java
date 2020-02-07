@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.deli.DeliProcInter;
+import dev.mvc.deli.DeliVO;
 import dev.mvc.members.MembersProcInter;
 import dev.mvc.members.MembersVO;
 import dev.mvc.product.ProductProcInter;
@@ -35,6 +36,11 @@ public class Product_orderCont {
   @Qualifier("dev.mvc.members.MembersProc") // 이름 지정
   private MembersProcInter membersProc;
   
+  @Autowired
+  @Qualifier("dev.mvc.deli.DeliProc") // 이름 지정
+  private DeliProcInter deliProc;
+  
+  
   public Product_orderCont() {
     
   }
@@ -47,6 +53,7 @@ public class Product_orderCont {
     MembersVO membersVO = membersProc.mem_read(membersno);
     ProductVO productVO = productProc.read(productno);
     List<Product_imageVO> img_list = product_imageProc.list_by_productno(productno);
+    
     
     mav.addObject("membersVO", membersVO);
     mav.addObject("productVO", productVO);
@@ -69,6 +76,7 @@ public class Product_orderCont {
     orderVO.setTel(membersVO.getTel());
     
     int count = orderProc.product_order_create(orderVO);
+    
     mav.addObject("membersVO", membersVO);
     mav.addObject("productVO", productVO);
     mav.addObject("img_list", img_list);

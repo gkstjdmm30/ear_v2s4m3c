@@ -47,4 +47,10 @@ public class DeliProc implements DeliProcInter{
     return read_orderno;
   }
 
+  @Override
+  public int deli_read_cnt(int orderno) {
+    int count = deliDAO.deli_read_cnt(orderno);
+    return count;
+  }
+
 }

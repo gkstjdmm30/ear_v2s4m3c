@@ -7,9 +7,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dev.mvc.deli.DeliDAOInter">
 
   <insert id="deli_insert" parameterType="DeliVO">
-      INSERT INTO deli(delino, orderno, delivery, ddate)
+      INSERT INTO deli(delino, orderno, ddate)
       VALUES((SELECT NVL(MAX(delino), 0) + 1 as delino FROM deli),
-         #{orderno}, #{delivery}, sysdate)
+         #{orderno}, sysdate)
   </insert>
   
   <select id="deli_select" resultType="DeliVO">
@@ -26,6 +26,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
   <select id="deli_read_orderno" resultType="DeliVO" parameterType="int">
       SELECT delino, orderno, delivery, ddate 
+      FROM deli
+      WHERE orderno=#{orderno}
+  </select>
+  
+  <select id="deli_read_cnt" resultType="int" parameterType="int">
+      SELECT count(delino) as cnt 
       FROM deli
       WHERE orderno=#{orderno}
   </select>

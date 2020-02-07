@@ -29,10 +29,10 @@
 <div class ='title_line'>배송 관리(관리자)</div>
 <table class = 'table table-striped'>
   <colgroup>
-    <col style='width: 10%;'/>
-    <col style='width: 10%;'/>
-    <col style='width: 10%;'/>    
-    <col style='width: 10%;'/>
+    <col style='width: 5%;'/>
+    <col style='width: 5%;'/>
+    <col style='width: 15%;'/>    
+    <col style='width: 45%;'/>
     <col style='width: 10%;'/>
     <col style='width: 10%;'/>
     <col style='width: 10%;'/>
@@ -52,19 +52,35 @@
   
   <tbody>
   <c:forEach var="deliVO" items = "${list}">
+  <c:forEach var="orderVO" items = "${orderVO}">
     <c:set var="delino" value="${deliVO.delino }" />
     
     <TR>
       <TD style='text-align: center;'> ${delino }</TD>
       <TD style='text-align: center;'>${deliVO.orderno }</TD>
       <TD style='text-align: center;'>${name }</TD>
-      <TD style='text-align: center;'>${orderVO }</TD>
-      <TD style='text-align: center;'>${deliVO.delivery }</TD>
+      <TD style='text-align: center;'>(${orderVO.zipcode})${orderVO.address1 }<br>${orderVO.address2 }</TD>
+      
+      <c:choose>
+        <c:when test= "${deliVO.delivery == 1}">
+          <TD style='text-align: center;'>배송 준비</TD>
+        </c:when>
+        <c:when test="${deliVO.delivery == 2}">
+          <TD style='text-align: center;'>배송출발</TD>
+        </c:when>
+       <c:when test="${deliVO.delivery == 3}">
+          <TD style='text-align: center;'>배송중</TD>
+        </c:when>
+        <c:otherwise>
+          <TD style='text-align: center;'>배송완료</TD>
+        </c:otherwise>
+      </c:choose>
       <TD style='text-align: center;'>${deliVO.ddate }</TD>
       <TD style='text-align: center;'>
         <A href="./deli_update.do?delino=${delino }"><IMG src='../notice/images/update.png'></A>
       </TD>
     </TR>
+  </c:forEach>
   </c:forEach> 
   </tbody>
  

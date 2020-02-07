@@ -9,5 +9,5 @@ public interface DeliProcInter {
   public DeliVO deli_read_orderno(int orderno);
   public int deli_update(DeliVO deliVO);
   public List<DeliVO> deli_name();
-
+  public int deli_read_cnt(int orderno);
 }

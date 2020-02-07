@@ -24,6 +24,15 @@ public class DeliCont {
 
   public DeliCont() {           
   }
+  
+  @RequestMapping(value="deli/deli_insert.do", method=RequestMethod.GET)
+  public ModelAndView deli_insert(DeliVO deliVO) {
+    ModelAndView mav = new ModelAndView();
+    
+    return mav;
+  }
+  
+  
   @RequestMapping(value="/deli/deli_select.do", method=RequestMethod.GET)
   public ModelAndView deli_select() {
     ModelAndView mav = new ModelAndView();
@@ -42,6 +51,14 @@ public class DeliCont {
   @RequestMapping(value="deli/deli_read.do", method=RequestMethod.GET)
   public ModelAndView deli_read(int orderno) {
     ModelAndView mav = new ModelAndView();
+    
+    if(deliProc.deli_read_cnt(orderno) == 0) {
+      DeliVO deliVO = new DeliVO();
+      deliVO.setOrderno(orderno);
+      deliProc.deli_insert(deliVO);
+    }
+    
+    
     DeliVO read = deliProc.deli_read_orderno(orderno);
     mav.addObject("deliVO", read);
     mav.setViewName("/deli/read");
@@ -64,7 +81,7 @@ public class DeliCont {
     deliVO.setOrderno(orderno);
     deliVO.setDelivery(delivery);
     deliProc.deli_update(deliVO);
-    mav.setViewName("/deli/list");
+    mav.setViewName("redirect:/deli_select.do");
     return mav;
   }
 

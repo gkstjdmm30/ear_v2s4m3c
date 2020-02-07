@@ -18,9 +18,7 @@
   <link href="../css/shop-homepage.css" rel="stylesheet">
 
 <script type="text/javascript">
-  $(function(){
 
-  });
 </script>
   
 </head>
@@ -45,7 +43,7 @@
     <TH class='th_basic'>상품 이름</TH>
     <TH class='th_basic'>회원 이름</TH>
     <TH class='th_basic'>(상품X갯수+배송비=총액)</TH>
-    <TH class='th_basic'>배송방법</TH>
+    <TH class='th_basic'>결제방법</TH>
     <TH class='th_basic'>날짜</TH>
     <TH class='th_basic'>배송상태</TH>
   </TR>
@@ -61,10 +59,16 @@
       <TD style='text-align: center;'><A href="./product_read_orderno.do?orderno=${orderno }">${product_orderVO2 }</a></TD>
       <TD style='text-align: center;'> ${membersVO.name }</TD>
       <TD style='text-align: center;'>(${product_orderVO.price}) X ${product_orderVO.count } + ${product_orderVO.shipping } = \ ${product_orderVO.totalprice }</TD>
-      <TD style='text-align: center;'>${product_orderVO.howorder }</TD>
+      <c:choose>
+        <c:when test= "${product_orderVO.howorder == 1}">
+          <TD style='text-align: center;'>신용카드</TD>
+        </c:when>
+        <c:otherwise>
+          <TD style='text-align: center;'>계좌이체</TD>
+        </c:otherwise>
+      </c:choose>
       <TD style='text-align: center;'>${product_orderVO.odate }</TD>
-      
-      <TD style='text-align: center;'><A href="./deli_read.do?orderno=${orderno }">배송 조회</A></TD>
+      <TD style='text-align: center;'><A href="../deli/deli_read.do?orderno=${orderno }">배송 조회</A></TD>
     </TR>
   </c:forEach>
   </c:forEach> 
