@@ -5,8 +5,9 @@ import java.util.List;
 public interface DeliProcInter {
   public int deli_insert(DeliVO deliVO);
   public List<DeliVO> deli_select();
-  public DeliVO deli_read(int orderno);
+  public DeliVO deli_read(int delino);
+  public DeliVO deli_read_orderno(int orderno);
   public int deli_update(DeliVO deliVO);
-  public int deli_delete(int orderno);
+  public List<DeliVO> deli_name();
 
 }

@@ -23,8 +23,8 @@ public class DeliProc implements DeliProcInter{
   }
 
   @Override
-  public DeliVO deli_read(int orderno) {
-    DeliVO read = deliDAO.deli_read(orderno);
+  public DeliVO deli_read(int delino) {
+    DeliVO read = deliDAO.deli_read(delino);
     return read;
   }
 
@@ -34,10 +34,17 @@ public class DeliProc implements DeliProcInter{
     return count;
   }
 
+
   @Override
-  public int deli_delete(int orderno) {
-    int count = deliDAO.deli_delete(orderno);
-    return count;
+  public List<DeliVO> deli_name() {
+    List<DeliVO> name = deliDAO.deli_name();
+    return name;
+  }
+
+  @Override
+  public DeliVO deli_read_orderno(int orderno) {
+    DeliVO read_orderno = deliDAO.deli_read_orderno(orderno);
+    return read_orderno;
   }
 
 }

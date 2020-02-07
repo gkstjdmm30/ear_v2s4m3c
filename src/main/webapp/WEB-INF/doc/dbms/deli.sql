@@ -49,10 +49,10 @@ CREATE table deli(
 );
 
 COMMENT ON TABLE deli is '배송 테이블';
-COMMENT ON COLUMN deli.orderno is '배송 번호';
-COMMENT ON COLUMN deli.delino is '주문 번호';
-COMMENT ON COLUMN deli.delivery is '주문 상태';
-COMMENT ON COLUMN deli.ddate is '주문일';
+COMMENT ON COLUMN deli.delino is '배송 번호';
+COMMENT ON COLUMN deli.orderno is '주문 번호';
+COMMENT ON COLUMN deli.delivery is '배송 상태';
+COMMENT ON COLUMN deli.ddate is '배송일';
 
 INSERT INTO deli(delino, orderno, delivery, ddate)
 VALUES((SELECT NVL(MAX(delino), 0) + 1 as delino FROM deli),
@@ -75,3 +75,8 @@ WHERE orderno=1;
 
 DELETE deli
 where orderno=2;
+
+SELECT product.name
+from product, product_order, deli
+where deli.orderno = product_order.orderno 
+        and product_order.productno = product.productno;

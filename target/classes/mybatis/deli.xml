@@ -21,18 +21,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <select id="deli_read" resultType="DeliVO" parameterType="int">
       SELECT delino, orderno, delivery, ddate 
       FROM deli
+      WHERE delino=#{delino}
+  </select>
+  
+  <select id="deli_read_orderno" resultType="DeliVO" parameterType="int">
+      SELECT delino, orderno, delivery, ddate 
+      FROM deli
       WHERE orderno=#{orderno}
   </select>
   
   <update id="deli_update" parameterType="DeliVO">
       UPDATE deli
-      set delivery=#{delivery}
-      WHERE orderno=#{orderno}
+      set delivery=#{delivery}, ddate = sysdate
+      WHERE delino=#{delino}
   </update>
-  
-  <delete id="deli_delete" parameterType="int">
-      DELETE deli
-      where orderno=#{orderno}
-  </delete>
+
+  <select id="deli_name" resultType="String">
+SELECT product.name
+from product, product_order, deli
+where deli.orderno = product_order.orderno 
+        and product_order.productno = product.productno
+  </select>
 
 </mapper>  

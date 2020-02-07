@@ -47,7 +47,7 @@
     <TH class='th_basic'>(상품X갯수+배송비=총액)</TH>
     <TH class='th_basic'>배송방법</TH>
     <TH class='th_basic'>날짜</TH>
-    <TH class='th_basic'>배송조회</TH>
+    <TH class='th_basic'>배송상태</TH>
   </TR>
   </thead>
   
@@ -64,7 +64,7 @@
       <TD style='text-align: center;'>${product_orderVO.howorder }</TD>
       <TD style='text-align: center;'>${product_orderVO.odate }</TD>
       
-      <TD style='text-align: center;'><A href="#">배송 조회</A></TD>
+      <TD style='text-align: center;'><A href="./deli_read.do?orderno=${orderno }">배송 조회</A></TD>
     </TR>
   </c:forEach>
   </c:forEach> 
