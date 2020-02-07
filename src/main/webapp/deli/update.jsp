@@ -40,7 +40,21 @@
                   
       <div class="form-group">   
         <div class="col-md-10">
-         배송 상태 <input type='text' class="form-control input-lg" name='old_delivery' id='old_delivery' value='${deliVO.delivery }' required="required" style='width: 90%;' readonly>
+         <c:choose>
+          <c:when test="${deliVO.delivery ==1}">
+            <input type='text' class="form-control input-lg" name='delivery' id='delivery' value='배송준비중' required="required" style='width: 90%;' readonly>
+          </c:when>
+          <c:when test="${deliVO.delivery ==2}">
+            <input type='text' class="form-control input-lg" name='delivery' id='delivery' value='배송 출발' required="required" style='width: 90%;' readonly>
+          </c:when>
+          <c:when test="${deliVO.delivery ==3}">
+            <input type='text' class="form-control input-lg" name='delivery' id='delivery' value='배송 중' required="required" style='width: 90%;' readonly>
+          </c:when>
+          <c:otherwise>
+           <input type='text' class="form-control input-lg" name='delivery' id='delivery' value='배송 완료' required="required" style='width: 90%;' readonly>
+          </c:otherwise>
+         </c:choose>
+         
         </div>
       </div>   
       <div class="form-group">   

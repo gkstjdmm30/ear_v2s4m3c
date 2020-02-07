@@ -9,7 +9,6 @@
 <title>주문 신청</title>
  
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script type="text/JavaScript"
           src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
  
@@ -38,7 +37,17 @@
     $('#shipping').val(shipping);
     $('#totalprice').val(totalprice);
   });
-</script>
+  </script>
+  <script>
+  function button_address() {
+    var zipcode = ${membersVO.zipcode}; 
+    var address1 = ${membersVO.address1}; 
+    var address2 = ${membersVO.address2}; 
+    $('#zipcode').val(zipcode);
+    $('#address1').val(address1);
+    $('#address2').val(address2);
+  }
+  </script>
  
 </head> 
  
@@ -212,22 +221,7 @@ function panel_img() {
 <!-- ----- DAUM 우편번호 API 종료----- -->
    <div class= "" style="float: right; padding: 12px; margin-right: 66px;">
       <input type="button" id="button_address" name="button_address" onclick="button_address();" class="btn btn-secondary" value="기존 주소">
-      <script>
-function button_address() {
-/*   $('#zipcode').reset();
-  $('#address1').reset();
-  $('#address2').reset(); */
-  $('#zipcode').val();
-  $('#address1').val();
-  $('#address2').val();
-  var zipcode = ${membersVO.zipcode}; 
-  var address1 = ${membersVO.address1}; 
-  var address2 = ${membersVO.address2}; 
-  $('#zipcode').val(zipcode);
-  $('#address1').val(address1);
-  $('#address2').val(address2);
-}
-</script>
+
       <select class="btn btn-light" name="howorder" id="howorder">
         <option value="1">신용카드</option>
         <option value="2">계좌이체</option>
