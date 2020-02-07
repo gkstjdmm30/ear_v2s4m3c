@@ -45,11 +45,11 @@ public class Product_orderCont {
     
     MembersVO membersVO = membersProc.mem_read(membersno);
     ProductVO productVO = productProc.read(productno);
-    List<Product_imageVO> list = product_imageProc.list_by_productno(productno);
+    List<Product_imageVO> img_list = product_imageProc.list_by_productno(productno);
     
     mav.addObject("membersVO", membersVO);
     mav.addObject("productVO", productVO);
-    mav.addObject("list", list);
+    mav.addObject("img_list", img_list);
     
     mav.setViewName("/product_order/create");
     return mav;
@@ -57,36 +57,23 @@ public class Product_orderCont {
   
   
   @RequestMapping(value="/product_order/product_order_create.do", method = RequestMethod.POST)
-  public ModelAndView product_order_create(Product_orderVO orderVO, int membersno, int productno, String tel) {
+  public ModelAndView product_order_create(Product_orderVO orderVO, int membersno, int productno) {
     ModelAndView mav = new ModelAndView();
     orderVO.setMembersno(membersno);
     orderVO.setProductno(productno);
-    orderVO.setTel(tel);
-    
     MembersVO membersVO = membersProc.mem_read(membersno);
     ProductVO productVO = productProc.read(productno);
-//    System.out.println("membersVO : " + membersVO.getMembersno());
-//    System.out.println("productno : " + productVO.getProductno());
-//    System.out.println("membersno : " + orderVO.getMembersno());
-//    System.out.println("productno : " + orderVO.getProductno());
-//    
-//    System.out.println("orderno : " + orderVO.getOrderno());
-//    System.out.println("count : " + orderVO.getCount());
-//    System.out.println("price : " + orderVO.getPrice());
-//    System.out.println("shippding : " + orderVO.getShipping());
-//    System.out.println("total : " + orderVO.getTotalprice());
-//    System.out.println("how : " + orderVO.getHoworder());
-//    System.out.println("tel : " + orderVO.getTel());
-//    System.out.println("zipcode : " + orderVO.getZipcode());
-//    System.out.println("address1 : " + orderVO.getAddress1());
-//    System.out.println("address2 : " + orderVO.getAddress2());
-    int count = orderProc.product_order_create(orderVO);
+    List<Product_imageVO> img_list = product_imageProc.list_by_productno(productno);
+ 
+    orderVO.setTel(membersVO.getTel());
     
-    if(count == 1) {
-      mav.setViewName("redirect:/product_order/read_membersno.jsp?membersno=" + orderVO.getMembersno());
-    } else {
-      mav.setViewName("redirect:/product_order/create_msg.jsp?count=" + count);
-    }
+    int count = orderProc.product_order_create(orderVO);
+    mav.addObject("membersVO", membersVO);
+    mav.addObject("productVO", productVO);
+    mav.addObject("img_list", img_list);
+     
+    mav.setViewName("redirect:/product_order/create_msg.jsp?count=" + count);
+
     return mav;
     
   } 
@@ -102,17 +89,21 @@ public class Product_orderCont {
   
   // http://localhost:9090/ear/product_order/product_order_read.do?orderno=1&membersno=1&productno=1
   @RequestMapping(value="/product_order/product_order_read.do", method=RequestMethod.GET)
-  public ModelAndView product_order_read(int orderno, int membersno, int productno) {
+  public ModelAndView product_order_read(int orderno) {
     ModelAndView mav = new ModelAndView();
-    MembersVO membersVO = membersProc.mem_read(membersno);
-    ProductVO productVO = productProc.read(productno);
-//    Product_imageVO imageVO = product_imageProc.read(productno);
+    Product_orderVO orderVO = orderProc.product_order_read_orderno(orderno);
+    
+    MembersVO membersVO = membersProc.mem_read(orderVO.getMembersno());
+    ProductVO productVO = productProc.read(orderVO.getProductno());
+    List<Product_imageVO> img_list = product_imageProc.list_by_productno(orderVO.getProductno());
     
     mav.addObject("membersVO", membersVO);
     mav.addObject("productVO", productVO);
-//    mav.addObject("product_imageVO", imageVO);
-    Product_orderVO list = orderProc.product_order_read_orderno(orderno);
-    mav.addObject("list", list);
+    mav.addObject("orderVO", orderVO);
+    mav.addObject("img_list", img_list);
+    
+    System.out.println("price :" + orderVO.getPrice());
+    
     mav.setViewName("/product_order/read_orderno");
     return mav;
   }

@@ -71,21 +71,21 @@
       <div class="form-group">    
         <div class="col-md-10" >
          가격 <input type='text' class="form-control input-lg" name='price' id='price' 
-                     value="${productVO.price }" required="required" style='width: 90%;'>
+                     value="${productVO.price }" required="required" style='width: 90%;' readonly>
         </div>
       </div>   
       
       <div class="form-group">
         <div class="col-md-10" >
          갯수 <input type='text' class="form-control input-lg" name='count' id='count' 
-                     value="<%=request.getParameter("count") %>" required="required" style='width: 90%;' >
+                     value="<%=request.getParameter("count") %>" required="required" style='width: 90%;' readonly>
         </div>
       </div>   
       
       <div class="form-group">    
         <div class="col-md-10">
          배송비 <input type='text' class="form-control input-lg" name='shipping' id='shipping' 
-                     value='' required="required" style='width: 90%;'>
+                     value='' required="required" style='width: 90%;' readonly>
         </div>
       </div>      
 
@@ -94,7 +94,7 @@
       <div class="form-group">
         <div class="col-md-10">
          총 가격 <input type='text' class="form-control input-lg" name='totalprice' id='totalprice' 
-                     value="" required="required" style='width: 90%;' >
+                     value="" required="required" style='width: 90%;' readonly>
         </div>
       </div>
       
@@ -102,11 +102,33 @@
    
 
 
+<script>
+function panel_img() {
+  var tag = "";
+  tag = "<A href=\"javascript: $('#list_panel').hide();\">";
+  tag += "  <IMG src='../product_image/storage/" + file
+      + "' style='width: 100%;'>";
+  tag += "</A>";
 
+  $('#attachfile_panel').html(tag);
+  $('#attachfile_panel').show();
+}
+</script>
    <div style="width: 40%; height: 70%; float: left;">
       <div class="form-group"> 
         <div class="col-md-10">
-          <img style="width: 100%; height: 100%; text-align: center;" src="${list.thumb }">
+          <DIV id='list_panel' style="width: 80%; margin: 0px auto;"></DIV> <!-- 원본 이미지 출력 -->
+          <li class="li_none" style='text-align: center;' >
+            <c:forEach var="product_imgVO" items="${img_list }">
+              <c:set var="thumb" value="${product_imgVO.thumb.toLowerCase() }" />
+              
+              <c:choose>
+                <c:when test="${thumb.endsWith('jpg') || thumb.endsWith('png') || thumb.endsWith('gif')}">
+                  <A href="javascript:panel_img('${product_imgVO.fname }')"><IMG src='../attachfile/storage/${thumb }' style='margin-top: 2px;'></A>
+                </c:when>
+              </c:choose>
+            </c:forEach>
+          </li>
         </div>
       </div>   
    </div>
@@ -114,13 +136,12 @@
  
  
  
- 
  <div class ="width: 40%;">
    <div>
    <input type="button" onclick="DaumPostcode()" value="우편번호 찾기" class="btn btn-info btn-md">
-      <input type='text' class="form-control input-lg" name='zipcode' id='zipcode' value=''  style='width: 40%; margin: 5px;' placeholder="우편번호" >
-      <input type='text' class="form-control input-lg" name='address1' id='address1' value=''  style='width: 40%; margin: 5px;' placeholder="주소" >
-      <input type='text' class="form-control input-lg" name='address2' id='address2' value=''  style='width: 40%; margin: 5px;' placeholder="상세 주소" >
+      <input type='text' class="form-control input-lg" name='zipcode' id='zipcode' value=''  style='width: 40%; margin: 5px;' placeholder="우편번호"  required="required">
+      <input type='text' class="form-control input-lg" name='address1' id='address1' value=''  style='width: 40%; margin: 5px;' placeholder="주소"  required="required">
+      <input type='text' class="form-control input-lg" name='address2' id='address2' value=''  style='width: 40%; margin: 5px;' placeholder="상세 주소"  required="required">
    </div>
    <!-- ----- DAUM 우편번호 API 시작 ----- -->
 <div id="wrap" style="display:none;border:1px solid;width:1000px;height:600px;margin:5px 110px;position:relative">

@@ -12,7 +12,6 @@ public class Product_orderProc implements Product_orderProcInter{
 
   @Override
   public int product_order_create(Product_orderVO orderVO) {
-    System.out.println("Proc »ý¼ºµÊ");
     int count = orderDAO.product_order_create(orderVO);
     return count;
   }
