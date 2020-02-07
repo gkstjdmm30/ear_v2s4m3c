@@ -36,7 +36,8 @@
                                                                dev.mvc.product_image,
                                                                dev.mvc.reply,
                                                                dev.mvc.members,
-                                                               dev.mvc.product_order" />
+                                                               dev.mvc.product_order,
+                                                               dev.mvc.deli" />
     <!-- /src/main/resources/mybatis 폴더 -->                   
     <property name="mapperLocations" value="classpath:mybatis/*.xml" />
   </bean>

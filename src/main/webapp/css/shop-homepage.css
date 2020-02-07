@@ -1,3 +1,11 @@
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+ 
+  <link href="../css/style.css" rel="Stylesheet" type="text/css">
+  <!-- Bootstrap core CSS -->
+  <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="../css/shop-homepage.css" rel="stylesheet">
 /*!
  * Start Bootstrap - Shop Homepage (https://startbootstrap.com/template-overviews/shop-homepage)
  * Copyright 2013-2019 Start Bootstrap

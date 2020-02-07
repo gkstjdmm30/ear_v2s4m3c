@@ -58,17 +58,15 @@
     <c:set var="orderno" value="${product_orderVO.orderno }" />
     
     <TR>
-      <TD style='text-align: center;'> <A href="./product_order_select.do?orderno=${orderno }&membersno=${product_orderVO.membersno}&productno=${product_orderVO.productno}">${product_orderVO.orderno }</A></TD>
+      <TD style='text-align: center;'> ${product_orderVO.orderno }</TD>
       <TD style='text-align: center;'>${product_orderVO.productno }</TD>
       <TD style='text-align: center;'>${product_orderVO.membersno }</TD>
       <TD style='text-align: left;'>(${product_orderVO.price}) X ${product_orderVO.count } + ${product_orderVO.shipping } = ${product_orderVO.totalprice }</TD>
       <TD style='text-align: center;'>${product_orderVO.howorder }</TD>
       <TD style='text-align: center;'>${product_orderVO.odate }</TD>
       <TD style='text-align: center;'>
-        <A href="./update.do?orderno=${orderno }"><IMG src='../notice/images/update.png'></A>
-        <A href="./delete.do?orderno=${orderno }"><IMG src='../notice/images/delete.png'></A>
       </TD>
-      <TD style='text-align: center;'><A href="#">배송 조회</A></TD>
+      <TD style='text-align: center;'><A href="./deli_select.do">배송 조회</A></TD>
     </TR>
   </c:forEach> 
   </tbody>

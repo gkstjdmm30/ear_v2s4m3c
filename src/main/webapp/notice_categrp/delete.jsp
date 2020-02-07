@@ -18,6 +18,13 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
      
+<script type="text/javascript">
+  // FK 값에 따른 notice 삭제
+  function delete_by_categrpno(){
+    frm_delete_by_categrpno.submit();
+  }
+</script>
+
 </head> 
  
 <body>
@@ -25,9 +32,10 @@
 <DIV style='display: table;'>
 <DIV style='display: table-cell; vertical-align: middle;'>
 
-<%-- <FORM name='delete' method='POST' action='/delete.do'>
-  <input type='hidden' name='categrpno' value='${noticeVO.categrpno }'>
-</FORM> --%>
+<FORM name='frm_delete_by_categrpno' method='POST' 
+            action='../notice/delete_by_categrpno.do'>
+  <input type='hidden' name='categrpno' value='${notice_categrpVO.categrpno }'>            
+</FORM>
 
 <FORM name='frm' method='POST' action='./delete.do'>
   <input type='hidden' name='categrpno' value='${notice_categrpVO.categrpno }'>
@@ -35,6 +43,7 @@
     <ul>
       <li class='li_none' style="font-weight: bold;">
         삭제될 카테고리 그룹 이름: ${notice_categrpVO.name }
+        <br>카테넘버 : ${categrpno } / ${notice_categrpVO.categrpno }
       </li>
       
       <c:if test="${count_by_categrpno > 0 }">
@@ -54,7 +63,9 @@
         삭제를 진행 하시겠습니까?
       </li>
       <li class='li_right'>
-        <button type="submit" class="btn btn-info">삭제 진행</button>
+        <c:if test="${count_by_categrpno == 0 }">
+          <button type="submit" class="btn btn-info">삭제 진행</button>
+        </c:if>  
         <button type="button" onclick="window.close();" class="btn btn-info">닫기</button>
       </li>         
     </ul>

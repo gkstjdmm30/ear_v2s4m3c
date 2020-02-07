@@ -26,5 +26,5 @@ INSERT INTO reply(replyno, productno, membersno, content, passwd, rdate)
 VALUES((SELECT NVL(MAX(replyno), 0) + 1 as replyno FROM reply),
              1, 1, '´ñ±Û2', '1234', sysdate);
              
-             
-SELECT * FROM reply;             
+                         
+SELECT * FROM reply; 

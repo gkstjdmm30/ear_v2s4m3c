@@ -228,7 +228,8 @@ public class Notice_attachfileCont {
                              method = RequestMethod.POST)
   public ModelAndView delete_by_contentsno(RedirectAttributes ra,
                                                                  int noticeno,
-                                                                 int categrpno) {
+                                                                 int categrpno,
+                                                                 int nowPage) {
     ModelAndView mav = new ModelAndView();
 
     int count = notice_attachfileProc.delete_by_noticeno(noticeno);
@@ -236,6 +237,7 @@ public class Notice_attachfileCont {
     ra.addAttribute("count", count); // 삭제된 레코드 갯수
     ra.addAttribute("noticeno", noticeno);
     ra.addAttribute("categrpno", categrpno);
+    ra.addAttribute("nowPage", nowPage);
     
     mav.setViewName("redirect:/notice_attachfile/delete_by_noticeno_msg.jsp");
 

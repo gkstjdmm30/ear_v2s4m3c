@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
- 
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html> 
 <html lang="ko"> 
 <head> 
@@ -24,7 +24,9 @@
     파일 등록
   </ASIDE>
   <ASIDE style='float: right;'>
-    <A href='./list.do?categrpno=${param.categrpno }'>목록</A>
+    <c:if test="${sessionScope.ps == 0}">
+      <A href='./list.do?categrpno=${param.categrpno }'>목록</A>
+    </c:if>
     <!-- <span class='menu_divide' >│</span> --> 
   </ASIDE> 
  

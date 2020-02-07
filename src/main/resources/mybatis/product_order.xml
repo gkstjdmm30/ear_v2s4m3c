@@ -44,5 +44,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     WHERE orderno = #{orderno}
   </delete>
   
+  <select id="name" resultType="String" parameterType="int">
+      SELECT product.name
+      from product, product_order, members
+      where members.membersno = product_order.membersno 
+              and product_order.productno = product.productno and product_order.membersno=#{membersno}
+  </select>
+
+  
   
   </mapper> 

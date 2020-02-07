@@ -288,10 +288,13 @@ public class NoticeCont {
                                             int noticeno, 
                                             int nowPage) {
     ModelAndView mav = new ModelAndView();
+    
+    
 
     int membersno = (Integer)session.getAttribute("membersno");
+    int ps = (Integer)session.getAttribute("ps");
     // 현재 로그인한 사용자와 글 등록자가 같은지 검사
-    if (membersno == noticeProc.read(noticeno).getMembersno()) {
+    if (membersno == noticeProc.read(noticeno).getMembersno() || ps == 0) {
       int count = noticeProc.delete(noticeno);
       if (count == 1) {
         notice_categrpProc.decreaseCnt(categrpno);
@@ -305,6 +308,7 @@ public class NoticeCont {
       mav.setViewName("redirect:/notice/delete_msg.jsp");
     } else {
       ra.addAttribute("categrpno", categrpno);
+      ra.addAttribute("nowPage", nowPage);
       mav.setViewName("redirect:/notice/auth_fail_msg.jsp");
     }
 
@@ -317,7 +321,7 @@ public class NoticeCont {
    * @param categrpno
    * @return
    */
-  @RequestMapping(value = "/notice/delete_by_noticeno.do", 
+  @RequestMapping(value = "/notice/delete_by_categrpno.do", 
                              method = RequestMethod.POST)
   public ModelAndView delete_by_categrpno(RedirectAttributes ra,
                                             int categrpno) {
@@ -335,6 +339,8 @@ public class NoticeCont {
 
     return mav;
   }
+  
+  
    
    
    
