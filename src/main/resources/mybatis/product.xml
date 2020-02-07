@@ -11,13 +11,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              #{productcateno}, #{membersno}, #{name}, #{price}, #{content},
              #{recom}, #{cnt}, #{replycnt}, sysdate, #{word})
    </insert>
-   
-    <select id="list_all" resultType="ProductVO">
-     SELECT productno, productcateno, membersno, name, price, content, 
-                recom, cnt, replycnt, rdate, word
-     FROM product
-     ORDER BY productno DESC
-   </select> 
 
    <select id="list_by_productcateno" resultType="ProductVO" parameterType="int">
      SELECT productno, productcateno, membersno, name, price, content, 
@@ -72,6 +65,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      WHERE productcateno=#{productcateno}
    </delete>
    
+   <update id="increaseRecom" parameterType="int">
+     UPDATE product
+     SET recom = recom + 1
+     WHERE productno = #{productno}
+   </update>
+   
    <update id="increaseReplycnt" parameterType="int">
      UPDATE product
      SET replycnt = replycnt + 1
@@ -114,8 +113,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      </choose>
    </select>    
    
-   <!-- 검색 목록 + 페이징 -->
-   <select id="list_by_search_paging" resultType="ProductVO" parameterType="HashMap">  
+   <!-- 상품 전체 목록 + 검색 + 페이징  -->
+   <select id="list_all_search_paging" resultType="ProductVO" parameterType="HashMap">
+     SELECT productno, productcateno, membersno, name, price, content, 
+                recom, cnt, replycnt, rdate, word, r
+        FROM(
+                  SELECT productno, productcateno, membersno, name, price, content, 
+                            recom, cnt, replycnt, rdate, word, rownum as r
+                  FROM (
+                             SELECT productno, productcateno, membersno, name, price, content, 
+                                        recom, cnt, replycnt, rdate, word
+                             FROM product
+                             <choose>
+                               <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+                               </when>
+                               <otherwise>
+                                 WHERE word LIKE '%' || #{word} || '%'
+                               </otherwise>
+                             </choose>
+                             ORDER BY productno DESC   
+                 )
+     )
+     where r &gt; = #{startNum} and r &lt; = #{endNum}
+     <!-- 
+     1 page: where r> = 1 and r <= 10; 
+     2 page: where r> = 11 and r <= 20; 
+     3 page: where r> = 21 and r <= 30; 
+     -->         
+    </select> 
+   
+   
+   <!-- 상품카테고리별목록 +검색  + 페이징 -->
+   <select id="list_by_productno_search_paging" resultType="ProductVO" parameterType="HashMap">  
       SELECT productno, productcateno, membersno, name, price, content, 
                 recom, cnt, replycnt, rdate, word, r
         FROM(
@@ -144,11 +173,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      -->         
     </select> 
    
-   
-   
-   
- 
-  
 </mapper>
 
 

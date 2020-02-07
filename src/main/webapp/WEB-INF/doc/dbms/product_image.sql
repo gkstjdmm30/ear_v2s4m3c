@@ -33,7 +33,10 @@ VALUES((SELECT NVL(MAX(attachfileno), 0) + 1 as attachfileno FROM attachfile),
              1, 'samyang3.jpg', 'samyang3_1.jpg', 'samyang3_t.jpg', 3000, sysdate);       
              
              
-SELECT * FROM product_image;             
+SELECT * FROM product_image;   
 
+
+DELETE FROM product_image
+WHERE productimgno = 1;
 
 

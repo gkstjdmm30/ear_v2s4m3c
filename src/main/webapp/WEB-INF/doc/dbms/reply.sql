@@ -19,10 +19,10 @@ COMMENT ON COLUMN reply.content is '내용';
 COMMENT ON COLUMN reply.passwd is '비밀번호';
 COMMENT ON COLUMN reply.rdate is '등록일';
 
-INSERT INTO reply(replyno, productno, memberno, content, passwd, rdate)
+INSERT INTO reply(replyno, productno, membersno, content, passwd, rdate)
 VALUES((SELECT NVL(MAX(replyno), 0) + 1 as replyno FROM reply),
              1, 1, '댓글1', '1234', sysdate);
-INSERT INTO reply(replyno, productno, memberno, content, passwd, rdate)
+INSERT INTO reply(replyno, productno, membersno, content, passwd, rdate)
 VALUES((SELECT NVL(MAX(replyno), 0) + 1 as replyno FROM reply),
              1, 1, '댓글2', '1234', sysdate);
              
