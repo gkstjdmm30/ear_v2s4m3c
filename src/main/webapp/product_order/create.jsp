@@ -143,8 +143,8 @@ function panel_img() {
       <input type='text' class="form-control input-lg" name='address1' id='address1' value=''  style='width: 40%; margin: 5px;' placeholder="주소"  required="required">
       <input type='text' class="form-control input-lg" name='address2' id='address2' value=''  style='width: 40%; margin: 5px;' placeholder="상세 주소"  required="required">
    </div>
-   <!-- ----- DAUM 우편번호 API 시작 ----- -->
-<div id="wrap" style="display:none;border:1px solid;width:1000px;height:600px;margin:5px 110px;position:relative">
+ <!-- ----- DAUM 우편번호 API 시작 ----- -->
+<div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 110px;position:relative">
   <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
 </div>
  
@@ -209,7 +209,7 @@ function panel_img() {
         element_wrap.style.display = 'block';
     }
 </script>
-<!-- ----- DAUM 우편번호 API 종료----- -->   
+<!-- ----- DAUM 우편번호 API 종료----- -->
    <div class= "" style="float: right; padding: 12px; margin-right: 66px;">
       <input type="button" id="button_address" name="button_address" onclick="button_address();" class="btn btn-secondary" value="기존 주소">
       <script>
