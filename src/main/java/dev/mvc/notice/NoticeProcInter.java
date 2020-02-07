@@ -37,4 +37,5 @@ public interface NoticeProcInter {
   
   public int decreaseReplycnt(int noticeno);
 
+  
 }

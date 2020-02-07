@@ -36,9 +36,7 @@ public interface NoticeDAOInter {
   public int increaseReplycnt(int noticeno);
   
   public int decreaseReplycnt(int noticeno);
-  
-  
-  
+ 
   
   
   

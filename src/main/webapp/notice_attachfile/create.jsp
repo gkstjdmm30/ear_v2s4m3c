@@ -36,6 +36,8 @@
       <!-- FK categrpno 지정 -->
       <input type='hidden' name='categrpno' id='categrpno' value='${param.categrpno }'>
       <input type='hidden' name='noticeno' id='noticeno' value='${param.noticeno }'>
+      <input type='hidden' name='nowPage' value='${param.nowPage }'>
+      
       
       <div class="form-group">   
         <div class="col-md-12">

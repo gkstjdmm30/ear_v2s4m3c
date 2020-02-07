@@ -105,9 +105,9 @@
                 <td style='text-align: center;'>${noticeVO.recom}</td>
                 <c:if test="${sessionScope.id != null}">
                   <td style='text-align: center;'>
-                    <a href="./update.do?noticeno=${noticeno}&categrpno=${notice_categrpVO.categrpno}"><img src="./images/update.png" title="수정"></a>
-                    <a href="./delete.do?noticeno=${noticeno}&categrpno=${notice_categrpVO.categrpno}"><img src="./images/delete.png" title="삭제"></a>
-                    <a href="../attachfile/create.do?noticeno=${noticeno}&categrpno=${notice_categrpVO.categrpno}"><img src="./images/upload.png" title="파일 업로드"></a>
+                    <a href="./update.do?noticeno=${noticeno}&categrpno=${notice_categrpVO.categrpno}&nowPage=${param.nowPage}"><img src="./images/update.png" title="수정"></a>
+                    <a href="./delete.do?noticeno=${noticeno}&categrpno=${notice_categrpVO.categrpno}&nowPage=${param.nowPage}"><img src="./images/delete.png" title="삭제"></a>
+                    <a href="../notice_attachfile/create.do?noticeno=${noticeno}&categrpno=${notice_categrpVO.categrpno}&nowPage=${param.nowPage}"><img src="./images/upload.png" title="파일 업로드"></a>
                   </td>
                 </c:if>
               </tr>

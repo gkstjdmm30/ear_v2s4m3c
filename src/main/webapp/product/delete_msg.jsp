@@ -6,14 +6,14 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>Resort world</title>
- 
+<title>Shop</title>
+
   <link href="../css/style.css" rel="Stylesheet" type="text/css">
   <!-- Bootstrap core CSS -->
+  <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
   <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom styles for this template -->
   <link href="../css/shop-homepage.css" rel="stylesheet">
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
  
 </head> 
 <body>
@@ -25,29 +25,30 @@
   <fieldset class='fieldset_basic'>
     <UL>
       <c:choose>
-        <c:when test="${param.upload_count > 0 }">
+        <c:when test="${param.count == 1 }">
           <LI class='li_none'>
-            <span class='span_success'>파일을 등록했습니다.</span>
+            <span class='span_success'>컨텐츠를 삭제했습니다.</span>
           </LI>
           <LI class='li_none'>
-            <span class='span_success'>정상 등록된 파일 ${param.upload_count} 건</span>
+            <button type='button' 
+                        onclick="location.href='./list.do?productcateno=${param.productcateno}'"
+                        class="btn btn-info">목록</button>                        
           </LI>
         </c:when>
         <c:otherwise>
           <LI class='li_none'>
-            <span class='span_fail'>파일 등록에 실패했습니다.</span>
+            <span class='span_fail'>컨텐츠 삭제에 실패했습니다.</span>
+          </LI>
+          <LI class='li_none'>
+            <button type='button' 
+                        onclick="history.back();"
+                        class="btn btn-info">재시도</button>
+            <button type='button' 
+                        onclick="location.href='./list.do?productcateno=${param.productcateno}'"
+                        class="btn btn-info">목록</button>                        
           </LI>
         </c:otherwise>
       </c:choose>
-      <LI class='li_none'>
-        <br>
-        <button type='button' 
-                    onclick="location.href='../notice/read.do?categrpno=${param.categrpno}&noticeno=${param.noticeno }&nowPage=${param.nowPage}'"
-                    class="btn btn-info">업로드된 파일 확인</button>
-        <button type='button' 
-                    onclick="location.href='../notice/list.do?categrpno=${param.categrpno}&nowPage=${param.nowPage}'"
-                    class="btn btn-info">목록</button>
-      </LI>
      </UL>
   </fieldset>
  

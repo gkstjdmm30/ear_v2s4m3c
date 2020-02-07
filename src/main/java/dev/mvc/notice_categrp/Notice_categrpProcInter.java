@@ -31,6 +31,13 @@ public interface Notice_categrpProcInter {
   /** 그룹에 속한 컨텐츠 글수 감소 */
   public int decreaseCnt(int categrpno);
   
+  /** cnt 컬럼 0으로 초기화 */
+  public int cnt_zero(int categrpno);
+  
+  
+  
+  
+  
 }
 
 

@@ -70,6 +70,12 @@ public class Notice_categrpProc implements Notice_categrpProcInter {
 		return count;
 	}
 
+	@Override
+	public int cnt_zero(int categrpno) {
+		int count = notice_categrpDAO.cnt_zero(categrpno);
+		return count;
+	}
+
 
 
 }

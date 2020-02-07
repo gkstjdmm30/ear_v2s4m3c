@@ -13,6 +13,7 @@ import dev.mvc.members.MembersVO;
 import dev.mvc.product.ProductProcInter;
 import dev.mvc.product.ProductVO;
 import dev.mvc.product_image.Product_imageProcInter;
+import dev.mvc.product_image.Product_imageVO;
 
 
 @Controller
@@ -44,11 +45,11 @@ public class Product_orderCont {
     
     MembersVO membersVO = membersProc.mem_read(membersno);
     ProductVO productVO = productProc.read(productno);
-//    Product_imageVO imageVO = product_imageProc.read(productno);
+    List<Product_imageVO> list = product_imageProc.list_by_productno(productno);
     
     mav.addObject("membersVO", membersVO);
     mav.addObject("productVO", productVO);
-//    mav.addObject("product_imageVO", imageVO);
+    mav.addObject("list", list);
     
     mav.setViewName("/product_order/create");
     return mav;
@@ -64,21 +65,21 @@ public class Product_orderCont {
     
     MembersVO membersVO = membersProc.mem_read(membersno);
     ProductVO productVO = productProc.read(productno);
-    System.out.println("membersVO : " + membersVO.getMembersno());
-    System.out.println("productno : " + productVO.getProductno());
-    System.out.println("membersno : " + orderVO.getMembersno());
-    System.out.println("productno : " + orderVO.getProductno());
-    
-    System.out.println("orderno : " + orderVO.getOrderno());
-    System.out.println("count : " + orderVO.getCount());
-    System.out.println("price : " + orderVO.getPrice());
-    System.out.println("shippding : " + orderVO.getShipping());
-    System.out.println("total : " + orderVO.getTotalprice());
-    System.out.println("how : " + orderVO.getHoworder());
-    System.out.println("tel : " + orderVO.getTel());
-    System.out.println("zipcode : " + orderVO.getZipcode());
-    System.out.println("address1 : " + orderVO.getAddress1());
-    System.out.println("address2 : " + orderVO.getAddress2());
+//    System.out.println("membersVO : " + membersVO.getMembersno());
+//    System.out.println("productno : " + productVO.getProductno());
+//    System.out.println("membersno : " + orderVO.getMembersno());
+//    System.out.println("productno : " + orderVO.getProductno());
+//    
+//    System.out.println("orderno : " + orderVO.getOrderno());
+//    System.out.println("count : " + orderVO.getCount());
+//    System.out.println("price : " + orderVO.getPrice());
+//    System.out.println("shippding : " + orderVO.getShipping());
+//    System.out.println("total : " + orderVO.getTotalprice());
+//    System.out.println("how : " + orderVO.getHoworder());
+//    System.out.println("tel : " + orderVO.getTel());
+//    System.out.println("zipcode : " + orderVO.getZipcode());
+//    System.out.println("address1 : " + orderVO.getAddress1());
+//    System.out.println("address2 : " + orderVO.getAddress2());
     int count = orderProc.product_order_create(orderVO);
     
     if(count == 1) {

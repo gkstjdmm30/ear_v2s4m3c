@@ -14,12 +14,6 @@ public interface ProductProcInter {
   public int create(ProductVO productVO);
 
   /**
-   * 상품 전체 목록
-   * @return
-   */
-  public List<ProductVO> list_all();
-
-  /**
    * productcateno별 전체 목록
    * @return
    */
@@ -68,6 +62,8 @@ public interface ProductProcInter {
    */
   public int delete_by_productcateno(int productcateno);
   
+  public int increaseRecom(int productno);
+  
   public int increaseReplycnt(int productno);
   
   public int decreaseReplycnt(int productno);
@@ -99,11 +95,17 @@ public interface ProductProcInter {
   public String pagingBox(String listFile, int productcateno, int search_count, int nowPage, String word);
   
   /**
+   * 상품 전체 목록
+   * @return
+   */
+  public ArrayList<ProductVO> list_all_search_paging(HashMap<String, Object> map);
+  
+  /**
    * 검색 + 페이징 목록
    * @param map
    * @return
    */
-  public ArrayList<ProductVO> list_by_search_paging(HashMap<String, Object> map);
+  public ArrayList<ProductVO> list_by_productno_search_paging(HashMap<String, Object> map);
   
 }
 

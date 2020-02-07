@@ -106,7 +106,7 @@
    <div style="width: 40%; height: 70%; float: left;">
       <div class="form-group"> 
         <div class="col-md-10">
-          <img style="width: 100%; height: 100%; text-align: center;" src="${product_imageVO.thumb }">
+          <img style="width: 100%; height: 100%; text-align: center;" src="${list.thumb }">
         </div>
       </div>   
    </div>
@@ -190,12 +190,15 @@
 </script>
 <!-- ----- DAUM 우편번호 API 종료----- -->   
    <div class= "" style="float: right; padding: 12px; margin-right: 66px;">
-      <input type="button" id="button_address" name="button_address" onclick="button_address" class="btn btn-secondary" value="기존 주소">
+      <input type="button" id="button_address" name="button_address" onclick="button_address();" class="btn btn-secondary" value="기존 주소">
       <script>
 function button_address() {
-  $('#zipcode').reset();
+/*   $('#zipcode').reset();
   $('#address1').reset();
-  $('#address2').reset();
+  $('#address2').reset(); */
+  $('#zipcode').val();
+  $('#address1').val();
+  $('#address2').val();
   var zipcode = ${membersVO.zipcode}; 
   var address1 = ${membersVO.address1}; 
   var address2 = ${membersVO.address2}; 
