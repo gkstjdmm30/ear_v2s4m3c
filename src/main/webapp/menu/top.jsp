@@ -72,7 +72,7 @@
                             <c:if test="${sessionScope.ps == 0}">
                               <li><a href="${root}/members/mem_list.do ">회원 관리(관리자)</a></li>
                               <li><a href="${root}/product_order/product_order_select.do ">주문 관리(관리자)</a></li>
-                              <li><a href="${root}/deli/deli_select.do }">배송 관리(관리자)</a></li>
+                              <li><a href="${root}/deli/deli_select.do">배송 관리(관리자)</a></li>
                             </c:if>
                       </ul>
                 </c:when>

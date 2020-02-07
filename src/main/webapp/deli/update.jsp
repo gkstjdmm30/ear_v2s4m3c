@@ -45,15 +45,17 @@
       </div>   
       <div class="form-group">   
         <div class="col-md-10">
-         <select class="btn btn-light" name="delivery" id="delivery">
+         바꿀 상태 <br><select class="btn btn-light" name="delivery" id="delivery">
             <option value='1'>배송준비</option>
             <option value='2'>배송출발</option>
             <option value='3'>배송중</option>
             <option value='4'>배송완료</option>
          </select>
         </div>
+        <div style="margin-top: 10px;">
         <button type="submit" class="btn btn-primary">수정하기</button>
-      <a href="javascript:history.back();"><button type="button" class="btn btn-secondary">취소</button></a> 
+      <a href="javascript:history.back();"><button type="button" class="btn btn-secondary">취소</button></a>
+      </div> 
       </div>   
     </div>
   
