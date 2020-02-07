@@ -76,23 +76,14 @@ public class ProductCont {
     // redirect: form에서 보낸 데이터 모두 삭제됨, 새로고침 중복 등록 방지용.
     
     ra.addAttribute("count", count); // redirect parameter 적용
-    ra.addAttribute("categrpno", productVO.getProductcateno());
+    ra.addAttribute("productcateno", productVO.getProductcateno());
     
     mav.setViewName("redirect:/product/create_msg.jsp");
 
     return mav;
   }
   
-  @RequestMapping(value = "/product/list_all.do", method = RequestMethod.GET)
-  public ModelAndView list_all() {
-    ModelAndView mav = new ModelAndView();
-
-    List<ProductVO> list = productProc.list_all();
-    mav.addObject("list", list);
-    mav.setViewName("/product/list_all"); // /webapp/product/list_all.jsp
-
-    return mav;
-  }
+  
   
   // http://localhost:9090/team4/product/list_by_productcateno.do?productcateno=1
   @RequestMapping(value = "/product/list_by_productcateno.do", method = RequestMethod.GET)
@@ -130,10 +121,13 @@ public class ProductCont {
     return mav;
   } */
   
-  // http://localhost:9090/ear/product/read.do?productno=1
+  // http://localhost:9090/team4/product/read.do?productno=1
   @RequestMapping(value = "/product/read.do", method = RequestMethod.GET)
   public ModelAndView read(int productno) {
     ModelAndView mav = new ModelAndView();
+    
+    int recom_count = productProc.increaseRecom(productno);
+    mav.addObject("recom_count",recom_count);
 
     ProductVO productVO = productProc.read(productno);
     mav.addObject("productVO", productVO);
@@ -334,7 +328,41 @@ public class ProductCont {
     return obj.toString();
   }
   
+  @RequestMapping(value = "/product/list_all.do", method = RequestMethod.GET)
+  public ModelAndView list_all_search_paging(
+      @RequestParam(value="productcateno", defaultValue="1") int productcateno, // 기본값
+      @RequestParam(value="word", defaultValue="") String word,           // 기본값
+      @RequestParam(value="nowPage", defaultValue="1") int nowPage    // 기본값
+      ) {
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("/product/list_all"); // /webapp/product/list_all.jsp
+    
+    // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
+    HashMap<String, Object> map = new HashMap<String, Object>();
+    map.put("productcateno", productcateno); // #{productcateno}
+    map.put("word", word);     // #{word}
+    map.put("nowPage", nowPage);  
+    
+    List<ProductVO> list = productProc.list_all_search_paging(map); // 목록을 만들어서
+    mav.addObject("list", list); // 리턴해줌
+    
+    List<Product_imageVO> product_image = product_imageProc.list();
+    mav.addObject("product_image" ,product_image);
+    
+    // 검색된 레코드 갯수
+    int search_count = productProc.search_count(map);
+    mav.addObject("search_count", search_count);
+    
+    Product_categrpVO product_categrpVO = product_categrpProc.read(productcateno);
+    mav.addObject("product_categrpVO", product_categrpVO);
   
+    String paging = productProc.pagingBox("list.do", productcateno, search_count, nowPage, word);
+    mav.addObject("paging", paging);
+  
+    mav.addObject("nowPage", nowPage);
+
+    return mav;
+  }
   
   /**
    * 목록 + 검색 + 페이징 지원
@@ -347,13 +375,12 @@ public class ProductCont {
    */
   @RequestMapping(value = "/product/list.do", 
                                        method = RequestMethod.GET)
-  public ModelAndView list_by_search_paging(
+  public ModelAndView list_by_productno_search_paging(
       @RequestParam(value="productcateno", defaultValue="1") int productcateno, // 기본값
       @RequestParam(value="word", defaultValue="") String word,           // 기본값
       @RequestParam(value="nowPage", defaultValue="1") int nowPage,    // 기본값
       Product_imageVO product_imageVO
       ) { 
-    System.out.println("--> nowPage: " + nowPage);
     
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/product/list");   
@@ -366,7 +393,7 @@ public class ProductCont {
     
     // 검색 목록
     
-    List<ProductVO> list = productProc.list_by_search_paging(map); // 목록을 만들어서
+    List<ProductVO> list = productProc.list_by_productno_search_paging(map); // 목록을 만들어서
     mav.addObject("list", list); // 리턴해줌
     
     /*List<Product_imageProductVO> product_image = productProc.list_by_product_image_join(product_imageVO.getProductno());
@@ -383,6 +410,9 @@ public class ProductCont {
     // 검색된 레코드 갯수
     int search_count = productProc.search_count(map);
     mav.addObject("search_count", search_count);
+    
+    Product_categrpVO product_categrpVO = product_categrpProc.read(productcateno);
+    mav.addObject("product_categrpVO", product_categrpVO);
   
     /*
      * SPAN태그를 이용한 박스 모델의 지원, 1 페이지부터 시작 

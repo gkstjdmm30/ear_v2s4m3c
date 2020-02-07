@@ -12,7 +12,6 @@ public class Product_orderProc implements Product_orderProcInter{
 
   @Override
   public int product_order_create(Product_orderVO orderVO) {
-    System.out.println("Proc »ý¼ºµÊ");
     int count = orderDAO.product_order_create(orderVO);
     return count;
   }
@@ -30,8 +29,8 @@ public class Product_orderProc implements Product_orderProcInter{
   }
 
   @Override
-  public Product_orderVO product_order_read_membersno(int membersno) {
-    Product_orderVO product_order_read_membersno = orderDAO.product_order_read_membersno(membersno);
+  public List<Product_orderVO> product_order_read_membersno(int membersno) {
+    List<Product_orderVO> product_order_read_membersno = orderDAO.product_order_read_membersno(membersno);
     return product_order_read_membersno;
   }
 
@@ -46,5 +45,13 @@ public class Product_orderProc implements Product_orderProcInter{
     int count = orderDAO.product_order_delete(orderno);
     return count;
   }
+
+  @Override
+  public List<String> name(int membersno) {
+    List<String> name = orderDAO.name(membersno);
+    return name;
+  }
+
+
 
 }

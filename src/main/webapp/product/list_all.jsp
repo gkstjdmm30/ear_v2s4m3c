@@ -68,10 +68,9 @@
 
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="./read.do?productno=${productno}&word=${param.word}"><IMG class="card-img-top" src='./images/에어팟 프로.jpg' alt=""></a>
-              <c:forEach var="product_imageVO" items="${product_image_list }">
+              <c:forEach var="product_imageVO" items="${product_image }">
                 <c:set var="thumb" value="${product_imageVO.thumb.toLowerCase() }" />
-                <%-- <a href="./read.do?productno=${productno}&word=${param.word}"><IMG class="card-img-top" src='../product_image/storage/${thumb }' alt=""></a> --%>
+                  <a href="./read.do?productno=${productno}&word=${param.word}"><IMG class="card-img-top" src='../product_image/storage/${thumb }' alt=""></a>
               </c:forEach>
               <div class="card-body">
                 <h5>

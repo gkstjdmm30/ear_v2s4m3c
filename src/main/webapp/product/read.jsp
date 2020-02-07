@@ -44,7 +44,7 @@
     var params = frm_reply.serialize();
     // alert('checkId() 호출됨: ' + params);
     // return;
-    if ($('#memberno', frm_reply).val().length == 0) {
+    if ($('#membersno', frm_reply).val().length == 0) {
       $('#modal_title').html('댓글 등록'); // 제목 
       $('#modal_content').html("로그인해야 등록 할 수 있습니다."); // 내용
       $('#modal_panel').modal();            // 다이얼로그 출력
@@ -217,13 +217,13 @@
   <ASIDE style='float: right;'>
     <A href="javascript:location.reload();">새로고침</A>
     <span class='menu_divide' > | </span> 
+    <A href='./list.do?categrpno=${categrpno }&word=${param.word}&nowPage=${param.nowPage}'>목록</A>
+    <c:if test="${sessionScope.ps == 0}">
+      <span class='menu_divide' > | </span>  
      <a href="../product_image/create.do?productno=${productno}&productcateno=${product_categrpVO.productcateno}&nowPage=${param.nowPage}">첨부 파일 등록</A>
       <span class='menu_divide' > | </span> 
       <a href="./file_delete.do?productno=${productno}&productcateno=${product_categrpVO.productcateno}&nowPage=${param.nowPage}">첨부 파일 삭제</A>
-    <span class='menu_divide' > | </span> 
-    <A href='./list.do?categrpno=${categrpno }&word=${param.word}&nowPage=${param.nowPage}'>목록</A>
-    <c:if test="${sessionScope.id != null}">
-      <span class='menu_divide' > | </span> 
+      <span class='menu_divide' > | </span>
       <A href='./update.do?productcateno=${productcateno }&productno=${productno}&nowPage=${param.nowPage}'>수정</A>
       <span class='menu_divide' > | </span> 
       <A href='./delete.do?productcateno=${productcateno }&productno=${productno}&nowPage=${param.nowPage}'>삭제</A>
@@ -351,6 +351,7 @@
           </li>
         </ul>
       </fieldset>
+   </FORM>   
       <!-- 댓글 영역 시작 -->
   <DIV style='width: 100%;'>
     <HR>
@@ -370,9 +371,8 @@
   </DIV>
   
   <!-- 댓글 영역 종료 -->
+  </div>
       
-  </FORM>
-    </div>
     
     <!-- /.col-lg-9 -->
       </div>

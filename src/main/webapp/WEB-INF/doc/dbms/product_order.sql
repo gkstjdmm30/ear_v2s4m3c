@@ -30,6 +30,9 @@ VALUES((SELECT NVL(MAX(membersno), 0) + 1 as mem_no FROM members),
       
  SELECT * FROM members;
  
+ UPDATE members
+ set ps=0
+ WHERE id = 'admin'; 
 -- product_categrp
 -- ªË¡¶
 DROP TABLE product_categrp;
@@ -185,3 +188,22 @@ UPDATE product_order
 SET howorder=1;
 
 DELETE FROM product_order;
+
+SELECT name
+from (
+				 select productno
+				 from product_order
+				 where membersno=1 and productno=1
+				)
+WHERE 
+      (
+         select productno
+         from product_order
+         where membersno=1
+       );
+
+SELECT product.name
+from product, product_order, members
+where members.membersno = product_order.membersno 
+        and product_order.productno = product.productno
+        and product_order.membersno =1;

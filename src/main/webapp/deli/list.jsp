@@ -6,7 +6,7 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>주문 관리</title>
+<title>배송 관리(관리자)</title>
  
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -26,14 +26,12 @@
 </head>
 <body>
 <jsp:include page="/menu/top.jsp" />
-<div class ='title_line'>주문 관리(관리자)</div>
- 
+<div class ='title_line'>배송 관리(관리자)</div>
 <table class = 'table table-striped'>
   <colgroup>
     <col style='width: 10%;'/>
     <col style='width: 10%;'/>
-    <col style='width: 10%;'/>
-    <col style='width: 30%;'/>    
+    <col style='width: 10%;'/>    
     <col style='width: 10%;'/>
     <col style='width: 10%;'/>
     <col style='width: 10%;'/>
@@ -42,31 +40,30 @@
   
   <thead>  
   <TR>
+    <TH class='th_basic'>배송 번호</TH>
     <TH class='th_basic'>주문 번호</TH>
-    <TH class='th_basic'>상품 번호</TH>
-    <TH class='th_basic'>회원 이름</TH>
-    <TH class='th_basic'>(상품X갯수+배송비=총액)</TH>
-    <TH class='th_basic'>배송방법</TH>
-    <TH class='th_basic'>날짜</TH>
+    <TH class='th_basic'>상품 이름</TH>
+    <TH class='th_basic'>주소</TH>
+    <TH class='th_basic'>상태</TH>
+    <TH class='th_basic'>주문일</TH>
     <TH class='th_basic'>기타</TH>
-    <TH class='th_basic'>배송조회</TH>
   </TR>
   </thead>
   
   <tbody>
-  <c:forEach var="product_orderVO" items = "${list}">
-    <c:set var="orderno" value="${product_orderVO.orderno }" />
+  <c:forEach var="deliVO" items = "${list}">
+    <c:set var="delino" value="${deliVO.delino }" />
     
     <TR>
-      <TD style='text-align: center;'> ${product_orderVO.orderno }</TD>
-      <TD style='text-align: center;'>${product_orderVO.productno }</TD>
-      <TD style='text-align: center;'>${product_orderVO.membersno }</TD>
-      <TD style='text-align: left;'>(${product_orderVO.price}) X ${product_orderVO.count } + ${product_orderVO.shipping } = ${product_orderVO.totalprice }</TD>
-      <TD style='text-align: center;'>${product_orderVO.howorder }</TD>
-      <TD style='text-align: center;'>${product_orderVO.odate }</TD>
+      <TD style='text-align: center;'> ${delino }</TD>
+      <TD style='text-align: center;'>${deliVO.orderno }</TD>
+      <TD style='text-align: center;'>${name }</TD>
+      <TD style='text-align: center;'>${orderVO }</TD>
+      <TD style='text-align: center;'>${deliVO.delivery }</TD>
+      <TD style='text-align: center;'>${deliVO.ddate }</TD>
       <TD style='text-align: center;'>
+        <A href="./deli_update.do?delino=${delino }"><IMG src='../notice/images/update.png'></A>
       </TD>
-      <TD style='text-align: center;'><A href="./deli_select.do">배송 조회</A></TD>
     </TR>
   </c:forEach> 
   </tbody>

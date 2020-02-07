@@ -20,11 +20,46 @@
 </head>
 <body>
 <jsp:include page="/menu/top.jsp" flush='false' />
-  <!-- Page Content -->
+<form name='frm' id='frm' method='get' action='./list.do'>
+    <input type='hidden' name='productcateno' value='${product_categrpVO.productcateno }'>
+    
+    <ASIDE style='float: left;'>
+      <A href='../product_categrp/list.do'>카테고리 그룹</A> > 
+      <A href='./list.do?productcateno=${product_categrpVO.productcateno }'>${product_categrpVO.name }</A>
+      <c:if test="${param.word.length() > 0 }">
+        > [${param.word }] 검색 목록 (${search_count } 건)
+      </c:if>
+    </ASIDE>
+    <ASIDE style='float: right;'>
+      <c:if test="${sessionScope.ps == 1 || sessionScope.id == null }">
+        상품 카테고리 별 검색 >
+      </c:if>
+      
+      <c:if test="${sessionScope.ps == 0}">
+        <A href='./create.do?productcateno=${product_categrpVO.productcateno }&nowPage=${param.nowPage}'>등록</A>
+      </c:if>
+      
+      <c:choose>
+        <c:when test="${param.word != '' }">
+          <input type='text' name='word' id='word' value='${param.word }' 
+                     style='width: 40%;'>
+        </c:when>
+        <c:otherwise>
+          <input type='text' name='word' id='word' value='' style='width: 35%;'>
+        </c:otherwise>
+      </c:choose>
+      <button type='submit'>검색</button>
+      <c:if test="${param.word.length() > 0 }">
+        <button type='button' 
+                     onclick="location.href='./list.do?categrpno=${categrpVO.categrpno}'">검색 취소</button>  
+      </c:if>
+    </ASIDE> 
+  </form>
+  <DIV class='menu_line' style='clear: both;'></DIV>
   <div class="container">
 
     <div class="row">
-
+    
       <div class="col-lg-3">
 
         <h1 class="my-4">이어팔아</h1>
@@ -69,20 +104,20 @@
 
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="./read.do?productno=${productno}&word=${param.word}"><IMG class="card-img-top" src='./images/에어팟 프로.jpg' alt=""></a>
-              <c:forEach var="product_imageVO" items="${product_image_list }">
+              <c:forEach var="product_imageVO" items="${product_image }">
                 <c:set var="thumb" value="${product_imageVO.thumb.toLowerCase() }" />
-                <%-- <a href="./read.do?productno=${productno}&word=${param.word}"><IMG class="card-img-top" src='../product_image/storage/${thumb }' alt=""></a> --%>
+                  <a href="./read.do?productno=${productno}&word=${param.word}&nowPage=${param.nowPage}"><IMG class="card-img-top" src='../product_image/storage/${thumb }' alt=""></a>
               </c:forEach>
               <div class="card-body">
                 <h5>
-                  <a href="./read.do?productno=${productno}&word=${param.word}">${productVO.name}</a>
+                  <a href="./read.do?productno=${productno}&word=${param.word}&nowPage=${param.nowPage}">${productVO.name}</a>
                 </h5>
-                <h5>30000원${product_imageVO.fname}dd</h5>
+                <h5>${productVO.price}원${productno}</h5>
                 <p class="card-text"><IMG src='./images/추천.jpeg' title=''>&nbsp${productVO.recom}</p>
               </div>
               <div class="card-footer">
                 <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+              </div>
             </div>
           </div> 
           
@@ -94,12 +129,13 @@
 
       </div>
       <!-- /.col-lg-9 -->
-
-    </div>
+      
+      </div>
     <!-- /.row -->
 
   </div>
-  <!-- /.container -->          
+  <!-- /.container -->
+  <DIV class='bottom_menu'>${paging }</DIV>      
 
 
 
