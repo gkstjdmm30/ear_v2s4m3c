@@ -104,7 +104,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    <delete id="delete_by_categrpno" parameterType="int">
      DELETE FROM notice
      WHERE categrpno=#{categrpno}
-   </delete> 
+   </delete>
    
    <update id="increaseReplycnt" parameterType="int">
      UPDATE notice

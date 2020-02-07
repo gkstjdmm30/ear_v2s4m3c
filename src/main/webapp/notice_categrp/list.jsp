@@ -113,7 +113,6 @@ function delete_form(categrpno) {
           </TR>
         </c:forEach> 
         </tbody>
-     
     </TABLE>
     
     </div>
@@ -121,7 +120,6 @@ function delete_form(categrpno) {
   
   </div>
   <!-- /.row -->
-    
 <jsp:include page="/menu/bottom.jsp"  /> <%-- flush='false' --%>
 </body>
  

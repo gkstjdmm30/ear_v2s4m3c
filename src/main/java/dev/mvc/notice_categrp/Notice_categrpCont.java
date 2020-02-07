@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.notice.NoticeProcInter;
 import dev.mvc.notice_categrp.Notice_categrpVO;
 
 @Controller
@@ -16,6 +17,10 @@ public class Notice_categrpCont {
   @Autowired
   @Qualifier("dev.mvc.notice_categrp.Notice_categrpProc") // 이름 지정
   private Notice_categrpProcInter notice_categrpProc;
+  
+	@Autowired
+	@Qualifier("dev.mvc.notice.NoticeProc")
+	private NoticeProcInter noticeProc;
   
   public Notice_categrpCont() {
     System.out.println("--> Notice_categrpCont created.");
@@ -94,6 +99,9 @@ public class Notice_categrpCont {
     ModelAndView mav = new ModelAndView();
     
     Notice_categrpVO notice_categrpVO = notice_categrpProc.read(categrpno);
+    
+    int count_by_categrpno = noticeProc.count_by_categrpno(categrpno);
+    mav.addObject("count_by_categrpno", count_by_categrpno);
     
     mav.addObject("notice_categrpVO", notice_categrpVO);
     mav.setViewName("/notice_categrp/delete"); // /webapp/notice_categrp/delete.jsp

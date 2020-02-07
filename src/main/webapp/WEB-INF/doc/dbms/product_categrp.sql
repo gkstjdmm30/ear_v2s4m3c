@@ -14,7 +14,7 @@ COMMENT ON TABLE product_categrp is '상품 카테고리';
 COMMENT ON COLUMN product_categrp.productcateno is '상품 카테고리 번호';
 COMMENT ON COLUMN product_categrp.name is '상품 카테고리 이름';
 COMMENT ON COLUMN product_categrp.seqno is '출력 순서';
-COMMENT ON COLUMN categrp.rdate is '그룹 생성일';
+COMMENT ON COLUMN product_categrp.rdate is '그룹 생성일';
 COMMENT ON COLUMN product_categrp.cnt is '등록된 상품 수';
 
 -- 등록
