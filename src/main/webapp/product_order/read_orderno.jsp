@@ -31,7 +31,7 @@
 
 
 <DIV class='title_line'>주문</DIV>
-<FORM name='frm' id='frm' method='POST' action='./product_order_update.do' 
+<FORM name='frm' id='frm' method='' action='' 
               onsubmit="return send();" class="form-horizontal">
 <%-- <input type='hidden' name='productno' value='${productVO.productno } '>   
 <input type='hidden' name='membersno' value='${membersVO.membersno } '>   
@@ -137,7 +137,7 @@ function panel_img() {
           <input class="btn btn-light" type="text" name="howorder" id="howorder" value = "계좌이체" readonly>
         </c:otherwise>
       </c:choose>      
-      <button type="submit" class="btn btn-primary">수정하기</button>
+      <a href="../index.jsp"><button type="button" class="btn btn-primary">확인</button></a>
       <a href="javascript:history.back();"><button type="button" class="btn btn-secondary">취소</button></a> 
    </div>
  </div>

@@ -61,6 +61,17 @@ INSERT INTO deli(delino, orderno, delivery, ddate)
 VALUES((SELECT NVL(MAX(delino), 0) + 1 as delino FROM deli),
    2, '배송중', sysdate);
    
-   SELECT * FROM deli;
+SELECT delino, orderno, delivery, ddate 
+FROM deli
+ORDER by delino ASC;
    
+SELECT delino, orderno, delivery, ddate 
+FROM deli
+WHERE orderno=1;
 
+UPDATE deli
+set delivery='배송 완료'
+WHERE orderno=1;
+
+DELETE deli
+where orderno=2;

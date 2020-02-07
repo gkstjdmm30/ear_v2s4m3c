@@ -87,8 +87,8 @@ public class Product_orderCont {
     return mav;
   }
   
-  // http://localhost:9090/ear/product_order/product_order_read.do?orderno=1&membersno=1&productno=1
-  @RequestMapping(value="/product_order/product_order_read.do", method=RequestMethod.GET)
+  // http://localhost:9090/ear/product_order/product_read_orderno.do?orderno=1
+  @RequestMapping(value="/product_order/product_read_orderno.do", method=RequestMethod.GET)
   public ModelAndView product_order_read(int orderno) {
     ModelAndView mav = new ModelAndView();
     Product_orderVO orderVO = orderProc.product_order_read_orderno(orderno);
@@ -102,15 +102,26 @@ public class Product_orderCont {
     mav.addObject("orderVO", orderVO);
     mav.addObject("img_list", img_list);
     
-    System.out.println("price :" + orderVO.getPrice());
     
     mav.setViewName("/product_order/read_orderno");
     return mav;
   }
-//  @RequestMapping(value="/product_order/product_order_read_membersno.do")
+//  http://localhost:9090/ear/product_order/product_read_membersno.do?membersno=1
+  @RequestMapping(value="/product_order/product_read_membersno.do", method=RequestMethod.GET)
+  public ModelAndView product_mem_read(int membersno) {
+    ModelAndView mav = new ModelAndView();
+    MembersVO membersVO = membersProc.mem_read(membersno);
+    List<Product_orderVO> list = orderProc.product_order_read_membersno(membersno);
+    List<String> list2 = orderProc.name(membersno);
+    
+    mav.addObject("membersVO", membersVO);
+    mav.addObject("list", list);
+    mav.addObject("list2", list2);
+    mav.setViewName("/product_order/read_membersno");
+    return mav;
+  }
 //  @RequestMapping(value="/product_order/product_order_update.do")
 //  @RequestMapping(value="/product_order/product_order_delete.do")
-//  
-//  
+
   
 }

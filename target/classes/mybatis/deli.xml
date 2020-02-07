@@ -6,4 +6,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="dev.mvc.deli.DeliDAOInter">
 
+  <insert id="deli_insert" parameterType="DeliVO">
+      INSERT INTO deli(delino, orderno, delivery, ddate)
+      VALUES((SELECT NVL(MAX(delino), 0) + 1 as delino FROM deli),
+         #{orderno}, #{delivery}, sysdate)
+  </insert>
+  
+  <select id="deli_select" resultType="DeliVO">
+       SELECT delino, orderno, delivery, ddate 
+       FROM deli
+       ORDER by delino ASC
+  </select>
+  
+  <select id="deli_read" resultType="DeliVO" parameterType="int">
+      SELECT delino, orderno, delivery, ddate 
+      FROM deli
+      WHERE orderno=#{orderno}
+  </select>
+  
+  <update id="deli_update" parameterType="DeliVO">
+      UPDATE deli
+      set delivery=#{delivery}
+      WHERE orderno=#{orderno}
+  </update>
+  
+  <delete id="deli_delete" parameterType="int">
+      DELETE deli
+      where orderno=#{orderno}
+  </delete>
+
 </mapper>  

@@ -68,9 +68,11 @@
                       <ul>
                          <li><a href="${root}/members/mem_read.do?membersno=${sessionScope.membersno}"> 회원정보 수정</a></li>
                          <li><a href="${root}/members/passwd_update.do?membersno=${sessionScope.membersno}">비밀번호 수정</a></li>
+                         <li><a href="${root}/product_order/product_read_membersno.do?membersno=${sessionScope.membersno }">주문 조회</a></li>
                          <li><a href="#">배송 조회</a></li>
                             <c:if test="${sessionScope.ps == 0}">
                               <li><a href="${root}/members/mem_list.do ">회원 관리(관리자)</a></li>
+                              <li><a href="${root}/product_order/product_order_select.do ">주문 관리(관리자)</a></li>
                               <li><a href="#">배송 관리(관리자)</a></li>
                             </c:if>
                       </ul>
