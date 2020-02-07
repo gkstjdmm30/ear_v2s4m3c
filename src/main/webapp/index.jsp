@@ -36,7 +36,7 @@
 
       <div class="col-lg-3">
 
-        <h1 class="my-4">이어팔아</h1>
+        <h1 class="my-4">이어팔어</h1>
         <c:import url="/product_categrp/list_left_menu.do" />
 
       </div>
