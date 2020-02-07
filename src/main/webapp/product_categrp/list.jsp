@@ -8,8 +8,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>Shop</title>
- 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
   <link href="../css/style.css" rel="Stylesheet" type="text/css">
   <!-- Bootstrap core CSS -->
@@ -67,18 +65,19 @@ function delete_form(productcateno) {
   
     <table class="table table-striped" style='width: 100%;'>
       <colgroup>
-        <col style="width: 15%;"></col>
-        <col style="width: 50%;"></col>
-        <col style="width: 10%;"></col>
-        <col style="width: 15%;"></col>
-        <col style="width: 10%;"></col>
-        
+          <col style='width: 10%;'/>
+          <col style='width: 40%;'/>
+          <col style='width: 15%;'/>
+          <col style='width: 10%;'/>    
+          <col style='width: 10%;'/>
+          <col style='width: 15%;'/>
       </colgroup>
       <%-- table 컬럼 --%>
       <thead>
         <tr>
           <th style='text-align: center;'>분류 번호</th>
           <th style='text-align: center;'>분류명</th>
+          <th style='text-align: center'>등록일</th>
           <th style='text-align: center;'>출력 순서</th>
           <th style='text-align: center;'>등록된 상품 수</th>
           <th style='text-align: center;'>기타</th>
@@ -94,9 +93,12 @@ function delete_form(productcateno) {
           <tr> 
             <td style='text-align: center;'>${product_categrpVO.productcateno}</td>
             <td style='text-align: center;'>${product_categrpVO.name}</td>
+            <td style='text-align: center;'>${product_categrpVO.rdate}</td>
             <td style='text-align: center;'>${product_categrpVO.seqno}</td>
             <td style='text-align: center;'>${product_categrpVO.cnt}</td>
             <td style='text-align: center;'>
+              <A href="/team4/product_categrp/update_seqno_up.do?productcateno=${productcateno }"><IMG src='./images/up.png' title='우선순위 높임' style='width: 16px;'></A>
+              <A href="./update_seqno_down.do?productcateno=${productcateno }"><IMG src='./images/down.png' title='우선순위 낮춤' style='width: 16px;'></A>
               <A href="javascript: update_form(${productcateno });"><IMG src='./images/update.png' title='수정'></A>
               <A href="javascript: delete_form(${productcateno });"><IMG src='./images/delete.png' title='삭제'></A>
             </td>
@@ -106,7 +108,7 @@ function delete_form(productcateno) {
       </tbody>
     </table>
     <br><br>
-  </div>
+
 
 <jsp:include page="/menu/bottom.jsp" /> 
 </body>

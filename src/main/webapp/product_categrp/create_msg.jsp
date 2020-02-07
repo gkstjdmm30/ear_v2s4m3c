@@ -9,12 +9,11 @@
 <title>Shop</title>
  
 <link href="../css/style.css" rel="Stylesheet" type="text/css">
-<script type="text/JavaScript"
-          src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<!-- Bootstrap core CSS -->
+  <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="../css/shop-homepage.css" rel="stylesheet">
 
 </head> 
 <body>
