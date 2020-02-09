@@ -52,14 +52,15 @@ public class Product_orderCont {
     
     MembersVO membersVO = membersProc.mem_read(membersno);
     ProductVO productVO = productProc.read(productno);
-    List<Product_imageVO> img_list = product_imageProc.list_by_productno(productno);
-    
-    
+//    List<Product_imageVO> img_list = product_imageProc.list_by_productno(productno);
+    List<Product_imageVO> product_image = product_imageProc.list_by_productno(productno);
     mav.addObject("membersVO", membersVO);
     mav.addObject("productVO", productVO);
-    mav.addObject("img_list", img_list);
+    mav.addObject("product_image", product_image);
     
-    mav.setViewName("/product_order/create");
+    System.out.println("membersVO.getZipcode() : " + membersVO.getZipcode() + membersVO.getAddress2());
+    
+    mav.setViewName("product_order/create.jsp?zipcode="+membersVO.getZipcode()+"&address1="+membersVO.getAddress1()+"&address2="+membersVO.getAddress2());
     return mav;
   }
   
@@ -76,7 +77,6 @@ public class Product_orderCont {
     orderVO.setTel(membersVO.getTel());
     
     int count = orderProc.product_order_create(orderVO);
-    
     mav.addObject("membersVO", membersVO);
     mav.addObject("productVO", productVO);
     mav.addObject("img_list", img_list);
