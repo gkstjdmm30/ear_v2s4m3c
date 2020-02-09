@@ -198,11 +198,11 @@ public class MembersCont {
   
   @RequestMapping(value="/members/passwd_update.do", method=RequestMethod.POST)
   public ModelAndView passwd_update(RedirectAttributes ra, int membersno,
-                                                  String passwd, String new_passwd) {
+                                                  String password, String new_password) {
     ModelAndView mav = new ModelAndView();
     HashMap<Object, Object> map = new HashMap<Object, Object>();
     map.put("membersno", membersno);
-    map.put("passwd", passwd);
+    map.put("passwd", password);
     int count = membersProc.passwd_check(map);
     int update_count = 0;
     
@@ -210,7 +210,7 @@ public class MembersCont {
       ra.addAttribute("count", count);
       mav.setViewName("redirect:/members/passwd_update_fail_msg.jsp");
     } else {
-      map.put("passwd",  new_passwd);
+      map.put("passwd",  new_password);
       update_count = membersProc.passwd_update(map);
       ra.addAttribute("update_count", update_count);
       mav.setViewName("redirect:/members/passwd_update_success_msg.jsp");
