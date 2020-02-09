@@ -12,7 +12,7 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <form name='frm' id='frm' method='get' action='./list.do' class="">
+      <form name='frm' id='frm' method='get' action='./list.all.do' class="">
         <input type='hidden' name='productcateno' value='${product_categrpVO.productcateno }'>
 
     <ASIDE style='float: right;'>

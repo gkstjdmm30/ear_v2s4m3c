@@ -85,7 +85,7 @@ public class Product_imageCont {
           fupname = Upload.saveFileSpring(multipartFile, upDir); // 파일 저장
           
           if (Tool.isImage(fname)) { // 이미지인지 검사
-            thumb = Tool.preview(upDir, fupname, 120, 80); // thumb 이미지 생성
+            thumb = Tool.preview(upDir, fupname, 300, 200); // thumb 이미지 생성
           }
         }
         Product_imageVO vo = new Product_imageVO();

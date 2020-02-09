@@ -7,20 +7,20 @@
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>Resort world</title>
  
-<link href="../css/style.css" rel="Stylesheet" type="text/css">
- 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
- 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
- 
+  
+  <link href="../css/style.css" rel="Stylesheet" type="text/css">
+  <!-- Bootstrap core CSS -->
+  <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="../css/shop-homepage.css" rel="stylesheet">
 </head> 
  
 <body>
 <jsp:include page="/menu/top.jsp" flush='false' />
   <ASIDE style='float: left;'>
-    <A href='../categrp/list.do'>카테고리 그룹</A> > 
+    <A href='../product_categrp/list.do'>카테고리 그룹</A> > 
     <A href='./list.do?productcateno=${productcategrpVO.productcateno }'>${categrpVO.name }</A> >
     신규 등록
   </ASIDE>
@@ -49,14 +49,13 @@
       <DIV class='content_bottom_menu'>
         <button type="submit" class="btn btn-info">파일 전송</button>
         <button type="button" 
-                    onclick="location.href='./list.do?productcateno=${param.productcateno}&nowPage=${param.nowPage }'" 
+                    onclick="location.href='../product/read.do?productno=${param.productno}&word=${param.word}'" 
                     class="btn btn-info">취소[목록]</button>
       </DIV>
        
     </FORM>
   </DIV>
 
-  
 <jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
  
