@@ -22,6 +22,8 @@
 <jsp:include page="/menu/top.jsp" flush='false' />
 <form name='frm' id='frm' method='get' action='./list.do'>
     <input type='hidden' name='productcateno' value='${product_categrpVO.productcateno }'>
+    <input type='hidden' name='nowPage' value='${param.nowPage }'>
+    
     
     <ASIDE style='float: left;'>
       <A href='../product_categrp/list.do'>카테고리 그룹</A> > 
@@ -51,7 +53,7 @@
       <button type='submit'>검색</button>
       <c:if test="${param.word.length() > 0 }">
         <button type='button' 
-                     onclick="location.href='./list.do?categrpno=${categrpVO.categrpno}'">검색 취소</button>  
+                     onclick="location.href='./list.do?categrpno=${product_categrpVO.productcateno}&nowPage=${param.nowPage }'">검색 취소</button>  
       </c:if>
     </ASIDE> 
   </form>
@@ -99,21 +101,25 @@
         <FORM name='frm' method="get" action='./update.do'>
         <input type="hidden" name="productno" value="${productno}">
         <div class="row">
-        <c:forEach var="productVO" items="${list }">
-          <c:set var="productno" value="${productVO.productno }" />
-
+        <c:forEach var="product_imageProductVO" items="${list }">
+          <c:set var="productno" value="${product_imageProductVO.productno }" />
+          <c:set var="thumb" value="${product_imageProductVO.thumb.toLowerCase() }" />
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <c:forEach var="product_imageVO" items="${product_image }">
-                <c:set var="thumb" value="${product_imageVO.thumb.toLowerCase() }" />
+                 <c:choose>
+                 <c:when test="${thumb.endsWith('jpg') || thumb.endsWith('png') || thumb.endsWith('gif')}">
                   <a href="./read.do?productno=${productno}&word=${param.word}&nowPage=${param.nowPage}"><IMG class="card-img-top" src='../product_image/storage/${thumb }' alt=""></a>
-              </c:forEach>
+                 </c:when> 
+                 <c:otherwise>
+                  <a href="./read.do?productno=${productno}&word=${param.word}&nowPage=${param.nowPage}"><IMG class="card-img-top" src='./images/no_image.png' alt=""></a>
+                </c:otherwise>       
+                </c:choose>
               <div class="card-body">
                 <h5>
-                  <a href="./read.do?productno=${productno}&word=${param.word}&nowPage=${param.nowPage}">${productVO.name}</a>
+                  <a href="./read.do?productno=${productno}&word=${param.word}&nowPage=${param.nowPage}">${product_imageProductVO.name}</a>
                 </h5>
-                <h5>${productVO.price}원${productno}</h5>
-                <p class="card-text"><IMG src='./images/추천.jpeg' title=''>&nbsp${productVO.recom}</p>
+                <h5>${product_imageProductVO.price}원${productno}</h5>
+                <p class="card-text"><IMG src='./images/추천.jpeg' title=''>&nbsp${product_imageProductVO.recom}</p>
               </div>
               <div class="card-footer">
                 <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
