@@ -75,13 +75,10 @@ public class DeliCont {
   }
   
   @RequestMapping(value="/deli/deli_update.do", method=RequestMethod.POST)
-  public ModelAndView deli_update(DeliVO deliVO, int orderno, String delivery, int delino) {
+  public ModelAndView deli_update(DeliVO deliVO) {
     ModelAndView mav = new ModelAndView();
-    deliVO.setDelino(delino);
-    deliVO.setOrderno(orderno);
-    deliVO.setDelivery(delivery);
     deliProc.deli_update(deliVO);
-    mav.setViewName("redirect:/deli_select.do");
+    mav.setViewName("redirect:/deli/deli_select.do");
     return mav;
   }
 
