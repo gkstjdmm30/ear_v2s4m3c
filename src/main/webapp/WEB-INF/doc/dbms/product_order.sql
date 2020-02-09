@@ -174,6 +174,11 @@ shipping, totalprice, howorder, tel, zipcode, address1, address2, odate)
 VALUES((SELECT NVL(MAX(orderno), 0) + 1 as orderno FROM product_order),
    1, 2, 2, 10000, 0, 20000, 0,  '1', '1', '1', '1', sysdate);
    
+INSERT INTO product_order(orderno, productno, membersno, count, price, 
+shipping, totalprice, howorder, tel, zipcode, address1, address2, odate)
+VALUES((SELECT NVL(MAX(orderno), 0) + 1 as orderno FROM product_order),
+   1, 1, 2, 10000, 2500, 22500, 0,  '1', '1', '1', '1', sysdate);
+  
 SELECT orderno, productno, membersno, count, price, 
 shipping, totalprice, howorder, tel, zipcode, address1, address2, odate
 FROM product_order

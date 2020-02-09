@@ -53,4 +53,10 @@ public class DeliProc implements DeliProcInter{
     return count;
   }
 
+  @Override
+  public List<Deli_listVO> deli_list() {
+    List<Deli_listVO> list = deliDAO.deli_list();
+    return list;
+  }
+
 }

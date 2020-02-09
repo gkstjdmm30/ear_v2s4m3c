@@ -66,7 +66,7 @@
       <TD style='text-align: center;'>${product_orderVO.odate }</TD>
       <TD style='text-align: center;'>
       </TD>
-      <TD style='text-align: center;'><A href="./deli_select.do">배송 조회</A></TD>
+      <TD style='text-align: center;'><A href="../deli/deli_read.do?orderno=${orderno }">배송 조회</A></TD>
     </TR>
   </c:forEach> 
   </tbody>
