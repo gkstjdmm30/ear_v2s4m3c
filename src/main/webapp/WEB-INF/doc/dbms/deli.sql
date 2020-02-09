@@ -55,5 +55,7 @@ SELECT product.name, product_order.zipcode, product_order.address1,
 FROM product, product_order, deli
 WHERE deli.orderno = product_order.orderno and product_order.productno = product.productno;
 
-
+SELECT product_image.thumb
+FROM product_order, product_image, deli
+WHERE deli.orderno = product_order.orderno and product_order.productno = product_image.productno and deli.orderno =1;
 

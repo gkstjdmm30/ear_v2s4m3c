@@ -65,7 +65,7 @@
         <div class="row">
         <c:forEach var="product_imageProductVO" items="${list }">
           <c:set var="productno" value="${product_imageProductVO.productno }" />
-          <c:set var="thumb" value="${product_imageProductVO.thumb.toLowerCase() }" />
+          <c:set var="thumb" value="${product_imageProductVO.thumb}" />
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
                  <c:choose>

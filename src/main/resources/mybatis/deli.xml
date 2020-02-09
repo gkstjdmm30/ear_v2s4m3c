@@ -56,6 +56,11 @@ FROM product, product_order, deli
 WHERE deli.orderno = product_order.orderno and product_order.productno = product.productno
   </select>
 
+  <select id="deli_thumb" resultType="String" parameterType="int">
+SELECT product_image.thumb
+FROM product_order, product_image, deli
+WHERE deli.orderno = product_order.orderno and product_order.productno = product_image.productno  and deli.orderno = #{orderno}
+  </select>
 </mapper>  
 
 

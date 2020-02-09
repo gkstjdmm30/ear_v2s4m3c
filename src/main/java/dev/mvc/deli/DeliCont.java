@@ -51,9 +51,10 @@ public class DeliCont {
       deliProc.deli_insert(deliVO);
     }
     
-    
+    String thumb = deliProc.deli_thumb(orderno);
     DeliVO read = deliProc.deli_read_orderno(orderno);
     mav.addObject("deliVO", read);
+    mav.addObject("thumb", thumb);
     mav.setViewName("/deli/read");
     return mav;
   }

@@ -31,10 +31,9 @@
  </script>
 <script type="text/javascript">
   function btn_address() {
-<%--     var zipcode = <%=request.getParameter("zipcode") %>
-    var address1 = <%=request.getParameter("address1") %>
-    var address2 = <%=request.getParameter("address2") %>  --%>
-    alert(zipcode + " / " + address1 + " / " + address2);
+    var zipcode = '<c:out value="${membersVO.zipcode}"/>';
+    var address1 = '<c:out value="${membersVO.address1}"/>';
+    var address2 = '<c:out value="${membersVO.address2}"/>';
     $('#zipcode').val(zipcode);
     $('#address1').val(address1);
     $('#address2').val(address2);
@@ -120,12 +119,15 @@
       <div class="form-group"> 
         <div class="col-md-10">
           <DIV id='list_panel' style="width: 80%; margin: 0px auto;"></DIV> <!-- 원본 이미지 출력 -->
+          <li class="li_none">
+            <DIV id='attachfile_panel' style="width: 80%; margin: 0px auto;"></DIV> <!-- 원본 이미지 출력 -->
+          </li>
           <li class="li_none" >
             <c:forEach var="product_imageVO" items="${product_image }">
-              <c:set var="thumb" value="${product_imageVO.thumb.toLowerCase() }" />
+              <c:set var="thumb" value="${product_imageVO.thumb }" />
               <c:choose>
                 <c:when test="${thumb.endsWith('jpg') || thumb.endsWith('png') || thumb.endsWith('gif')}">
-                  <A href="javascript:panel_img('${product_imageVO.fupname }')"><IMG src='../product_image/storage/${thumb }' style='margin-top: 2px;'></A>
+                  <A href="javascript:panel_img('${product_imageVO.fname }')"><IMG src='../product_image/storage/${thumb }' style='margin-top: 2px;'></A>
                   &nbsp&nbsp&nbsp&nbsp&nbsp
                 </c:when>
               </c:choose>
@@ -224,11 +226,6 @@
    </div>
  </div>
   </FORM>
-  
-    zipcode : <%=request.getParameter("zipcode") %>
-    <br> address1 : <%=request.getParameter("address1") %>
-    <br> address2 : <%=request.getParameter("address2") %>
-
 <jsp:include page="/menu/bottom2.jsp" />
 </body>
  
