@@ -1,9 +1,5 @@
 package dev.mvc.product;
 
-import java.util.List;
-
-import org.springframework.web.multipart.MultipartFile;
-
 public class Product_imageProductVO {
   /** 원본 파일명 */
   private String fname;

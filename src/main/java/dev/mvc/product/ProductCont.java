@@ -49,7 +49,7 @@ public class ProductCont {
     System.out.println("--> Product created.");
   }
   
-  // http://localhost:9090/ojt/product/create.do?productcateno=1
+  // http://localhost:9090/ear/product/create.do?productcateno=1
   @RequestMapping(value = "/product/create.do", method = RequestMethod.GET)
   public ModelAndView create(int productcateno) {
     ModelAndView mav = new ModelAndView();
