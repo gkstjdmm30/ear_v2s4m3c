@@ -12,6 +12,7 @@
   <link href="../css/style.css" rel="Stylesheet" type="text/css">
   <!-- Bootstrap core CSS -->
   <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom styles for this template -->
   <link href="../css/shop-homepage.css" rel="stylesheet">
   
@@ -68,6 +69,7 @@
 
       </div>
       <!-- /.col-lg-3 -->
+      
       <div class="col-lg-9">
 
         <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
