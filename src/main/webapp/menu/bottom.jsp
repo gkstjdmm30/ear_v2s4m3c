@@ -12,10 +12,7 @@
     </div>
     <!-- /.container -->
   </footer>
-<<<<<<< HEAD
  
   <!-- Bootstrap core JavaScript -->
   <script src="${root}/bootstrap/vendor/jquery/jquery.min.js"></script>
   <script src="${root}/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-=======
->>>>>>> branch 'master' of https://github.com/gkstjdmm30/ear_v2s4m3c.git
