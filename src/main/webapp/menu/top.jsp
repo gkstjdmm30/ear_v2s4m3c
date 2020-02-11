@@ -17,6 +17,7 @@
         <input type='hidden' name='nowPage' value='${param.nowPage }'>
 
     <ASIDE style='float: right;'>
+      <div style='margin-top: 10px;'>
       <c:choose>
         <c:when test="${param.word != '' }">
           <input type="search" name='word' id='word' placeholder="Search"  value='${param.word }' 
@@ -29,6 +30,7 @@
       <button type="submit" class="search-btn">
         <i class="fas fa-search"></i>
       </button>
+      </div>
     </ASIDE> 
   </form>
       
