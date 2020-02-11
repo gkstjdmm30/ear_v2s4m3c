@@ -9,6 +9,7 @@
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>회원 로그인</title>
  
+
   <link href="../css/style.css" rel="Stylesheet" type="text/css">
   <!-- Bootstrap core CSS -->
   <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -16,6 +17,10 @@
   <link href="../css/shop-homepage.css" rel="stylesheet">
 
 </head>
+<script type="text/javascript">
+$(function() { // 자동 실행
+});
+</script>
 <body>
 <jsp:include page="/menu/top.jsp" />
 
