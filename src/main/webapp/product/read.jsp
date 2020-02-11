@@ -150,7 +150,7 @@
   
   // 삭제 레이어 출력
   function reply_delete(replyno) {
-    // alert('replyno: ' + replyno);
+    alert('replyno: ' + replyno);
     var frm_reply_delete = $('#frm_reply_delete');
     $('#replyno', frm_reply_delete).val(replyno); // 삭제할 댓글 번호 저장
     $('#modal_panel_delete').modal();               // 삭제폼 다이얼로그 출력

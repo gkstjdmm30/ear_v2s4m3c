@@ -12,8 +12,9 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <form name='frm' id='frm' method='get' action='./list.all.do' class="">
+      <form name='frm' id='frm' method='get' action='./list_all.do' class="">
         <input type='hidden' name='productcateno' value='${product_categrpVO.productcateno }'>
+        <input type='hidden' name='nowPage' value='${param.nowPage }'>
 
     <ASIDE style='float: right;'>
       <c:choose>
@@ -82,8 +83,7 @@
                 </c:choose>
                 </li>  
           </spen>                   
-                   
-                   
+                       
           <spen class='menubar'>
             <li class="nav-item">
               <c:choose>
@@ -105,5 +105,3 @@
     <!-- Page Content -->
   <div class="container">
     <div class="content">
-
-  

@@ -70,7 +70,6 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
-
         <FORM name='frm' method="get" action='./update.do'>
         <input type="hidden" name="productno" value="${productno}">
         <div class="row">
