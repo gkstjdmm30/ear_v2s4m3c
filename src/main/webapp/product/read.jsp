@@ -150,7 +150,7 @@
   
   // 삭제 레이어 출력
   function reply_delete(replyno) {
-    // alert('replyno: ' + replyno);
+    alert('replyno: ' + replyno);
     var frm_reply_delete = $('#frm_reply_delete');
     $('#replyno', frm_reply_delete).val(replyno); // 삭제할 댓글 번호 저장
     $('#modal_panel_delete').modal();               // 삭제폼 다이얼로그 출력
@@ -322,8 +322,19 @@
       
       <div class="col-lg-9">
 
-  <FORM name='frm' method="get" action='./update.do'>
-      <input type="hidden" name="productno" value="${productno}">
+<c:choose>
+  <c:when test="${sessionScope.id == null }">
+      <script type="text/javascript">
+      alert('로그인 해주세요');
+      </script>
+    <FORM name='frm' method="get" action='../members/mem_login.do'>
+  </c:when>
+  <c:otherwise>
+    <FORM name='frm' method="get" action='../product_order/product_order_create.do'>
+      <input type='hidden' name='productno' id='productno' value='${productno}'>
+      <input type='hidden' name='membersno' id='membersno' value='${sessionScope.membersno}'>
+  </c:otherwise>
+</c:choose>
       <fieldset class="fieldset">
         <ul>
           <li class="li_none" style='border-bottom: solid 1px #AAAAAA;'>
@@ -357,7 +368,7 @@
               ${productVO.name}
           </li>
           <li class="li_none">
-            구매 갯수: <input type='number' name='order_count' id='order_count' value='1'  min='1'> 
+            구매 갯수: <input type='number' name='count' id='count' value='1'  min='1' step='1'> 
           </li> 
           <li class="li_none">
             <DIV style='text-decoration: none;'>
@@ -367,7 +378,7 @@
           </li>
           <li class="li_center" >
 <!--           <button type="button" onclick="" class="button_circle" style='width: 100px;'>추천</button> -->
-          <button type="button" onclick="" class="btn btn-info" style='width: 100px;'>주문</button>
+          <button type="submit" class="btn btn-info" style='width: 100px;' >주문</button>
           </li>
           </ul>
           </ASIDE>
@@ -382,7 +393,7 @@
       
       <textarea name='content' id='content' style='width: 100%; height: 60px;' placeholder="댓글 작성, 로그인해야 등록 할 수 있습니다."></textarea>
       <input type='password' name='passwd' id='passwd' placeholder="비밀번호">
-      <button type='button' id='btn_create' onclick="create_reply()">등록</button>
+      <button type='button'  id='btn_create' onclick="create_reply()">등록</button>
     </FORM>
     <HR>
     <DIV id='panel_reply'>
