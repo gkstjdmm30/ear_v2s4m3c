@@ -15,12 +15,11 @@
   <title>Shop</title>
   
   <link href="./css/style.css" rel="Stylesheet" type="text/css">
-
   <!-- Bootstrap core CSS -->
   <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+  <link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
   <!-- Custom styles for this template -->
-  <link href="css/shop-homepage.css" rel="stylesheet">
+  <link href="./css/shop-homepage.css" rel="stylesheet">
 
 </head>
 
@@ -52,13 +51,13 @@
           </ol>
           <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
+              <img class="d-block img-fluid" src="./notice/images/delete.png" alt="First slide">
+            </div> 
+            <div class="carousel-item">
+              <img class="d-block img-fluid" src="./notice/images/update.png" alt="Second slide">
             </div>
             <div class="carousel-item">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
-            </div>
-            <div class="carousel-item">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
+              <img class="d-block img-fluid" src="./notice/images/up.png" alt="Third slide">
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -111,6 +110,9 @@
   <!-- /.container -->
 
 <jsp:include page="/menu/bottom.jsp" />
+<!-- Bootstrap core JavaScript -->
+<script src="bootstrap/vendor/jquery/jquery.min.js"></script>
+<script src="bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
