@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.product_order.Product_orderProcInter;
-import dev.mvc.product_order.Product_orderVO;
 
 @Controller
 public class DeliCont {
@@ -36,19 +35,13 @@ public class DeliCont {
   @RequestMapping(value="/deli/deli_select.do", method=RequestMethod.GET)
   public ModelAndView deli_select() {
     ModelAndView mav = new ModelAndView();
-    List<DeliVO> list = deliProc.deli_select();
-    List<Product_orderVO> orderVO = orderProc.product_order_select();
-    List<DeliVO> name = deliProc.deli_name();
-    
-    mav.addObject("list", list);
-    mav.addObject("orderVO", orderVO);
-    mav.addObject("name", name);
-    
+    List<Deli_listVO> deli_list = deliProc.deli_list();
+    mav.addObject("Deli_listVO", deli_list);
     mav.setViewName("/deli/list");
     return mav;
   }
 
-  @RequestMapping(value="deli/deli_read.do", method=RequestMethod.GET)
+  @RequestMapping(value="/deli/deli_read.do", method=RequestMethod.GET)
   public ModelAndView deli_read(int orderno) {
     ModelAndView mav = new ModelAndView();
     
@@ -58,9 +51,10 @@ public class DeliCont {
       deliProc.deli_insert(deliVO);
     }
     
-    
+    String thumb = deliProc.deli_thumb(orderno);
     DeliVO read = deliProc.deli_read_orderno(orderno);
     mav.addObject("deliVO", read);
+    mav.addObject("thumb", thumb);
     mav.setViewName("/deli/read");
     return mav;
   }
@@ -75,13 +69,10 @@ public class DeliCont {
   }
   
   @RequestMapping(value="/deli/deli_update.do", method=RequestMethod.POST)
-  public ModelAndView deli_update(DeliVO deliVO, int orderno, String delivery, int delino) {
+  public ModelAndView deli_update(DeliVO deliVO) {
     ModelAndView mav = new ModelAndView();
-    deliVO.setDelino(delino);
-    deliVO.setOrderno(orderno);
-    deliVO.setDelivery(delivery);
     deliProc.deli_update(deliVO);
-    mav.setViewName("redirect:/deli_select.do");
+    mav.setViewName("redirect:/deli/deli_select.do");
     return mav;
   }
 

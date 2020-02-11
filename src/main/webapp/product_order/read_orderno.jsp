@@ -137,7 +137,7 @@ function panel_img() {
           <input class="btn btn-light" type="text" name="howorder" id="howorder" value = "계좌이체" readonly>
         </c:otherwise>
       </c:choose>      
-      <a href="../index.jsp"><button type="button" class="btn btn-primary">확인</button></a>
+      <a href="../index.jsp"><button type="button" class="btn btn-primary">홈</button></a>
       <a href="javascript:history.back();"><button type="button" class="btn btn-secondary">취소</button></a> 
    </div>
  </div>

@@ -48,7 +48,7 @@
               <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
             </div>
             <div class="carousel-item">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
+              <img class="d-block img-fluid" src="../product_image/images/에어팟 프로.jpg" alt="Third slide">
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -63,20 +63,24 @@
         <FORM name='frm' method="get" action='./update.do'>
         <input type="hidden" name="productno" value="${productno}">
         <div class="row">
-        <c:forEach var="productVO" items="${list }">
-          <c:set var="productno" value="${productVO.productno }" />
-
+        <c:forEach var="product_imageProductVO" items="${list }">
+          <c:set var="productno" value="${product_imageProductVO.productno }" />
+          <c:set var="thumb" value="${product_imageProductVO.thumb }" />
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <c:forEach var="product_imageVO" items="${product_image }">
-                <c:set var="thumb" value="${product_imageVO.thumb.toLowerCase() }" />
-                  <a href="./read.do?productno=${productno}&word=${param.word}"><IMG class="card-img-top" src='../product_image/storage/${thumb }' alt=""></a>
-              </c:forEach>
+                 <c:choose>
+                 <c:when test="${thumb.endsWith('jpg') || thumb.endsWith('png') || thumb.endsWith('gif')}">
+                  <a href="./read.do?productno=${productno}&word=${param.word}&nowPage=${param.nowPage}"><IMG class="card-img-top" src='../product_image/storage/${thumb }' alt=""></a>
+                 </c:when> 
+                 <c:otherwise>
+                  <a href="./read.do?productno=${productno}&word=${param.word}&nowPage=${param.nowPage}"><IMG class="card-img-top" src='./images/no_image.png' alt=""></a>
+                </c:otherwise>       
+                </c:choose>
               <div class="card-body">
                 <h5>
-                  <a href="./read.do?productno=${productno}&word=${param.word}">${productVO.name}</a>
+                  <a href="./read.do?productno=${productno}&word=${param.word}&nowPage=${nowPage}">${product_imageProductVO.name}</a>
                 </h5>
-                <h5>30000원${product_imageVO.fname}</h5>
+                <h5>${product_imageProductVO.price}원</h5>
                 <p class="card-text"><IMG src='./images/추천.jpeg' title=''>&nbsp${productVO.recom}</p>
               </div>
               <div class="card-footer">

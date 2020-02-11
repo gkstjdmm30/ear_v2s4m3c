@@ -2,6 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+
+<c:set var="root" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,6 +12,9 @@
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>Shop</title>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<link href="../css/button.css" rel="Stylesheet" type="text/css">
 <link href="../css/style.css" rel="Stylesheet" type="text/css">
   <!-- Bootstrap core CSS -->
   <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -207,42 +213,6 @@
 <c:set var="productno" value="${productVO.productno }" />
 
 <jsp:include page="/menu/top.jsp" flush='false' />
-<DIV class='content'>
-<!-- Page Content -->
-  <div class="container">
-    <ASIDE style='float: left;'>
-    <A href='../product_categrp/list.do'>카테고리 그룹</A> > 
-    <A href='./list.do?productcateno=${productcateno }&word=${param.word}'>${product_categrpVO.name }</A>
-  </ASIDE>
-  <ASIDE style='float: right;'>
-    <A href="javascript:location.reload();">새로고침</A>
-    <span class='menu_divide' > | </span> 
-    <A href='./list.do?categrpno=${categrpno }&word=${param.word}&nowPage=${param.nowPage}'>목록</A>
-    <c:if test="${sessionScope.ps == 0}">
-      <span class='menu_divide' > | </span>  
-     <a href="../product_image/create.do?productno=${productno}&productcateno=${product_categrpVO.productcateno}&nowPage=${param.nowPage}">첨부 파일 등록</A>
-      <span class='menu_divide' > | </span> 
-      <a href="./file_delete.do?productno=${productno}&productcateno=${product_categrpVO.productcateno}&nowPage=${param.nowPage}">첨부 파일 삭제</A>
-      <span class='menu_divide' > | </span>
-      <A href='./update.do?productcateno=${productcateno }&productno=${productno}&nowPage=${param.nowPage}'>수정</A>
-      <span class='menu_divide' > | </span> 
-      <A href='./delete.do?productcateno=${productcateno }&productno=${productno}&nowPage=${param.nowPage}'>삭제</A>
-    </c:if>
-  </ASIDE> 
-  
-  <div class='menu_line'></div>
-
-    <div class="row">
-
-      <div class="col-lg-3">
-
-        <h1 class="my-4">이어팔아</h1>
-        <c:import url="/product_categrp/list_left_menu.do" />
-
-      </div>
-      <!-- /.col-lg-3 -->
-      
-      <div class="col-lg-9">
 
   <!-- Modal 알림창 시작 -->
   <div class="modal fade" id="modal_panel" role="dialog">
@@ -314,6 +284,43 @@
       </div>
     </div>
   </div> <!-- Modal 알림창 종료 -->
+  
+  <DIV class='content'>
+<!-- Page Content -->
+  <div class="container">
+    <ASIDE style='float: left;'>
+    <A href='../product_categrp/list.do'>카테고리 그룹</A> > 
+    <A href='./list.do?productcateno=${productcateno }&word=${param.word}'>${product_categrpVO.name }</A>
+  </ASIDE>
+  <ASIDE style='float: right;'>
+    <A href="javascript:location.reload();">새로고침</A>
+    <span class='menu_divide' > | </span> 
+    <A href='./list.do?productcateno=${productcateno }&word=${param.word}&nowPage=${param.nowPage}'>목록</A>
+    <c:if test="${sessionScope.ps == 0}">
+      <span class='menu_divide' > | </span>  
+     <a href="../product_image/create.do?productno=${productno}&productcateno=${product_categrpVO.productcateno}&nowPage=${param.nowPage}">첨부 파일 등록</A>
+      <span class='menu_divide' > | </span> 
+      <a href="./file_delete.do?productno=${productno}&productcateno=${product_categrpVO.productcateno}&nowPage=${param.nowPage}">첨부 파일 삭제</A>
+      <span class='menu_divide' > | </span>
+      <A href='./update.do?productcateno=${productcateno }&productno=${productno}&nowPage=${param.nowPage}'>수정</A>
+      <span class='menu_divide' > | </span> 
+      <A href='./delete.do?productcateno=${productcateno }&productno=${productno}&nowPage=${param.nowPage}'>삭제</A>
+    </c:if>
+  </ASIDE> 
+  
+  <div class='menu_line'></div>
+
+    <div class="row">
+
+      <div class="col-lg-3">
+
+        <h1 class="my-4">이어팔아</h1>
+        <c:import url="/product_categrp/list_left_menu.do" />
+
+      </div>
+      <!-- /.col-lg-3 -->
+      
+      <div class="col-lg-9">
 
   <FORM name='frm' method="get" action='./update.do'>
       <input type="hidden" name="productno" value="${productno}">
@@ -322,7 +329,7 @@
           <li class="li_none" style='border-bottom: solid 1px #AAAAAA;'>
             <span class="glyphicon glyphicon-list-alt"></span> 
             <span>${productVO.name}</span>
-            (<span>${productVO.recom}</span>)
+            (<span>${productVO.cnt}</span>)
             <span>${productVO.rdate.substring(0, 16)}</span>
           </li>
           <li class="li_none">
@@ -330,26 +337,40 @@
           </li>
           <li class="li_none" >
             <c:forEach var="product_imageVO" items="${product_image }">
-              <c:set var="thumb" value="${product_imageVO.thumb.toLowerCase() }" />
+              <c:set var="thumb" value="${product_imageVO.thumb }" />
+              <ASIDE style='float: left;'>
               <c:choose>
                 <c:when test="${thumb.endsWith('jpg') || thumb.endsWith('png') || thumb.endsWith('gif')}">
-                  <A href="javascript:panel_img('${product_imageVO.fname }')"><IMG src='../product_image/storage/${thumb }' style='margin-top: 2px;'></A>
-                  &nbsp&nbsp&nbsp&nbsp&nbsp구매 갯수: <input type='number' name='order_count' id='order_count' value='1' > 
-                </c:when>
+                  <A href="javascript:panel_img('${product_imageVO.fname }')"><IMG src='../product_image/storage/${thumb }' style='margin-top: 2px; width: 400px; height: 300px;'></A>
+                 </c:when> 
+                 <c:otherwise>
+                  <IMG class="card-img-top" src='./images/no_image.png' alt="">
+                </c:otherwise>       
               </c:choose>
+               </ASIDE>
             </c:forEach>
           </li>
-          
+         </ul>
+          <ASIDE style='float: right;'>
+          <ul>
           <li class="li_none">
-            <DIV>${productVO.content }</DIV>
+              ${productVO.name}
           </li>
+          <li class="li_none">
+            구매 갯수: <input type='number' name='order_count' id='order_count' value='1'  min='1'> 
+          </li> 
           <li class="li_none">
             <DIV style='text-decoration: none;'>
               <span class="glyphicon glyphicon-search"></span>
               검색어(키워드): ${productVO.word }
             </DIV>
           </li>
-        </ul>
+          <li class="li_center" >
+<!--           <button type="button" onclick="" class="button_circle" style='width: 100px;'>추천</button> -->
+          <button type="button" onclick="" class="btn btn-info" style='width: 100px;'>주문</button>
+          </li>
+          </ul>
+          </ASIDE>
       </fieldset>
    </FORM>   
       <!-- 댓글 영역 시작 -->
@@ -361,7 +382,7 @@
       
       <textarea name='content' id='content' style='width: 100%; height: 60px;' placeholder="댓글 작성, 로그인해야 등록 할 수 있습니다."></textarea>
       <input type='password' name='passwd' id='passwd' placeholder="비밀번호">
-      <button type='button' id='btn_create' onclick="create_reply();">등록</button>
+      <button type='button' id='btn_create' onclick="create_reply()">등록</button>
     </FORM>
     <HR>
     <DIV id='panel_reply'>

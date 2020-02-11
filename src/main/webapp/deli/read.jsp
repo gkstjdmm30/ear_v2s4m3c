@@ -29,6 +29,21 @@
 <div class ='title_line'>배송 관리</div>
 <FORM name='frm' id='frm' method='' action=''>
 <div>
+   <div style="width: 40%; height: 70%; float: left;">
+      <div class="form-group"> 
+        <div class="col-md-10">
+          <li class="li_none" >
+              <c:choose>
+                <c:when test="${thumb.endsWith('jpg') || thumb.endsWith('png') || thumb.endsWith('gif')}">
+                  <IMG src='../product_image/storage/${thumb }' style='margin-top: 2px;'>
+                  &nbsp&nbsp&nbsp&nbsp&nbsp
+                </c:when>
+              </c:choose>
+          </li>
+        </div>
+      </div>   
+   </div>
+   <br>
    <div style="width: 60%; height: 70%;  float: left;">
       <div class="form-group">
             
@@ -42,23 +57,23 @@
          배송 상태 
          <c:choose>
           <c:when test="${deliVO.delivery ==1}">
-            <input type='text' class="form-control input-lg" name='delivery' id='delivery' value='배송준비중' required="required" style='width: 90%;' readonly>
+            <input type='text' class="form-control input-lg" value='배송준비중' required="required" style='width: 90%;' readonly>
           </c:when>
           <c:when test="${deliVO.delivery ==2}">
-            <input type='text' class="form-control input-lg" name='delivery' id='delivery' value='배송 출발' required="required" style='width: 90%;' readonly>
+            <input type='text' class="form-control input-lg" value='배송 출발' required="required" style='width: 90%;' readonly>
           </c:when>
           <c:when test="${deliVO.delivery ==3}">
-            <input type='text' class="form-control input-lg" name='delivery' id='delivery' value='배송 중' required="required" style='width: 90%;' readonly>
+            <input type='text' class="form-control input-lg" value='배송 중' required="required" style='width: 90%;' readonly>
           </c:when>
           <c:otherwise>
-           <input type='text' class="form-control input-lg" name='delivery' id='delivery' value='배송 완료' required="required" style='width: 90%;' readonly>
+           <input type='text' class="form-control input-lg" value='배송 완료' required="required" style='width: 90%;' readonly>
           </c:otherwise>
          </c:choose>
          
          
         </div>
       </div>   
-      <div class="form-group">   
+      <div class="form-group" style="margin-left: 13px;">   
         <a href="../index.jsp"><button type="Button" class="btn btn-primary">홈</button></a>
       <a href="javascript:history.back();"><button type="button" class="btn btn-secondary">취소</button></a> 
       </div>   

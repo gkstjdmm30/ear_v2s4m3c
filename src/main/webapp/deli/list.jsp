@@ -31,7 +31,7 @@
   <colgroup>
     <col style='width: 5%;'/>
     <col style='width: 5%;'/>
-    <col style='width: 15%;'/>    
+    <col style='width: 10%;'/>    
     <col style='width: 45%;'/>
     <col style='width: 10%;'/>
     <col style='width: 10%;'/>
@@ -51,8 +51,35 @@
   </thead>
   
   <tbody>
-  <c:forEach var="deliVO" items = "${list}">
+  <c:forEach var ="Deli_listVO" items = "${Deli_listVO }">
+  <TR>
+    <TD style="text-align: center;">${Deli_listVO.delino}</TD>
+    <TD style="text-align: center;">${Deli_listVO.orderno}</TD>
+    <TD style="text-align: center;">${Deli_listVO.name}</TD>
+    <TD style="text-align: center;">(${Deli_listVO.zipcode})${Deli_listVO.address1 }<br>${Deli_listVO.address2}</TD>
+    <c:choose>
+      <c:when test= "${Deli_listVO.delivery == 1}">
+        <TD style='text-align: center;'>배송 준비</TD>
+      </c:when>
+      <c:when test="${Deli_listVO.delivery == 2}">
+        <TD style='text-align: center;'>배송출발</TD>
+      </c:when>
+     <c:when test="${Deli_listVO.delivery == 3}">
+        <TD style='text-align: center;'>배송중</TD>
+      </c:when>
+      <c:otherwise>
+        <TD style='text-align: center;'>배송완료</TD>
+      </c:otherwise>
+    </c:choose>
+    <TD style='text-align: center;'>${Deli_listVO.ddate }</TD>
+    <TD style='text-align: center;'>
+      <A href="./deli_update.do?delino=${Deli_listVO.delino }"><IMG src='../notice/images/update.png'></A>
+    </TD>
+  </TR>
+  </c:forEach>
+ <%--  <c:forEach var="deliVO" items = "${list}">
   <c:forEach var="orderVO" items = "${orderVO}">
+  </c:forEach>
     <c:set var="delino" value="${deliVO.delino }" />
     
     <TR>
@@ -80,8 +107,8 @@
         <A href="./deli_update.do?delino=${delino }"><IMG src='../notice/images/update.png'></A>
       </TD>
     </TR>
-  </c:forEach>
-  </c:forEach> 
+
+  </c:forEach>  --%>
   </tbody>
  
 </table>

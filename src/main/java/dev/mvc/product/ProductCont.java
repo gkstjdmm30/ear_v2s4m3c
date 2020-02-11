@@ -64,7 +64,8 @@ public class ProductCont {
   
   @RequestMapping(value = "/product/create.do", method = RequestMethod.POST)
   public ModelAndView create(RedirectAttributes ra,
-                                           ProductVO productVO) {
+                                           ProductVO productVO,
+                                           int nowPage) {
     ModelAndView mav = new ModelAndView();
 
     int count = productProc.create(productVO);
@@ -77,6 +78,7 @@ public class ProductCont {
     
     ra.addAttribute("count", count); // redirect parameter 적용
     ra.addAttribute("productcateno", productVO.getProductcateno());
+    ra.addAttribute("nowPage", nowPage);
     
     mav.setViewName("redirect:/product/create_msg.jsp");
 
@@ -126,8 +128,8 @@ public class ProductCont {
   public ModelAndView read(int productno) {
     ModelAndView mav = new ModelAndView();
     
-    int recom_count = productProc.increaseRecom(productno);
-    mav.addObject("recom_count",recom_count);
+    int cnt = productProc.increaseCnt(productno);
+    mav.addObject("cnt",cnt);
 
     ProductVO productVO = productProc.read(productno);
     mav.addObject("productVO", productVO);
@@ -343,11 +345,8 @@ public class ProductCont {
     map.put("word", word);     // #{word}
     map.put("nowPage", nowPage);  
     
-    List<ProductVO> list = productProc.list_all_search_paging(map); // 목록을 만들어서
+    List<Product_imageProductVO> list = productProc.list_all_search_paging(map); // 목록을 만들어서
     mav.addObject("list", list); // 리턴해줌
-    
-    List<Product_imageVO> product_image = product_imageProc.list();
-    mav.addObject("product_image" ,product_image);
     
     // 검색된 레코드 갯수
     int search_count = productProc.search_count(map);
@@ -356,7 +355,7 @@ public class ProductCont {
     Product_categrpVO product_categrpVO = product_categrpProc.read(productcateno);
     mav.addObject("product_categrpVO", product_categrpVO);
   
-    String paging = productProc.pagingBox("list.do", productcateno, search_count, nowPage, word);
+    String paging = productProc.pagingBox("list_all.do", productcateno, search_count, nowPage, word);
     mav.addObject("paging", paging);
   
     mav.addObject("nowPage", nowPage);
@@ -368,7 +367,7 @@ public class ProductCont {
    * 목록 + 검색 + 페이징 지원
    * http://localhost:9090/ojt/product/list.do
    * http://localhost:9090/ojt/product/list.do?categrpno=1&word=&nowPage=1
-   * @param categoryno
+   * @param productcateno
    * @param word
    * @param nowPage
    * @return
@@ -378,8 +377,7 @@ public class ProductCont {
   public ModelAndView list_by_productno_search_paging(
       @RequestParam(value="productcateno", defaultValue="1") int productcateno, // 기본값
       @RequestParam(value="word", defaultValue="") String word,           // 기본값
-      @RequestParam(value="nowPage", defaultValue="1") int nowPage,    // 기본값
-      Product_imageVO product_imageVO
+      @RequestParam(value="nowPage", defaultValue="1") int nowPage   // 기본값
       ) { 
     
     ModelAndView mav = new ModelAndView();
@@ -393,19 +391,8 @@ public class ProductCont {
     
     // 검색 목록
     
-    List<ProductVO> list = productProc.list_by_productno_search_paging(map); // 목록을 만들어서
+    List<Product_imageProductVO> list = productProc.list_by_productno_search_paging(map); // 목록을 만들어서
     mav.addObject("list", list); // 리턴해줌
-    
-    /*List<Product_imageProductVO> product_image = productProc.list_by_product_image_join(product_imageVO.getProductno());
-    mav.addObject("product_image" ,product_image);*/
-    
-    /*List<Product_imageVO> product_image = product_imageProc.list_by_productno(product_imageVO.getProductno());
-    mav.addObject("product_image" ,product_image);*/
-    
-    List<Product_imageVO> product_image = product_imageProc.list();
-    mav.addObject("product_image" ,product_image);
-    
-    
     
     // 검색된 레코드 갯수
     int search_count = productProc.search_count(map);

@@ -3,6 +3,9 @@ package dev.mvc.deli;
 import java.util.Date;
 
 public class DeliVO {
+  public DeliVO() {
+    System.out.println("DeliVO created");
+  }
   
   private int delino;
   private int orderno;

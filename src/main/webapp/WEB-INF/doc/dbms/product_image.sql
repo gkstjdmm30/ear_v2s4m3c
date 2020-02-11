@@ -36,7 +36,7 @@ VALUES((SELECT NVL(MAX(attachfileno), 0) + 1 as attachfileno FROM attachfile),
 SELECT * FROM product_image;   
 
 
-DELETE FROM product_image
+DELETE FROM product_image;
 WHERE productimgno = 1;
 
 

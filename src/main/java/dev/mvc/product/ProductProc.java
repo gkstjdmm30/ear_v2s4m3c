@@ -73,8 +73,8 @@ public class ProductProc implements ProductProcInter {
   }
   
   @Override
-  public int increaseRecom(int productno) {
-    int count = productDAO.increaseRecom(productno);
+  public int increaseCnt(int productno) {
+    int count = productDAO.increaseCnt(productno);
     return count;
   }
 
@@ -107,7 +107,7 @@ public class ProductProc implements ProductProcInter {
    * 현재 페이지: 11 / 22   [이전] 11 12 13 14 15 16 17 18 19 20 [다음] 
    *
    * @param listFile 목록 파일명 
-   * @param categrpno 카테고리번호 
+   * @param productcateno 카테고리번호 
    * @param search_count 검색(전체) 레코드수 
    * @param nowPage     현재 페이지
    * @param word 검색어
@@ -188,7 +188,7 @@ public class ProductProc implements ProductProcInter {
   }
   
   @Override
-  public ArrayList<ProductVO> list_all_search_paging(HashMap<String, Object> map) {
+  public ArrayList<Product_imageProductVO> list_all_search_paging(HashMap<String, Object> map) {
     /* 
     페이지에서 출력할 시작 레코드 번호 계산 기준값, nowPage는 1부터 시작
     1 페이지: nowPage = 1, (1 - 1) * 10 --> 0 
@@ -209,13 +209,13 @@ public class ProductProc implements ProductProcInter {
     map.put("startNum", startNum);
     map.put("endNum", endNum);
     
-    ArrayList<ProductVO> list = productDAO.list_all_search_paging(map);
+    ArrayList<Product_imageProductVO> list = productDAO.list_all_search_paging(map);
     
     return list;
   }
 
   @Override
-  public ArrayList<ProductVO> list_by_productno_search_paging(HashMap<String, Object> map) {
+  public ArrayList<Product_imageProductVO> list_by_productno_search_paging(HashMap<String, Object> map) {
     /* 
     페이지에서 출력할 시작 레코드 번호 계산 기준값, nowPage는 1부터 시작
     1 페이지: nowPage = 1, (1 - 1) * 10 --> 0 
@@ -236,7 +236,7 @@ public class ProductProc implements ProductProcInter {
     map.put("startNum", startNum);
     map.put("endNum", endNum);
     
-    ArrayList<ProductVO> list = productDAO.list_by_productno_search_paging(map);
+    ArrayList<Product_imageProductVO> list = productDAO.list_by_productno_search_paging(map);
     
     return list;
   }

@@ -64,7 +64,7 @@ public interface ProductDAOInter {
    */
   public int delete_by_productcateno(int productcateno);
   
-  public int increaseRecom(int productno);
+  public int increaseCnt(int productno);
   
   public int increaseReplycnt(int productno);
   
@@ -88,14 +88,16 @@ public interface ProductDAOInter {
    * 상품 전체 목록
    * @return
    */
-  public ArrayList<ProductVO> list_all_search_paging(HashMap<String, Object> map);
+  public ArrayList<Product_imageProductVO> list_all_search_paging(HashMap<String, Object> map);
   
   /**
    * 검색 + 페이징 목록
    * @param map
    * @return
    */
-  public ArrayList<ProductVO> list_by_productno_search_paging(HashMap<String, Object> map);
+  public ArrayList<Product_imageProductVO> list_by_productno_search_paging(HashMap<String, Object> map);
+  
+  
 }
 
 
