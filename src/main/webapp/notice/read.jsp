@@ -38,7 +38,7 @@
     <A href="javascript:location.reload();">새로고침</A>
     <span class='menu_divide' > | </span> 
     <A href='./list.do?categrpno=${notice_categrpVO.categrpno }&word=${param.word}&nowPage=${param.nowPage}'>목록</A>
-    <c:if test="${sessionScope.id != null}">
+    <c:if test="${sessionScope.ps == 0}">
       <span class='menu_divide' > | </span> 
       <A href='./update.do?categrpno=${notice_categrpVO.categrpno }&noticeno=${noticeno}&nowPage=${param.nowPage}'>수정</A>
       <span class='menu_divide' > | </span> 
@@ -48,7 +48,7 @@
       <span class='menu_divide' > | </span> 
       <A href='./delete.do?categrpno=${notice_categrpVO.categrpno }&noticeno=${noticeno}&nowPage=${param.nowPage}'>삭제</A>
     </c:if>
-  </ASIDE> 
+  </ASIDE>
   
   <div class='menu_line'></div>
 

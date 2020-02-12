@@ -5,14 +5,32 @@ import java.util.HashMap;
 
 public interface NoticeDAOInter {
 	
-  //검색 + 페이징 목록
+	/**
+	 * 검색 + 페이징 목록
+	 * <select id="list_by_categrpno_search_paging" resultType="NoticeVO" parameterType="int">
+	 * @param map
+	 * @return NoticeVO
+	 */
   public ArrayList<NoticeVO> list_by_categrpno_search_paging(HashMap<String, Object> map);
   
-  // 카테고리별 검색 레코드 갯수
+	/**
+	 * 카테고리별 검색 레코드 갯수
+	 * <select id="search_count" resultType="int" parameterType="HashMap">
+	 * @param hashMap
+	 * @return int
+	 */
   public int search_count(HashMap<String, Object> hashMap);
   
-  // 페이지 메소드는 DAO를 호출하지 않음
-  // 페이지 목록 문자열 생성, Box 형태
+  /**
+	 * 페이지 메소드는 DAO를 호출하지 않음
+	 * 페이지 목록 문자열 생성, Box 형태
+   * @param listFile
+   * @param categrpno
+   * @param search_count
+   * @param nowPage
+   * @param word
+   * @return
+   */
   public String pagingBox(String listFile, int categrpno, int search_count, int nowPage, String word);
 
   // 등록

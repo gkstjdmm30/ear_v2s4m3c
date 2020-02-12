@@ -153,7 +153,10 @@ public class NoticeProc implements NoticeProcInter {
 		int count = noticeDAO.delete(noticeno);
 		return count;
 	}
-
+	
+	/**
+	 * 
+	 */
 	@Override
 	public int count_by_categrpno(int categrpno) {
 		int count = noticeDAO.count_by_categrpno(categrpno);
