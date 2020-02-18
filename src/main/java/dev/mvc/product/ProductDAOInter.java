@@ -64,7 +64,7 @@ public interface ProductDAOInter {
    */
   public int delete_by_productcateno(int productcateno);
   
-  public int increaseRecom(int productno);
+  public int increaseCnt(int productno);
   
   public int increaseReplycnt(int productno);
   

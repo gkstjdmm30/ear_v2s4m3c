@@ -48,7 +48,7 @@
               <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
             </div>
             <div class="carousel-item">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
+              <img class="d-block img-fluid" src="../product_image/images/에어팟 프로.jpg" alt="Third slide">
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -65,7 +65,7 @@
         <div class="row">
         <c:forEach var="product_imageProductVO" items="${list }">
           <c:set var="productno" value="${product_imageProductVO.productno }" />
-          <c:set var="thumb" value="${product_imageProductVO.thumb.toLowerCase() }" />
+          <c:set var="thumb" value="${product_imageProductVO.thumb }" />
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
                  <c:choose>
@@ -80,7 +80,7 @@
                 <h5>
                   <a href="./read.do?productno=${productno}&word=${param.word}&nowPage=${nowPage}">${product_imageProductVO.name}</a>
                 </h5>
-                <h5>30000원${product_imageProductVO.fname}</h5>
+                <h5>${product_imageProductVO.price}원</h5>
                 <p class="card-text"><IMG src='./images/추천.jpeg' title=''>&nbsp${productVO.recom}</p>
               </div>
               <div class="card-footer">

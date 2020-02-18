@@ -65,9 +65,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      WHERE productcateno=#{productcateno}
    </delete>
    
-   <update id="increaseRecom" parameterType="int">
+   <update id="increaseCnt" parameterType="int">
      UPDATE product
-     SET recom = recom + 1
+     SET cnt = cnt + 1
      WHERE productno = #{productno}
    </update>
    

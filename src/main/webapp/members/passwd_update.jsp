@@ -17,7 +17,7 @@
 <script type="text/javascript">
 function send() {
   var msg = '';
-  if ($('#new_passwd').val() != $('#new_passwd2').val()) {
+  if ($('#new_passwd', frm).val() != $('#new_passwd2', frm).val() || $('#new_passwd', frm).val() == null) {
     msg = '입력된 패스워드가 일치하지 않습니다.<br>';
     msg += "패스워드를 다시 입력해주세요.<br>"; 
     
@@ -64,7 +64,14 @@ function send() {
   <FORM name='frm' id='frm' method='POST' action='./passwd_update.do' 
               class="form-horizontal">
     <input type='hidden' name='membersno' value='${param.membersno }'>
-              
+    <script type="text/javascript">
+      var password = $('#passwd').val();
+      $('#password').val(password);
+      var new_password = $('#passwd').val();
+      $('#new_password').val(new_password);
+    </script>
+    <input type='hidden' name='password' id='password' value='' >
+    <input type='hidden' name='new_password' id='new_password' value='' >
     <div class="form-group">
       <label class="col-md-6 control-label" style="font-size: 0.8em;">현재 패스워드</label>    
       <div class="col-md-6">
@@ -88,13 +95,13 @@ function send() {
       <div class="col-md-6">
         <input type='password' class="form-control input-lg" name='new_passwd2' 
                   id='new_passwd2' value='' required="required" 
-                  style='width: 30%;' placeholder="패스워드">
+                  style='width: 30%;' placeholder="패스워드 확인">
       </div>
     </div>   
     
     <div class="form-group">
       <div class="col-md-offset-6 col-md-6">
-        <button type="button" onclick="send();" class="btn btn-primary btn-md">변경</button>
+        <button type="button" onclick="send()" class="btn btn-primary btn-md">변경</button>
         <button type="button" onclick="location.href='../index.jsp'" class="btn btn-primary btn-md">취소</button>
  
       </div>

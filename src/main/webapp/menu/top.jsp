@@ -1,21 +1,23 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
-<link href="../css/search.css" rel="Stylesheet" type="text/css">
-
 <c:set var="root" value="${pageContext.request.contextPath}" />
+<link href="${root}/css/search.css" rel="Stylesheet" type="text/css">
+
  
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="${root}">이어팔아</a>
+      <a class="navbar-brand" href="${root}/product/list_all.do">이어팔아</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <form name='frm' id='frm' method='get' action='./list.all.do' class="">
+      <form name='frm' id='frm' method='get' action='${root}/product/list_all.do' class="">
         <input type='hidden' name='productcateno' value='${product_categrpVO.productcateno }'>
+        <input type='hidden' name='nowPage' value='${param.nowPage }'>
 
     <ASIDE style='float: right;'>
+      <div style='margin-top: 10px;'>
       <c:choose>
         <c:when test="${param.word != '' }">
           <input type="search" name='word' id='word' placeholder="Search"  value='${param.word }' 
@@ -28,6 +30,7 @@
       <button type="submit" class="search-btn">
         <i class="fas fa-search"></i>
       </button>
+      </div>
     </ASIDE> 
   </form>
       
@@ -49,11 +52,9 @@
             <li class="nav-item">
               <a class="nav-link" href="${root}/notice/list.do?categrpno=1&nowPage=1">공지사항</a>
                 <ul>
-                   <li><a href="${root}/notice/list.do?categrpno=1&nowPage=1">공지사항</a></li>
-                   <li><a href="#">자료실</a></li>
-                   <li><a href="#">Q&A</a></li>
                    <c:if test="${sessionScope.ps == 0}">
-                      <li><a href="${root}/notice_categrp/list.do">카테고리 관리(관리자)</a></li>
+                     <li><a href="${root}/notice/list.do?categrpno=1&nowPage=1">공지사항</a></li>
+                     <li><a href="${root}/notice_categrp/list.do">카테고리 관리(관리자)</a></li>
                    </c:if>
                 </ul>
             </li>
@@ -82,8 +83,7 @@
                 </c:choose>
                 </li>  
           </spen>                   
-                   
-                   
+                       
           <spen class='menubar'>
             <li class="nav-item">
               <c:choose>
@@ -105,5 +105,3 @@
     <!-- Page Content -->
   <div class="container">
     <div class="content">
-
-  

@@ -15,16 +15,32 @@ public interface NoticeProcInter {
   // 페이지 목록 문자열 생성, Box 형태
   public String pagingBox(String listFile, int categrpno, int search_count, int nowPage, String word);
 
-  // 등록
+  /**
+   * 글 등록
+   * @param noticeVO
+   * @return
+   */
   public int create(NoticeVO noticeVO);
   
-  // 조회
+  /**
+   * 글 읽기
+   * @param noticeno
+   * @return
+   */
   public NoticeVO read(int noticeno);
   
-  // 수정
+  /**
+   * 기존 글 업데이트
+   * @param noticeVO
+   * @return
+   */
   public int update(NoticeVO noticeVO);
   
-  // 한건 삭제
+  /**
+   * 한 건 삭제
+   * @param noticeno
+   * @return
+   */
   public int delete(int noticeno);
   
   // 부모 카테고리 번호별 레코드 갯수

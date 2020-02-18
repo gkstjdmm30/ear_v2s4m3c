@@ -20,32 +20,35 @@
   
 
 <script type="text/javascript">
-
-<%--   $(function(){
-    
-    var price = 10000;
-    var count = <%= Integer.parseInt(request.getParameter("count"))%>
-    var shipping = ((price*count)>10000?0:2500);
-    var totalprice = (price*count) + shipping;
-    $('#totalprice').val(totalprice);
-  }); --%>
   $(function(){
     var price = $('#price').val();
-    var count = <%= Integer.parseInt(request.getParameter("count"))%>
+    var count = <%=Integer.parseInt(request.getParameter("count"))%>
     var shipping = ((price*count)>10000?0:2500);
     var totalprice = (price*count) + shipping;
     $('#shipping').val(shipping);
     $('#totalprice').val(totalprice);
   });
-  </script>
-  <script>
-  function button_address() {
-    var zipcode = ${membersVO.zipcode}; 
-    var address1 = ${membersVO.address1}; 
-    var address2 = ${membersVO.address2}; 
+ </script>
+<script type="text/javascript">
+  function btn_address() {
+    var zipcode = '<c:out value="${membersVO.zipcode}"/>';
+    var address1 = '<c:out value="${membersVO.address1}"/>';
+    var address2 = '<c:out value="${membersVO.address2}"/>';
     $('#zipcode').val(zipcode);
     $('#address1').val(address1);
     $('#address2').val(address2);
+  }
+  </script>
+  <script type="text/javascript">
+  function panel_img(file) {
+    var tag = "";
+    tag = "<A href=\"javascript: $('#attachfile_panel').hide();\">";
+    tag += "  <IMG src='../product_image/storage/" + file
+        + "' style='width: 100%;'>";
+    tag += "</A>";
+
+    $('#attachfile_panel').html(tag);
+    $('#attachfile_panel').show();
   }
   </script>
  
@@ -111,29 +114,21 @@
    
 
 
-<script>
-function panel_img() {
-  var tag = "";
-  tag = "<A href=\"javascript: $('#list_panel').hide();\">";
-  tag += "  <IMG src='../product_image/storage/" + file
-      + "' style='width: 100%;'>";
-  tag += "</A>";
 
-  $('#attachfile_panel').html(tag);
-  $('#attachfile_panel').show();
-}
-</script>
    <div style="width: 40%; height: 70%; float: left;">
       <div class="form-group"> 
         <div class="col-md-10">
           <DIV id='list_panel' style="width: 80%; margin: 0px auto;"></DIV> <!-- 원본 이미지 출력 -->
-          <li class="li_none" style='text-align: center;' >
-            <c:forEach var="product_imgVO" items="${img_list }">
-              <c:set var="thumb" value="${product_imgVO.thumb.toLowerCase() }" />
-              
+          <li class="li_none">
+            <DIV id='attachfile_panel' style="width: 80%; margin: 0px auto;"></DIV> <!-- 원본 이미지 출력 -->
+          </li>
+          <li class="li_none" >
+            <c:forEach var="product_imageVO" items="${product_image }">
+              <c:set var="thumb" value="${product_imageVO.thumb }" />
               <c:choose>
                 <c:when test="${thumb.endsWith('jpg') || thumb.endsWith('png') || thumb.endsWith('gif')}">
-                  <A href="javascript:panel_img('${product_imgVO.fname }')"><IMG src='../attachfile/storage/${thumb }' style='margin-top: 2px;'></A>
+                  <A href="javascript:panel_img('${product_imageVO.fname }')"><IMG src='../product_image/storage/${thumb }' style='margin-top: 2px;'></A>
+                  &nbsp&nbsp&nbsp&nbsp&nbsp
                 </c:when>
               </c:choose>
             </c:forEach>
@@ -220,7 +215,7 @@ function panel_img() {
 </script>
 <!-- ----- DAUM 우편번호 API 종료----- -->
    <div class= "" style="float: right; padding: 12px; margin-right: 66px;">
-      <input type="button" id="button_address" name="button_address" onclick="button_address();" class="btn btn-secondary" value="기존 주소">
+    <button type="button" onclick='btn_address()' class="btn btn-secondary">기존 주소</button>
 
       <select class="btn btn-light" name="howorder" id="howorder">
         <option value="1">신용카드</option>
@@ -231,7 +226,6 @@ function panel_img() {
    </div>
  </div>
   </FORM>
-
 <jsp:include page="/menu/bottom2.jsp" />
 </body>
  

@@ -64,7 +64,8 @@ public class ProductCont {
   
   @RequestMapping(value = "/product/create.do", method = RequestMethod.POST)
   public ModelAndView create(RedirectAttributes ra,
-                                           ProductVO productVO) {
+                                           ProductVO productVO,
+                                           int nowPage) {
     ModelAndView mav = new ModelAndView();
 
     int count = productProc.create(productVO);
@@ -77,6 +78,7 @@ public class ProductCont {
     
     ra.addAttribute("count", count); // redirect parameter Àû¿ë
     ra.addAttribute("productcateno", productVO.getProductcateno());
+    ra.addAttribute("nowPage", nowPage);
     
     mav.setViewName("redirect:/product/create_msg.jsp");
 
@@ -126,8 +128,8 @@ public class ProductCont {
   public ModelAndView read(int productno) {
     ModelAndView mav = new ModelAndView();
     
-    int recom_count = productProc.increaseRecom(productno);
-    mav.addObject("recom_count",recom_count);
+    int cnt = productProc.increaseCnt(productno);
+    mav.addObject("cnt",cnt);
 
     ProductVO productVO = productProc.read(productno);
     mav.addObject("productVO", productVO);
@@ -353,7 +355,7 @@ public class ProductCont {
     Product_categrpVO product_categrpVO = product_categrpProc.read(productcateno);
     mav.addObject("product_categrpVO", product_categrpVO);
   
-    String paging = productProc.pagingBox("list.do", productcateno, search_count, nowPage, word);
+    String paging = productProc.pagingBox("list_all.do", productcateno, search_count, nowPage, word);
     mav.addObject("paging", paging);
   
     mav.addObject("nowPage", nowPage);

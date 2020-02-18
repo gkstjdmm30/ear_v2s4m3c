@@ -59,4 +59,10 @@ public class DeliProc implements DeliProcInter{
     return list;
   }
 
+  @Override
+  public String deli_thumb(int orderno) {
+    String thumb = deliDAO.deli_thumb(orderno);
+    return thumb;
+  }
+
 }

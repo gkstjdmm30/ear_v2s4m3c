@@ -71,4 +71,5 @@ UPDATE product
 SET  = '에어팟 프로'
 WHERE productno = 1;
              
+DELETE from product;
              

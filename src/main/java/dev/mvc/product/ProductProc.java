@@ -73,8 +73,8 @@ public class ProductProc implements ProductProcInter {
   }
   
   @Override
-  public int increaseRecom(int productno) {
-    int count = productDAO.increaseRecom(productno);
+  public int increaseCnt(int productno) {
+    int count = productDAO.increaseCnt(productno);
     return count;
   }
 
