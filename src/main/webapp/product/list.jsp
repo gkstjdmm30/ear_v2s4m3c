@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<c:set var="root" value="${pageContext.request.contextPath}" />
  
 <!DOCTYPE html>
 <html lang="ko">
@@ -16,6 +18,7 @@
   <!-- Custom styles for this template -->
   <link href="../css/shop-homepage.css" rel="stylesheet">
   
+  <!-- Bootstrap core JavaScript -->
   <script src="${root}/bootstrap/vendor/jquery/jquery.min.js"></script>
   <script src="${root}/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   
@@ -83,13 +86,13 @@
           </ol>
           <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
-              <img class="d-block img-fluid" src="./images/banner_BjPyM1000.jpg" alt="First slide">
+              <img class="d-block img-fluid" src="./images/banner_BjPyM1000.jpg" alt="First slide" style='width: 900px; height: 350px;'>
             </div>
             <div class="carousel-item">
-              <img class="d-block img-fluid" src="./images/banner_DjGtD1000.jpg" alt="Second slide">
+              <img class="d-block img-fluid" src="./images/banner_DjGtD1000.jpg" alt="Second slide" style='width: 900px; height: 350px;'>
             </div>
             <div class="carousel-item">
-              <img class="d-block img-fluid" src="./images/banner_BjPyM1000.jpg" alt="Third slide">
+              <img class="d-block img-fluid" src="./images/banner_BjPyM1000.jpg" alt="Third slide" style='width: 900px; height: 350px;'>
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
