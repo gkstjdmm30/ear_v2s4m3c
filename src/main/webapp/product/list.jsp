@@ -92,7 +92,7 @@
               <img class="d-block img-fluid" src="./images/banner_DjGtD1000.jpg" alt="Second slide" style='width: 900px; height: 350px;'>
             </div>
             <div class="carousel-item">
-              <img class="d-block img-fluid" src="./images/banner_BjPyM1000.jpg" alt="Third slide" style='width: 900px; height: 350px;'>
+              <img class="d-block img-fluid" src="./images/banner_QyOoZ1000.jpg" alt="Third slide" style='width: 900px; height: 350px;'>
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

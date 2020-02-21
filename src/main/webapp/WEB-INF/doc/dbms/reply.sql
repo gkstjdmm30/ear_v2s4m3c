@@ -28,3 +28,5 @@ VALUES((SELECT NVL(MAX(replyno), 0) + 1 as replyno FROM reply),
              
                          
 SELECT * FROM reply; 
+
+DELETE FROM reply;
