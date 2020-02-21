@@ -28,7 +28,7 @@ VALUES((SELECT NVL(MAX(productcateno), 0) + 1 as categrpno FROM product_categrp)
 
 INSERT INTO product_categrp(productcateno, name, seqno, rdate, cnt)
 VALUES((SELECT NVL(MAX(productcateno), 0) + 1 as categrpno FROM product_categrp),
-            '스피커', 3, sysdate, 0);
+            '헤드셋', 3, sysdate, 0);
             
 -- 목록            
 SELECT *
