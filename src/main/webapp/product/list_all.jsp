@@ -86,7 +86,7 @@
                   <a href="./read.do?productno=${productno}&word=${param.word}&nowPage=${nowPage}">${product_imageProductVO.name}</a>
                 </h5>
                 <h5>${product_imageProductVO.price}원</h5>
-                <p class="card-text"><IMG src='./images/추천.jpeg' title=''>&nbsp${productVO.recom}</p>
+                <p class="card-text"><IMG src='./images/추천.jpeg' title=''>&nbsp${product_imageProductVO.recom}</p>
               </div>
               <div class="card-footer">
                 <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -108,7 +108,7 @@
 
   </div>
   <!-- /.container -->
-  <DIV class='bottom_menu'>${paging }</DIV>      
+  <DIV class='bottom_menu' style>${paging }</DIV>      
 
 
 

@@ -291,8 +291,6 @@
     <A href='./list.do?productcateno=${productcateno }&word=${param.word}'>${product_categrpVO.name }</A>
   </ASIDE>
   <ASIDE style='float: right;'>
-    <A href="javascript:location.reload();">새로고침</A>
-    <span class='menu_divide' > | </span> 
     <A href='./list.do?productcateno=${productcateno }&word=${param.word}&nowPage=${param.nowPage}'>목록</A>
     <c:if test="${sessionScope.ps == 0}">
       <span class='menu_divide' > | </span>  
@@ -350,7 +348,7 @@
               <ASIDE style='float: left;'>
               <c:choose>
                 <c:when test="${thumb.endsWith('jpg') || thumb.endsWith('png') || thumb.endsWith('gif')}">
-                  <A href="javascript:panel_img('${product_imageVO.fname }')"><IMG src='../product_image/storage/${thumb }' style='margin-top: 2px; width: 400px; height: 300px;'></A>
+                  <A href="javascript:panel_img('${product_imageVO.fname }')"><IMG src='../product_image/storage/${thumb }' style='width: 400px; height: 300px; '></A>
                  </c:when> 
                  <c:otherwise>
                   <IMG class="card-img-top" src='./images/no_image.png' alt="">
@@ -363,15 +361,16 @@
           <ASIDE style='float: right;'>
           <ul>
           <li class="li_none">
-              ${productVO.name}
+              <h4 class="my-4">${productVO.name}</h4>
+              <h5 class="my-4">${productVO.price }원</h5>
           </li>
           <li class="li_none">
-            구매 갯수: <input type='number' name='count' id='count' value='1'  min='1' step='1'> 
+            구매 갯수: <input type='number' name='count' id='count' value='1'  min='1' step='1'> 개
           </li> 
           <li class="li_none">
             <DIV style='text-decoration: none;'>
               <span class="glyphicon glyphicon-search"></span>
-              검색어(키워드): ${productVO.word }
+              <br>검색어(키워드): ${productVO.word }
             </DIV>
           </li>
           <li class="li_center" >

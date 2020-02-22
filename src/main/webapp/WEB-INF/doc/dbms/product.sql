@@ -67,9 +67,10 @@ ORDER BY productcateno ASC;
 
 
              
-UPDATE product   
-SET  = '에어팟 프로'
-WHERE productno = 1;
+
+UPDATE product
+SET recom = 96
+WHERE productno = 5;
              
 DELETE from product;
              

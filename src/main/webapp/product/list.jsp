@@ -124,7 +124,7 @@
                 <h5>
                   <a href="./read.do?productno=${productno}&word=${param.word}&nowPage=${param.nowPage}">${product_imageProductVO.name}</a>
                 </h5>
-                <h5>${product_imageProductVO.price}원${productno}</h5>
+                <h5>${product_imageProductVO.price}원</h5>
                 <p class="card-text"><IMG src='./images/추천.jpeg' title=''>&nbsp${product_imageProductVO.recom}</p>
               </div>
               <div class="card-footer">
